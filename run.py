@@ -181,7 +181,7 @@ def main():
     (out / 'meta.json').write_text(json.dumps({'title': title, 'description': desc, 'tags': tags, 'duration': total}, indent=2, ensure_ascii=False), encoding='utf-8')
     log(f'rendered {mp4}')
 
-    if not qpath and not a.no_upload:
+    if not qpath and mode != 'off':
         hist['recent'] = (hist.get('recent', []) + [{'id': ep['id'], 'format': ep['format'], 'topic': ep.get('topic'), 'title': ep['title']}])[-200:]
         hist['count'] = hist.get('count', 0) + 1
         if ep.get('bank_id'):
