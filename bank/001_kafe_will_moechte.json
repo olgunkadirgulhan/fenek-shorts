@@ -1,0 +1,27 @@
+{
+  "title": "Almanya'da kafede bu hatayı yapma! ☕ #almanca",
+  "desc": "Türklerin Almanya'da kafede en sık yaptığı hata: 'Ich will ein Kaffee'. Doğrusu ve nedeni bu videoda.",
+  "caption": ["ALMANYA'DA KAFEDE", "BU HATAYI YAPMA ☕"],
+  "tag": "A1 · KAFEDE",
+  "topic": "cafe",
+  "theme": "cafe",
+  "beats": [
+    {"who": "fenek", "lang": "tr", "text": "Almanya'da kafede bu hatayı yapma!", "st": {"fenek": true, "mood": {"emre": "nervous"}}},
+    {"who": "lena", "lang": "de", "text": "Guten Morgen! Was möchten Sie?", "sub": "Günaydın! Ne istersiniz?", "st": {"mood": {"emre": "nervous"}}},
+    {"who": "emre", "lang": "de", "text": "Ich will ein Kaffee!", "sub": "Bir kahve istiyorum!", "st": {"mood": {"emre": "confident"}}},
+    {"who": null, "lang": null, "text": "", "silence": 0.6, "st": {"icon": "x", "sfx_before": "buzz", "mood": {"emre": "sad", "lena": "neutral"}, "tag": {"text": "HATA!", "color": "#E5484D"}}},
+    {"who": "fenek", "lang": "tr", "text": "Dur! İki hata var. Birincisi:", "st": {"freeze": true, "fenek": true, "key": "ex", "sfx_before": "whoosh", "tag": {"text": "HATA!", "color": "#E5484D"}, "overlay": {"type": "explain", "title": "⏸ DUR! 2 HATA VAR", "show": 1, "lines": [[["❌ Ich ", ""], ["will ein", "#E5484D", true], [" Kaffee", ""]], [["1️⃣ ", ""], ["will", "#E5484D"], [" → ", ""], ["möchte", "#16A37E"], [" (kibar)", "#5B6072"]], [["2️⃣ ", ""], ["der", "#2F6FEB"], [" Kaffee → ", ""], ["einen", "#2F6FEB"], [" Kaffee", ""]], [["✅ Ich möchte einen Kaffee", "#0B6E52"]]]}}},
+    {"who": "emre", "lang": "de", "text": "Ich will", "st": {"freeze": true, "fenek": true, "key": "ex", "nosub": true, "tag": {"text": "HATA!", "color": "#E5484D"}, "overlay": {"type": "explain", "title": "⏸ DUR! 2 HATA VAR", "show": 1, "lines": [[["❌ Ich ", ""], ["will ein", "#E5484D", true], [" Kaffee", ""]]]}}},
+    {"who": "fenek", "lang": "tr", "text": "kaba duruyor. Kibarcası:", "st": {"freeze": true, "fenek": true, "key": "ex", "tag": {"text": "HATA!", "color": "#E5484D"}, "overlay": {"type": "explain", "title": "⏸ DUR! 2 HATA VAR", "show": 2, "lines": [[["❌ Ich ", ""], ["will ein", "#E5484D", true], [" Kaffee", ""]], [["1️⃣ ", ""], ["will", "#E5484D"], [" → ", ""], ["möchte", "#16A37E"], [" (kibar)", "#5B6072"]]]}}},
+    {"who": "emre", "lang": "de", "text": "Ich möchte", "st": {"freeze": true, "fenek": true, "key": "ex", "nosub": true, "tag": {"text": "HATA!", "color": "#E5484D"}, "overlay": {"type": "explain", "title": "⏸ DUR! 2 HATA VAR", "show": 2, "lines": [[["❌ Ich ", ""], ["will ein", "#E5484D", true], [" Kaffee", ""]], [["1️⃣ ", ""], ["will", "#E5484D"], [" → ", ""], ["möchte", "#16A37E"], [" (kibar)", "#5B6072"]]]}}},
+    {"who": "fenek", "lang": "tr", "text": "İkincisi: kahve eril bir kelime. Bu yüzden:", "st": {"freeze": true, "fenek": true, "key": "ex", "tag": {"text": "HATA!", "color": "#E5484D"}, "overlay": {"type": "explain", "title": "⏸ DUR! 2 HATA VAR", "show": 3, "lines": [[["❌ Ich ", ""], ["will ein", "#E5484D", true], [" Kaffee", ""]], [["1️⃣ ", ""], ["will", "#E5484D"], [" → ", ""], ["möchte", "#16A37E"], [" (kibar)", "#5B6072"]], [["2️⃣ ", ""], ["der", "#2F6FEB"], [" Kaffee → ", ""], ["einen", "#2F6FEB"], [" Kaffee", ""]]]}}},
+    {"who": "emre", "lang": "de", "text": "Ich möchte einen Kaffee.", "st": {"freeze": true, "fenek": true, "key": "ex", "nosub": true, "tag": {"text": "HATA!", "color": "#E5484D"}, "overlay": {"type": "explain", "title": "⏸ DUR! 2 HATA VAR", "show": 4, "lines": [[["❌ Ich ", ""], ["will ein", "#E5484D", true], [" Kaffee", ""]], [["1️⃣ ", ""], ["will", "#E5484D"], [" → ", ""], ["möchte", "#16A37E"], [" (kibar)", "#5B6072"]], [["2️⃣ ", ""], ["der", "#2F6FEB"], [" Kaffee → ", ""], ["einen", "#2F6FEB"], [" Kaffee", ""]], [["✅ Ich möchte einen Kaffee", "#0B6E52"]]]}}},
+    {"who": "emre", "lang": "de", "text": "Ich möchte einen Kaffee mit Milch, bitte.", "sub": "Sütlü bir kahve istiyorum, lütfen.", "st": {"sfx_before": "pop", "sfx": "ding", "icon": "check", "tag": {"text": "DOĞRUSU ✓", "color": "#16A37E"}}},
+    {"who": "lena", "lang": "de", "text": "Mit Zucker?", "sub": "Şekerli mi?", "st": {"tag": {"text": "DOĞRUSU ✓", "color": "#16A37E"}, "mood": {"emre": "happy"}}},
+    {"who": "emre", "lang": "de", "text": "Nein, danke. Und ein Stück Kuchen.", "sub": "Hayır, teşekkürler. Bir de bir dilim pasta.", "st": {"tag": {"text": "DOĞRUSU ✓", "color": "#16A37E"}, "mood": {"emre": "happy"}}},
+    {"who": "fenek", "lang": "tr", "text": "Soru! Bu kelimenin artikeli ne?", "st": {"fenek": true, "key": "q", "sfx_before": "whoosh", "tag": {"text": "SORU", "color": "#8B5CF6"}, "overlay": {"type": "quiz", "kind": "art", "emoji": "🍰", "word": "Kuchen", "opts": ["der", "die", "das"], "answer": "der"}}},
+    {"who": null, "lang": null, "text": "", "silence": 3.0, "st": {"fenek": true, "key": "q", "countdown": 3, "tag": {"text": "SORU", "color": "#8B5CF6"}, "overlay": {"type": "quiz", "kind": "art", "emoji": "🍰", "word": "Kuchen", "opts": ["der", "die", "das"], "answer": "der"}}},
+    {"who": "emre", "lang": "de", "text": "der Kuchen", "sub": "pasta", "st": {"fenek": true, "key": "q", "sfx": "ding", "tag": {"text": "SORU", "color": "#8B5CF6"}, "overlay": {"type": "quiz", "kind": "art", "emoji": "🍰", "word": "Kuchen", "opts": ["der", "die", "das"], "answer": "der", "reveal": true}}},
+    {"who": "fenek", "lang": "tr", "text": "Tüm ünite sitede ücretsiz. Link profilde!", "st": {"fenek": true, "key": "cta", "sfx_before": "pop", "overlay": {"type": "cta", "unit": "Kafede", "emoji": "☕", "cefr": "A1"}}}
+  ]
+}

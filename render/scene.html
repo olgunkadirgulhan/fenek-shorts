@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fenek Shorts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; height: 100%; background: #111; }
+  body { display: flex; align-items: center; justify-content: center; font-family: Nunito, "Noto Color Emoji", sans-serif; }
+  #stage { height: 100vh; aspect-ratio: 9 / 16; position: relative; }
+  body.capture #stage { height: 1920px; width: 1080px; }
+  svg { width: 100%; height: 100%; display: block; }
+  #play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.35); cursor: pointer; }
+  #play span { width: 110px; height: 110px; border-radius: 50%; background: #E4572E; color: #fff; font-size: 52px; display: flex; align-items: center; justify-content: center; }
+  body.capture #play { display: none; }
+  .cap { font-family: "Baloo 2", sans-serif; font-weight: 800; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="svg" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"></svg>
+  <div id="play"><span>▶</span></div>
+</div>
+<audio id="audio" src="track.wav" preload="auto"></audio>
+<script src="ep.js"></script>
+<script src="cast.js"></script>
+<script>
+const svg = document.getElementById("svg");
+const B = EP.beats;
+const COLOR = { emre: "#0E9384", lena: "#E0552B", fenek: "#E4572E" };
+const NAME = { emre: "EMRE", lena: "LENA", fenek: "FENEK 🦊" };
+const ARTC = { der: "#2F6FEB", die: "#E5484D", das: "#16A37E" };
+
+function current(t) {
+  let cur = B[0];
+  for (const b of B) if (t >= b.t0 - .2) cur = b;
+  return cur;
+}
+const keyStart = key => { const b = B.find(x => x.st.key === key); return b ? b.t0 : 0; };
+
+/* ---------- metin kutuları ---------- */
+function wrap(text, max) {
+  const out = []; let line = "";
+  String(text).split(" ").forEach(w => { if ((line + " " + w).trim().length > max) { out.push(line.trim()); line = w; } else line += " " + w; });
+  if (line.trim()) out.push(line.trim());
+  return out;
+}
+function caption(lines, k) {
+  const sc = .9 + .1 * ease(k * 3);
+  let s = `<g transform="translate(540 235) scale(${sc}) translate(-540 -235)"><rect x="90" y="120" width="900" height="${70 + lines.length * 78}" rx="26" fill="#fff" stroke="${INK}" stroke-width="8"/>`;
+  lines.forEach((l, i) => s += `<text x="540" y="${198 + i * 78}" text-anchor="middle" class="cap" font-size="${l.length > 22 ? 54 : 64}" fill="${INK}">${esc(l)}</text>`);
+  return s + "</g>";
+}
+function tag(text, color, k) {
+  const w = text.length * 24 + 60, x = 70 - (1 - ease(k * 4)) * 420;
+  return `<g transform="translate(${x} 0)"><rect x="0" y="360" width="${w}" height="68" rx="14" fill="${color}" stroke="${INK}" stroke-width="6"/><text x="${w / 2}" y="408" text-anchor="middle" class="cap" font-size="42" fill="#fff">${esc(text)}</text></g>`;
+}
+function subtitle(b, t) {
+  const k = clamp((t - b.t0) / Math.max(.2, b.t1 - b.t0), 0, 1);
+  const main = wrap(b.text, b.lang === "de" ? 24 : 28), sub = b.sub ? wrap(b.sub, 36) : [];
+  const words = b.text.split(" ").length, shown = Math.ceil(k * words + .001);
+  const h = 60 + main.length * 72 + sub.length * 50, y0 = 1600 - h / 2;
+  let s = `<rect x="70" y="${y0}" width="940" height="${h}" rx="28" fill="rgba(255,255,255,.96)" stroke="${COLOR[b.who]}" stroke-width="8"/>`;
+  s += `<rect x="100" y="${y0 - 30}" width="${NAME[b.who].length * 24 + 40}" height="56" rx="14" fill="${COLOR[b.who]}" stroke="${INK}" stroke-width="5"/><text x="120" y="${y0 + 10}" class="cap" font-size="36" fill="#fff">${NAME[b.who]}</text>`;
+  let wi = 0;
+  main.forEach((l, i) => {
+    const ts = l.split(" ").map(w => { wi++; return `<tspan fill="${wi <= shown ? INK : "#B8BCC8"}">${esc(w)} </tspan>`; }).join("");
+    s += `<text x="540" y="${y0 + 88 + i * 72}" text-anchor="middle" font-size="${b.lang === "de" ? 62 : 54}" font-weight="900">${ts}</text>`;
+  });
+  sub.forEach((l, i) => s += `<text x="540" y="${y0 + 88 + main.length * 72 + i * 50}" text-anchor="middle" font-size="40" font-weight="800" fill="#5B6072">${esc(l)}</text>`);
+  return s;
+}
+function panel(y, h, k) {
+  const sc = pop(k / .35);
+  return [`<g transform="translate(540 ${y + h / 2}) scale(${sc}) translate(-540 ${-(y + h / 2)})"><rect x="80" y="${y}" width="920" height="${h}" rx="40" fill="#fff" stroke="${INK}" stroke-width="9"/>`, "</g>"];
+}
+const artWord = (art, noun, de, size, y, x = 540, anchor = "middle") => art
+  ? `<text x="${x}" y="${y}" text-anchor="${anchor}" class="cap" font-size="${size}"><tspan fill="${ARTC[art]}">${art}</tspan><tspan fill="${INK}"> ${esc(noun)}</tspan></text>`
+  : `<text x="${x}" y="${y}" text-anchor="${anchor}" class="cap" font-size="${size}" fill="${INK}">${esc(de)}</text>`;
+const fit = (s, base, max) => Math.min(base, Math.floor(base * max / Math.max(max, String(s).length)));
+
+/* ---------- overlay'ler ---------- */
+function ovCard(o, k) {
+  const [a, z] = panel(500, 640, k);
+  let s = a + `<text x="940" y="570" text-anchor="end" class="cap" font-size="40" fill="#9AA3B2">${o.i}/${o.n}</text>`;
+  s += `<text x="540" y="760" text-anchor="middle" font-size="190">${o.emoji}</text>`;
+  s += artWord(o.art, o.noun, o.de, fit(o.de, 96, 16), 920);
+  s += `<rect x="200" y="975" width="680" height="4" fill="#E6E1D8"/><text x="540" y="1060" text-anchor="middle" font-size="${fit(o.tr, 60, 24)}" font-weight="900" fill="#5B6072">${esc(o.tr)}</text>`;
+  return s + z;
+}
+function ovQuiz(o, k, cd, t) {
+  const [a, z] = panel(480, 700, k);
+  let s = a + (o.n ? `<text x="940" y="550" text-anchor="end" class="cap" font-size="40" fill="#9AA3B2">${o.i}/${o.n}</text>` : "");
+  if (o.kind === "art") {
+    s += `<text x="540" y="660" text-anchor="middle" font-size="120">${o.emoji}</text>`;
+    s += `<text x="540" y="800" text-anchor="middle" class="cap" font-size="${fit(o.word, 96, 14)}" fill="${INK}"><tspan fill="${o.reveal ? ARTC[o.answer] : INK}">${o.reveal ? o.answer : "___"}</tspan> ${esc(o.word)}</text>`;
+    o.opts.forEach((w, i) => {
+      const kk = pop((k - .2 - i * .12) / .3), ok = o.reveal && w === o.answer, dim = o.reveal && !ok;
+      s += `<g transform="translate(${250 + i * 290} 960) scale(${ok ? 1.12 : kk})" opacity="${dim ? .3 : 1}"><rect x="-120" y="-70" width="240" height="140" rx="30" fill="${ARTC[w]}" stroke="${INK}" stroke-width="8"/><text x="0" y="24" text-anchor="middle" class="cap" font-size="72" fill="#fff">${w}${ok ? " ✓" : ""}</text></g>`;
+    });
+  } else {
+    s += `<text x="540" y="640" text-anchor="middle" class="cap" font-size="${fit(o.word, 84, 16)}" fill="${INK}">${esc(o.word)}</text>`;
+    s += `<text x="540" y="700" text-anchor="middle" font-size="40" font-weight="800" fill="#5B6072">ne demek?</text>`;
+    o.opts.forEach((w, i) => {
+      const ok = o.reveal && w === o.answer, dim = o.reveal && !ok, y = 760 + i * 118;
+      s += `<g opacity="${dim ? .3 : 1}"><rect x="150" y="${y}" width="780" height="98" rx="26" fill="${ok ? "#16A37E" : "#F3EEE6"}" stroke="${INK}" stroke-width="6"/><text x="540" y="${y + 64}" text-anchor="middle" font-size="${fit(w, 48, 26)}" font-weight="900" fill="${ok ? "#fff" : INK}">${esc(w)}${ok ? " ✓" : ""}</text></g>`;
+    });
+  }
+  if (cd) s += countdownBadge(cd, t, 870, 540);
+  return s + z;
+}
+function countdownBadge(cd, t, x, y) {
+  const left = Math.max(1, Math.ceil(cd.total - t)), f = (cd.total - t) % 1;
+  return `<g transform="translate(${x} ${y}) scale(${1.2 - .2 * ease((1 - f) * 3)})"><circle r="60" fill="#FFC93C" stroke="${INK}" stroke-width="8"/><text y="26" text-anchor="middle" class="cap" font-size="72" fill="${INK}">${left}</text></g>`;
+}
+const HUNTC = ["#FF8A3D", "#2F6FEB", "#16A37E", "#C026D3", "#E5484D"];
+function ovGrid(o, k, cd, t) {
+  const n = o.grid.length, cs = 92, gx = 540 - n * cs / 2, gy = 470;
+  const [a, z] = panel(gy - 30, n * cs + 60, k);
+  let s = a;
+  o.words.slice(0, o.found).forEach((w, i) => {
+    const [r0, c0] = w.cells[0], [r1, c1] = w.cells[w.cells.length - 1];
+    const x0 = gx + c0 * cs + cs / 2, y0 = gy + r0 * cs + cs / 2, x1 = gx + c1 * cs + cs / 2, y1 = gy + r1 * cs + cs / 2;
+    s += `<path d="M${x0} ${y0} L${x1} ${y1}" stroke="${HUNTC[i % 5]}" stroke-width="78" stroke-linecap="round" opacity=".45"/>`;
+  });
+  o.grid.forEach((row, r) => Array.from(row).forEach((ch, c) => {
+    s += `<text x="${gx + c * cs + cs / 2}" y="${gy + r * cs + cs / 2 + 22}" text-anchor="middle" class="cap" font-size="60" fill="${INK}">${ch}</text>`;
+  }));
+  if (cd) s += countdownBadge(cd, t, 930, 440);
+  s += z;
+  // bulunanlar listesi
+  o.words.slice(0, o.found).forEach((w, i) => {
+    const y = 1250 + Math.floor(i / 2) * 78, x = i % 2 ? 560 : 90;
+    s += `<g><rect x="${x}" y="${y}" width="430" height="64" rx="18" fill="#fff" stroke="${HUNTC[i % 5]}" stroke-width="6"/><text x="${x + 20}" y="${y + 45}" font-size="${fit(w.de + w.tr, 34, 22)}" font-weight="900" fill="${INK}">${w.emoji} ${esc(w.de)}</text></g>`;
+  });
+  return s;
+}
+function ovExplain(o, k, t) {
+  const [a, z] = panel(500, 640, k);
+  let s = a + `<text x="540" y="580" text-anchor="middle" class="cap" font-size="52" fill="${INK}">${esc(o.title || "")}</text>`;
+  (o.lines || []).slice(0, o.show || 99).forEach((ln, i) => {
+    const y = 690 + i * 112;
+    const segs = ln.map(([txt, col, strike]) => `<tspan fill="${col || INK}" ${strike ? 'text-decoration="line-through"' : ""}>${esc(txt)}</tspan>`).join("");
+    s += `<text x="140" y="${y}" font-size="54" font-weight="900" fill="${INK}">${segs}</text>`;
+  });
+  return s + z;
+}
+function ovCta(o, k) {
+  const sc = pop(k / .4);
+  let s = `<g transform="translate(540 800) scale(${sc}) translate(-540 -800)"><rect x="110" y="480" width="860" height="640" rx="40" fill="#1B1F3B" stroke="${INK}" stroke-width="8"/>`;
+  s += `<text x="540" y="600" text-anchor="middle" class="cap" font-size="80" fill="#E4572E">fenek 🦊</text>`;
+  s += `<rect x="170" y="660" width="740" height="190" rx="28" fill="#FBF6EE"/><text x="220" y="740" font-size="${fit(o.unit, 52, 18)}" font-weight="900" fill="${INK}">${o.emoji} ${esc(o.unit)}</text><text x="220" y="805" font-size="40" font-weight="800" fill="#5B6072">${o.cefr} · ücretsiz ders</text>`;
+  s += `<rect x="730" y="708" width="140" height="96" rx="48" fill="#E4572E"/><text x="800" y="770" text-anchor="middle" class="cap" font-size="40" fill="#fff">BAŞLA</text>`;
+  s += `<text x="540" y="945" text-anchor="middle" font-size="50" font-weight="900" fill="#fff">35 ünite · 10 dil · ücretsiz</text>`;
+  s += `<text x="540" y="1040" text-anchor="middle" font-size="46" font-weight="900" fill="#FFC93C">👉 Link profilde</text></g>`;
+  return s;
+}
+
+/* ---------- ana çizim ---------- */
+function render(t) {
+  const b = current(t), st = b.st || {};
+  const talking = B.find(x => x.who && t >= x.t0 && t < x.t1);
+  const talk = who => talking && talking.who === who && Math.floor(t * 9) % 2 === 0;
+  const blinkE = (t % 3.3) < .12, blinkL = ((t + 1.4) % 3.9) < .12, blinkF = ((t + .7) % 2.8) < .12;
+  const mood = st.mood || {};
+  const dingAge = st.sfx === "ding" ? t - b.t0 : 99;
+
+  let s = `<g ${st.freeze ? 'style="filter:grayscale(1) brightness(.88)"' : ""}>`;
+  s += background(t, EP.theme, EP.poster);
+  s += lena(770, t, { talk: talk("lena"), blink: blinkL, mood: mood.lena || "happy", hearts: dingAge < 1.6 });
+  s += counter(t, false, false, 0);
+  s += emre(300, t, { talk: talk("emre"), blink: blinkE, mood: dingAge < 1.6 ? "happy" : (mood.emre || "neutral"), jump: dingAge < 1.2 });
+  s += "</g>";
+
+  if (st.icon) { const k = pop((t - b.t0) / .3); s += `<g transform="translate(540 700) scale(${k})"><circle r="140" fill="${st.icon === "x" ? "#E5484D" : "#16A37E"}" stroke="${INK}" stroke-width="10"/>${st.icon === "x" ? '<path d="M-56 -56 L56 56 M56 -56 L-56 56" stroke="#fff" stroke-width="32" stroke-linecap="round"/>' : '<path d="M-58 0 L-14 48 L62 -44" stroke="#fff" stroke-width="30" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'}</g>`; }
+
+  const o = st.overlay;
+  const hasOv = !!o;
+  if (o) {
+    const k = t - keyStart(st.key);
+    const cd = st.countdown ? { total: b.t0 + st.countdown } : null;
+    if (o.type === "card") s += ovCard(o, k);
+    else if (o.type === "quiz") s += ovQuiz(o, k, cd, t);
+    else if (o.type === "grid") s += ovGrid(o, k, cd, t);
+    else if (o.type === "explain") s += ovExplain(o, k, t);
+    else if (o.type === "cta") s += ovCta(o, k);
+  }
+
+  // Fenek
+  if (st.fenek || (talking && talking.who === "fenek")) {
+    const first = B.find(x => x.t0 <= t + .01 && (x.st.fenek || x.who === "fenek") && B.indexOf(x) >= B.indexOf(b) - 3) || b;
+    const k = ease((t - first.t0 + .3) / .45);
+    const small = hasOv && o.type !== "cta";
+    s += fenek((small ? 900 : 850) + (1 - k) * 500, small ? 1420 : 1330, small ? .62 : .8, t, { talk: talk("fenek"), blink: blinkF, point: !small, mood: "happy" });
+  }
+
+  s += caption(st.caption || EP.caption, t - (st.caption ? b.t0 : 0));
+  const tg = st.tag || { text: EP.tag, color: "#FF8A3D" };
+  let ti = B.indexOf(b);
+  while (ti > 0 && ((B[ti - 1].st.tag || {}).text || EP.tag) === tg.text) ti--;
+  if (!(o && o.type === "cta")) s += tag(tg.text, tg.color, t - (ti > 0 ? B[ti].t0 : 0));
+  if (talking && !talking.st.nosub && !(o && o.type === "cta")) s += subtitle(talking, t);
+
+  const p = clamp(t / EP.total, 0, 1);
+  s += `<rect x="70" y="1845" width="940" height="22" rx="11" fill="rgba(27,31,59,.25)"/><rect x="70" y="1845" width="${940 * p}" height="22" rx="11" fill="#E4572E"/>`;
+  s += `<text x="1010" y="1820" text-anchor="end" class="cap" font-size="34" fill="${INK}" opacity=".75">fenek 🦊</text>`;
+  svg.innerHTML = s;
+}
+window.seek = render;
+
+const capture = new URLSearchParams(location.search).has("capture");
+if (capture) document.body.classList.add("capture");
+render(0);
+if (!capture) {
+  const audio = document.getElementById("audio"), play = document.getElementById("play");
+  play.onclick = () => { play.style.display = "none"; audio.currentTime = 0; audio.play(); loop(); };
+  audio.onended = () => { play.style.display = "flex"; };
+  function loop() { render(audio.currentTime); if (!audio.paused) requestAnimationFrame(loop); }
+}
+</script>
+</body>
+</html>
