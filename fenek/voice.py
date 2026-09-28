@@ -89,7 +89,10 @@ def _chatterbox_checked(who, lang, text, cfg, ref, raw):
         # tek kelimelik kısa metinler modelde kararsız: noktalama ile cümle gibi okut
         say = text if text.rstrip()[-1:] in '.!?' else text.rstrip() + '.'
         wav = m.generate(say, language_id=lang, **kw)
-        dur = wav.shape[-1] / m.sr
+        # sadece konuşulan kısmı ölç (baştaki/sondaki sessizlik kısa kelimelerde oranı şişirir)
+        x = wav.detach().abs().flatten()
+        loud = (x > 0.02).nonzero()
+        dur = ((loud[-1] - loud[0]).item() / m.sr) if len(loud) else 0.0
         ratio = dur / exp
         err = abs(ratio - 1)
         if best is None or err < best[0]:
