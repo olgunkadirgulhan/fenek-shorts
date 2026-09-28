@@ -114,7 +114,16 @@ def build(ep, out):
     return total
 
 
+def free_models():
+    """Ses modellerini bellekten at: Chrome'a yer kalsın (Chatterbox + whisper birkaç GB tutar)."""
+    import gc
+    voice._cb = None
+    lipsync._whisper = None
+    gc.collect()
+
+
 def render(ep, out):
+    free_models()
     for f in ('scene.html', 'cast.js'):
         shutil.copy(HERE / 'render' / f, out / f)
     (out / 'ep.js').write_text('window.EP = ' + json.dumps(ep, ensure_ascii=False) + ';\n', encoding='utf-8')

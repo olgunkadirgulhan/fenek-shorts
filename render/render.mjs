@@ -17,10 +17,14 @@ const FFMPEG = process.env.FFMPEG || "ffmpeg";
 const port = 9300 + Math.floor(Math.random() * 600);
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), "fenek-chrome-"));
 const proc = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${port}`, "--disable-gpu", "--no-sandbox", "--hide-scrollbars",
-  "--force-device-scale-factor=1", "--allow-file-access-from-files", `--user-data-dir=${profile}`, "about:blank"]);
+  "--force-device-scale-factor=1", "--allow-file-access-from-files", "--disable-dev-shm-usage", `--user-data-dir=${profile}`, "about:blank"]);
+let chromeErr = "";
+proc.stderr.on("data", d => { chromeErr = (chromeErr + d).slice(-2000); });
+proc.on("exit", code => { if (code) console.error(`chrome çıktı (kod ${code}):\n${chromeErr}`); });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let list;
-for (let i = 0; i < 40 && !list; i++) { await sleep(250); try { list = await (await fetch(`http://127.0.0.1:${port}/json`)).json(); } catch {} }
+for (let i = 0; i < 240 && !list; i++) { await sleep(250); try { list = await (await fetch(`http://127.0.0.1:${port}/json`)).json(); } catch {} }   // 60 sn'ye kadar bekle
+if (!list || !list.find(p => p.type === "page")) { console.error(`Chrome açılmadı (${CHROME}).\n${chromeErr}`); process.exit(3); }
 const ws = new WebSocket(list.find(p => p.type === "page").webSocketDebuggerUrl);
 await new Promise(r => ws.onopen = r);
 let id = 0; const pend = {}; const errors = [];
