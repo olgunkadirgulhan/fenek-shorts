@@ -30,8 +30,12 @@ HOOKS = {
     'quiz': ['Almanca quiz! {t}: üç soru, üç saniye.', 'Kendini dene! {t} hakkında üç soru.'],
     'av': ['Bu tabloda beş Almanca kelime saklı. On saniyen var!', 'Beş kelime saklı. Kaç tanesini bulabilirsin?'],
 }
-CTAS = ['Tüm ünite sitede ücretsiz. Link profilde!', 'Her gün yeni Almanca video için abone ol!',
-        'Bunun devamı sitede, ücretsiz. Link profilde!', 'Kaç tanesini bildin? Yorumlara yaz!']
+SITE_CTAS = ['Tüm ünite sitede ücretsiz. Link profilde!', 'Bunun devamı sitede, ücretsiz. Link profilde!']
+FOLLOW_CTAS = ['Her gün yeni Almanca video için takip et!', 'Kaç tanesini bildin? Yorumlara yaz!',
+               'Bunu kaydet, yarın tekrar et!', 'Yarın yeni kelimeler var. Takip et!']
+# Site açılana kadar (SITE_URL boş) siteye/markaya yönlendiren cümle kurulmaz
+BRAND = bool((os.environ.get('SITE_URL') or '').strip())
+CTAS = SITE_CTAS + FOLLOW_CTAS if BRAND else FOLLOW_CTAS
 
 
 def noun(w):
@@ -86,7 +90,7 @@ def ep_sahne(unit, rng):
         beats += [beat('fenek', SRC, 'Soru! Bu kelimenin artikeli ne?', overlay=q, key='q', fenek=True),
                   pause(3.0, overlay=q, key='q', countdown=3, fenek=True),
                   beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key='q', sfx='ding', fenek=True, mood={'emre': 'happy'})]
-    beats.append(beat('fenek', SRC, rng.choice(CTAS), overlay={'type': 'cta', 'unit': t, 'emoji': unit['emoji'], 'cefr': unit['cefr']}, key='cta', fenek=True, sfx_before='pop'))
+    beats.append(beat('fenek', SRC, rng.choice([c for c in CTAS if 'Kaç tanesini' not in c]), overlay={'type': 'cta', 'unit': t, 'emoji': unit['emoji'], 'cefr': unit['cefr']}, key='cta', fenek=True, sfx_before='pop'))
     title = f"{t}: Almanca diyalog {unit['emoji']} | {unit['cefr']} #almanca"
     return dict(caption=[f"{up(t)}", "ALMANCA DİYALOG " + unit['emoji']], tag=f"{unit['cefr']} · ÜNİTE", title=title,
                 topic=unit['id'], theme=unit['id'], poster={'emoji': unit['emoji'], 'label': unit['title'][TGT].upper()[:18]}, beats=beats,
@@ -136,8 +140,12 @@ def ep_quiz(pack, rng):
         beats += [beat('fenek', SRC, f"{i + 1}. soru. {ask}", overlay=q, key=f'q{i}', fenek=True, sfx_before='whoosh', nosub=True)]
         if q['kind'] == 'mean':
             beats.append(beat('lena', TGT, w[TGT], '', overlay=q, key=f'q{i}', fenek=True, nosub=True))
-        beats += [pause(3.0, overlay=q, key=f'q{i}', countdown=3, fenek=True),
-                  beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key=f'q{i}', sfx='ding', fenek=True, mood={'emre': 'happy'})]
+        beats.append(pause(3.0, overlay=q, key=f'q{i}', countdown=3, fenek=True))
+        if q['kind'] == 'mean':
+            # kelimeyi Lena zaten söyledi: cevabı Fenek Türkçe verir (aynı kelime iki kez duyulmasın)
+            beats.append(beat('fenek', SRC, f"Cevap: {w[SRC]}!", '', overlay={**q, 'reveal': True}, key=f'q{i}', sfx='ding', fenek=True, nosub=True, mood={'emre': 'happy'}))
+        else:
+            beats.append(beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key=f'q{i}', sfx='ding', fenek=True, mood={'emre': 'happy'}))
     beats.append(beat('fenek', SRC, rng.choice(CTAS), overlay={'type': 'cta', 'unit': t, 'emoji': pack['emoji'], 'cefr': pack['cefr']}, key='cta', fenek=True, sfx_before='pop'))
     return dict(caption=['ALMANCA QUIZ 🤔', f"{up(t)}"], tag=f"{pack['cefr']} · QUIZ", topic=pack['id'], theme='study', poster={'emoji': pack['emoji'], 'label': pack['title'][TGT].upper()[:18]},
                 title=f"Almanca quiz: {t} 🤔 3 soruda kendini dene! | {pack['cefr']}", beats=beats,
@@ -195,7 +203,7 @@ def ep_av(pack, rng):
         who = 'lena' if i % 2 == 0 else 'emre'
         beats.append(beat(who, TGT, w['de'], w['tr'], overlay={**base, 'found': i + 1}, key='g', sfx_before='pop'))
     beats.append(beat('fenek', SRC, 'Kaç tanesini buldun? Yorumlara yaz!', overlay={**base, 'found': len(words)}, key='g', fenek=True))
-    beats.append(beat('fenek', SRC, rng.choice(CTAS[:3]), overlay={'type': 'cta', 'unit': t, 'emoji': pack['emoji'], 'cefr': pack['cefr']}, key='cta', fenek=True, sfx_before='pop'))
+    beats.append(beat('fenek', SRC, rng.choice([c for c in CTAS if 'Yorumlara' not in c]), overlay={'type': 'cta', 'unit': t, 'emoji': pack['emoji'], 'cefr': pack['cefr']}, key='cta', fenek=True, sfx_before='pop'))
     return dict(caption=['5 KELİME SAKLI 🔍', '10 SANİYEN VAR!'], tag=f"{pack['cefr']} · KELİME AVI", topic=pack['id'], theme='study', poster={'emoji': pack['emoji'], 'label': pack['title'][TGT].upper()[:18]},
                 title=f"Bu tabloda 5 Almanca kelime saklı 🔍 Bulabilir misin? | {t}", beats=beats,
                 desc=f"Kelime avı: {t} ({pack['cefr']}). Harf tablosunda saklı 5 Almanca kelimeyi 10 saniyede bul!")

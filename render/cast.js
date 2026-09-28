@@ -26,26 +26,7 @@ function brows(x, y, mood) {
     return `<path d="M${ex - 24} ${y + (d < 0 ? tilt : -tilt) * .5} L${ex + 24} ${y - (d < 0 ? tilt : -tilt) * .5}" stroke="${INK}" stroke-width="10" stroke-linecap="round"/>`;
   }).join("");
 }
-// Rhubarb ağız şekilleri (Hanna-Barbera standardı). A=m/b/p kapalı, B=çoğu ünsüz (dişler), C=e, D=a (geniş),
-// E=o (yuvarlak), F=u/w (büzük), G=f/v (üst diş alt dudakta), H=l (dil yukarı), X=dinlenme
-const MOUTH_FILL = "#7A1F2B", TONGUE = "#F28BA0", TEETH = "#FFFFFF";
-function mouthShape(x, y, sh, mood) {
-  const w = mood === "happy" ? 1.15 : 1;
-  const ell = (rx, ry, extra = "") => `<ellipse cx="${x}" cy="${y + 4}" rx="${rx * w}" ry="${ry}" fill="${MOUTH_FILL}" stroke="${INK}" stroke-width="${S}"/>${extra}`;
-  switch (sh) {
-    case "A": return `<path d="M${x - 26 * w} ${y + 4} Q${x} ${y + 12} ${x + 26 * w} ${y + 4}" stroke="${INK}" stroke-width="${S + 1}" fill="none" stroke-linecap="round"/>`;
-    case "B": return ell(28, 12, `<rect x="${x - 20 * w}" y="${y - 6}" width="${40 * w}" height="9" rx="3" fill="${TEETH}"/>`);
-    case "C": return ell(30, 19, `<rect x="${x - 20 * w}" y="${y - 13}" width="${40 * w}" height="8" rx="3" fill="${TEETH}"/><ellipse cx="${x}" cy="${y + 15}" rx="${13 * w}" ry="5" fill="${TONGUE}"/>`);
-    case "D": return ell(34, 28, `<rect x="${x - 22 * w}" y="${y - 22}" width="${44 * w}" height="9" rx="3" fill="${TEETH}"/><ellipse cx="${x}" cy="${y + 22}" rx="${16 * w}" ry="7" fill="${TONGUE}"/>`);
-    case "E": return `<ellipse cx="${x}" cy="${y + 4}" rx="19" ry="22" fill="${MOUTH_FILL}" stroke="${INK}" stroke-width="${S}"/><ellipse cx="${x}" cy="${y + 16}" rx="9" ry="5" fill="${TONGUE}"/>`;
-    case "F": return `<ellipse cx="${x}" cy="${y + 4}" rx="12" ry="13" fill="${MOUTH_FILL}" stroke="${INK}" stroke-width="${S}"/>`;
-    case "G": return ell(26, 11, `<rect x="${x - 18}" y="${y - 5}" width="36" height="10" rx="3" fill="${TEETH}"/><path d="M${x - 24} ${y + 10} Q${x} ${y + 3} ${x + 24} ${y + 10}" stroke="${INK}" stroke-width="4" fill="none"/>`);
-    case "H": return ell(28, 20, `<ellipse cx="${x}" cy="${y - 4}" rx="${12 * w}" ry="7" fill="${TONGUE}"/>`);
-    default: return null;   // X: dinlenme → ruh haline göre normal ağız
-  }
-}
 function mouth(x, y, mood, open) {
-  if (typeof open === "string") { const m = mouthShape(x, y, open, mood); if (m) return m; open = false; }
   if (open) return `<ellipse cx="${x}" cy="${y + 4}" rx="${mood === "happy" ? 34 : 24}" ry="${mood === "happy" ? 26 : 18}" fill="#7A1F2B" stroke="${INK}" stroke-width="${S}"/><ellipse cx="${x}" cy="${y + 16}" rx="12" ry="6" fill="#F28BA0"/>`;
   if (mood === "happy") return `<path d="M${x - 40} ${y - 6} Q${x} ${y + 48} ${x + 40} ${y - 6} Z" fill="#7A1F2B" stroke="${INK}" stroke-width="${S}" stroke-linejoin="round"/>`;
   if (mood === "sad") return `<path d="M${x - 28} ${y + 16} Q${x} ${y - 12} ${x + 28} ${y + 16}" stroke="${INK}" stroke-width="${S}" fill="none" stroke-linecap="round"/>`;

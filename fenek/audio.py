@@ -29,24 +29,7 @@ def _lp(x, k):
     return ((c[k:] - c[:-k]) / k)[:len(x)].astype(np.float32)
 
 
-SFX_DIR = __import__('pathlib').Path(__file__).resolve().parent.parent / 'sfx'
-
-
-def _sfx_file(name):
-    """sfx/<ad>.wav varsa (Kenney, CC0) onu kullan: 48 kHz mono."""
-    p = SFX_DIR / f'{name}.wav'
-    if not p.exists():
-        return None
-    import wave
-    with wave.open(str(p)) as w:
-        x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
-    return x / (np.abs(x).max() + 1e-6) * 0.8
-
-
 def sfx(name, seed=0):
-    real = _sfx_file(name)
-    if real is not None:
-        return real
     rng = np.random.default_rng(seed)
     if name == 'slap':
         n = int(0.25 * SR)

@@ -30,7 +30,7 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from fenek import audio, episodes, lipsync, voice  # noqa: E402
+from fenek import audio, episodes, voice  # noqa: E402
 
 HIST = HERE / 'history.json'
 PUBLISHED = HERE / 'published.csv'
@@ -90,9 +90,6 @@ def build(ep, out):
         else:
             wav, dur = voice.synth(b['who'], b['lang'], b['text'])
             voices.append((t, read_wav(wav), 1.0))
-            b['mouth'] = lipsync.mouth_cues(wav)                      # gerçek dudak senkronu
-            if not st.get('nosub'):
-                b['words'] = lipsync.word_starts(wav, b['text'], b['lang'])   # karaoke altyazı
             speech += [(t - 0.05, 1), (t + dur, 1), (t + dur + 0.2, 0)]
             if st.get('sfx') == 'ding':
                 effects.append((t, audio.sfx('ding'), 0.35))
@@ -108,17 +105,16 @@ def build(ep, out):
     raw = out / 'track_raw.wav'
     with wave.open(str(raw), 'wb') as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(audio.SR); w.writeframes(pcm.tobytes())
-    # mastering: YouTube standardı -14 LUFS, tepe -1.5 dB (videolar arası ses seviyesi eşit)
+    # mastering: YouTube standardı -14 LUFS (her videonun sesi aynı yükseklikte)
     subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', str(raw), '-af', 'loudnorm=I=-14:TP=-1.5:LRA=9', '-ar', str(audio.SR), str(out / 'track.wav')], check=True)
     raw.unlink(missing_ok=True)
     return total
 
 
 def free_models():
-    """Ses modellerini bellekten at: Chrome'a yer kalsın (Chatterbox + whisper birkaç GB tutar)."""
+    """Ses modelini bellekten at: Chrome'a yer kalsın (Chatterbox birkaç GB tutar)."""
     import gc
     voice._cb = None
-    lipsync._whisper = None
     gc.collect()
 
 
@@ -133,13 +129,31 @@ def render(ep, out):
     return out / 'video.mp4'
 
 
+def signature(ep):
+    """Bölümün parmak izi: aynı format + konu + aynı kelimeler/cümleler = aynı video."""
+    texts = sorted(b['text'] for b in ep['beats'] if b.get('who') and b.get('lang') == episodes.TGT)
+    return f"{ep['format']}|{ep.get('topic')}|{'/'.join(texts)}"
+
+
+def debrand(ep):
+    """Site açılana kadar: skeçlerdeki siteye/markaya yönlendiren kapanış cümlelerini takip çağrısına çevir."""
+    ep['brand'] = episodes.BRAND
+    if episodes.BRAND:
+        return
+    import random
+    for b in ep['beats']:
+        if b.get('lang') == episodes.SRC and any(k in b.get('text', '') for k in ('sitede', 'Link profilde', 'link profilde')):
+            b['text'] = random.choice(episodes.FOLLOW_CTAS)
+
+
 def metadata(ep):
+    # Site açılana kadar (SITE_URL boş) marka/site adı geçmez; sadece kanal takibi istenir
     site = os.environ.get('SITE_URL', '').strip()
     tags = ['almanca', 'almanca öğren', 'almanca dersi', 'deutsch lernen', 'almanca kelimeler', 'almanya',
-            'german', 'learn german', ep['format'], 'fenek']
+            'german', 'learn german', ep['format']] + (['fenek'] if site else [])
     desc = (f"{ep.get('desc', '')}\n\n"
-            + (f'Tüm üniteler ücretsiz: {site}\n' if site else 'Tüm üniteler ücretsiz, link profilde.\n')
-            + 'Her gün 4 yeni Almanca video. Karakterler: Emre, Lena ve Fenek 🦊\n\n'
+            + (f'Tüm üniteler ücretsiz: {site}\n' if site else '')
+            + 'Her gün 4 yeni Almanca video. Takip et, Almancan her gün biraz daha gelişsin! 🔔\n\n'
             '#almanca #almancaöğren #deutsch #shorts')
     return ep['title'][:100], desc, tags
 
@@ -181,8 +195,16 @@ def main():
         slot = a.slot if a.slot is not None else hist.get('count', 0)
         if a.format:
             slot = episodes.SLOT_FORMATS.index(a.format)
-        ep = episodes.make_episode(slot, hist, seed=int(datetime.now().timestamp()))
+        seen = set(hist.get('sigs', []))
+        seed0 = int(datetime.now().timestamp())
+        # Her video farklı olsun: daha önce üretilmiş bir bölüm çıkarsa başka tohumla, gerekirse başka formatla dene
+        for k in range(40):
+            ep = episodes.make_episode(slot + (k // 10), hist, seed=seed0 + k)
+            if signature(ep) not in seen:
+                break
+            log(f'tekrar eden bölüm atlandı ({ep["format"]} / {ep.get("topic")})')
         ep['id'] = datetime.now(timezone.utc).strftime('%Y%m%d-%H%M') + '-' + ep['format']
+    debrand(ep)
     log(f"episode {ep['id']}: {ep['title']}")
 
     out = OUT / ep['id']
@@ -200,6 +222,7 @@ def main():
     if not qpath and mode != 'off':
         hist['recent'] = (hist.get('recent', []) + [{'id': ep['id'], 'format': ep['format'], 'topic': ep.get('topic'), 'title': ep['title']}])[-200:]
         hist['count'] = hist.get('count', 0) + 1
+        hist['sigs'] = (hist.get('sigs', []) + [signature(ep)])[-5000:]
         if ep.get('bank_id'):
             hist.setdefault('bank_used', []).append(ep['bank_id'])
         HIST.write_text(json.dumps(hist, indent=1, ensure_ascii=False), encoding='utf-8')

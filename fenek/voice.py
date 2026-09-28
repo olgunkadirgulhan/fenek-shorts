@@ -22,21 +22,16 @@ VOICES = ROOT / 'voices'
 FFMPEG = os.environ.get('FFMPEG', 'ffmpeg')
 
 # karakter -> (dil, piper sesi, chatterbox ayarları)
-# Sakin, net "öğretmen" tonu: düşük exaggeration = daha az abartı; düşük cfg_weight = daha yavaş, yumuşak tempo
 CAST = {
-    'emre': {'piper': 'de_DE-thorsten-high', 'cb': {'exaggeration': 0.4, 'cfg_weight': 0.35, 'temperature': 0.65}},
-    'lena': {'piper': 'de_DE-kerstin-low', 'cb': {'exaggeration': 0.42, 'cfg_weight': 0.35, 'temperature': 0.65}},
-    'fenek': {'piper': None, 'cb': {'exaggeration': 0.45, 'cfg_weight': 0.32, 'temperature': 0.65}},
+    'emre': {'piper': 'de_DE-thorsten-high', 'cb': {'exaggeration': 0.45, 'cfg_weight': 0.45, 'temperature': 0.7}},
+    'lena': {'piper': 'de_DE-kerstin-low', 'cb': {'exaggeration': 0.5, 'cfg_weight': 0.45, 'temperature': 0.7}},
+    'fenek': {'piper': None, 'cb': {'exaggeration': 0.55, 'cfg_weight': 0.4, 'temperature': 0.75}},
 }
-# Yumuşatma zinciri: gürültü/uğultu temizliği, hafif sıcaklık (200 Hz), sertlik azaltma (3.2 kHz), cızırtı giderici,
-# nazik kompresör, baş/son sessizlik kırpma, her replik aynı ses seviyesine (-18 LUFS)
-SOFTEN = ('highpass=f=80,lowpass=f=11000,'
-          'equalizer=f=200:t=q:w=1.0:g=1.5,equalizer=f=3200:t=q:w=1.2:g=-2.5,'
-          'deesser=i=0.4:m=0.5:f=0.5,'
-          'acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.3,'
+SOFTEN = ('highpass=f=75,lowpass=f=10500,deesser=i=0.35:m=0.5:f=0.5,'
+          'acompressor=threshold=-21dB:ratio=2.2:attack=8:release=120:makeup=1.5,'
+          'aecho=0.9:0.5:28|46:0.07|0.04,'
           'silenceremove=start_periods=1:start_threshold=-45dB:stop_periods=-1:stop_duration=0.25:stop_threshold=-45dB,'
-          'loudnorm=I=-18:TP=-2:LRA=7,'
-          'apad=pad_dur=0.05')
+          'apad=pad_dur=0.04')
 
 _cb = None
 _piper = {}
@@ -73,6 +68,38 @@ def wav_len(path):
         return w.getnframes() / w.getframerate()
 
 
+def expected_len(text):
+    """Metin uzunluğundan beklenen konuşma süresi (sn): Türkçe/Almanca ~13 harf/sn + nefes payı."""
+    return len(text.replace(' ', '')) / 13 + 0.35
+
+
+def _chatterbox_checked(who, lang, text, cfg, ref, raw):
+    """Chatterbox bazen kelimeyi tekrarlar (ses uzar) ya da cümleyi keser (ses kısalır): o zaman yazı ile ses
+    kayar. Süre beklenenin çok dışındaysa farklı tohum ve daha düşük sıcaklıkla tekrar üret; en yakın olanı tut."""
+    import torch, torchaudio
+    m = _chatterbox()
+    exp = expected_len(text)
+    best = None
+    for attempt in range(4):
+        kw = dict(cfg['cb'])
+        kw['temperature'] = max(0.45, kw['temperature'] - 0.1 * attempt)
+        if ref.exists():
+            kw['audio_prompt_path'] = str(ref)
+        torch.manual_seed(1234 + attempt * 7919)
+        # tek kelimelik kısa metinler modelde kararsız: noktalama ile cümle gibi okut
+        say = text if text.rstrip()[-1:] in '.!?' else text.rstrip() + '.'
+        wav = m.generate(say, language_id=lang, **kw)
+        dur = wav.shape[-1] / m.sr
+        ratio = dur / exp
+        err = abs(ratio - 1)
+        if best is None or err < best[0]:
+            best = (err, wav, dur)
+        if 0.55 <= ratio <= 1.9:
+            break
+        print(f'[tts] süre şüpheli ({dur:.1f} sn, beklenen ~{exp:.1f}): tekrar üretiliyor — {text!r}', flush=True)
+    torchaudio.save(str(raw), best[1].cpu(), m.sr)
+
+
 def synth(who, lang, text):
     """-> (wav yolu 48 kHz mono, süre sn)"""
     eng = engine() if not (engine() == 'piper' and lang != 'de') else 'chatterbox'
@@ -87,13 +114,7 @@ def synth(who, lang, text):
         return out, wav_len(out)
     raw = TTS_CACHE / f'{key}.raw.wav'
     if eng == 'chatterbox':
-        import torchaudio
-        m = _chatterbox()
-        kw = dict(cfg['cb'])
-        if ref.exists():
-            kw['audio_prompt_path'] = str(ref)
-        wav = m.generate(text, language_id=lang, **kw)
-        torchaudio.save(str(raw), wav.cpu(), m.sr)
+        _chatterbox_checked(who, lang, text, cfg, ref, raw)
     elif eng == 'edge':
         import asyncio, edge_tts
         name = {'emre': 'de-DE-ConradNeural', 'lena': 'de-DE-KatjaNeural', 'fenek': 'tr-TR-EmelNeural'}[who]
