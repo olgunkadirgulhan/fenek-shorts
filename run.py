@@ -94,7 +94,9 @@ def build(ep, out):
             if st.get('sfx') == 'ding':
                 effects.append((t, audio.sfx('ding'), 0.35))
             b['t0'], b['t1'] = round(t, 3), round(t + dur, 3)
-            t += dur
+            # cevabın gösterildiği anlar (quiz/kart cevabı) ekranda en az 2 sn kalsın: izleyici okuyabilsin
+            hold = st.get('hold') or (2.0 if (st.get('overlay') or {}).get('reveal') else 0)
+            t += max(dur, hold)
         t += GAP
     ep['total'] = total = round(t + 0.8, 2)
     pts = sorted(speech[1:])

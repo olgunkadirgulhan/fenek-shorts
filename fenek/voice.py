@@ -27,11 +27,17 @@ CAST = {
     'lena': {'piper': 'de_DE-kerstin-low', 'cb': {'exaggeration': 0.5, 'cfg_weight': 0.45, 'temperature': 0.7}},
     'fenek': {'piper': None, 'cb': {'exaggeration': 0.55, 'cfg_weight': 0.4, 'temperature': 0.75}},
 }
+# Sadece baştaki ve sondaki sessizlik kırpılır (ortadaki duraklamalar ve kelime sonlarındaki kısık sesler korunur;
+# eski zincir bunları "sessizlik" sanıp kırpıyordu → kelimeler kesik duyuluyordu). Sonda 0.12 sn nefes payı kalır.
 SOFTEN = ('highpass=f=75,lowpass=f=10500,deesser=i=0.35:m=0.5:f=0.5,'
           'acompressor=threshold=-21dB:ratio=2.2:attack=8:release=120:makeup=1.5,'
           'aecho=0.9:0.5:28|46:0.07|0.04,'
-          'silenceremove=start_periods=1:start_threshold=-45dB:stop_periods=-1:stop_duration=0.25:stop_threshold=-45dB,'
-          'apad=pad_dur=0.04')
+          'silenceremove=start_periods=1:start_threshold=-50dB,'
+          'areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.12,areverse,'
+          'apad=pad_dur=0.06')
+# Almanca replikler Piper ile (Chatterbox Almancada kısa kelimeleri ve cümle sonlarını kesiyor — tts_probe testi)
+GERMAN_ENGINE = (os.environ.get('GERMAN_ENGINE') or 'piper').lower()
+PIPER_SLOW = 1.2   # Piper'ın konuşma süresi çarpanı: öğrenenler için ~%20 daha yavaş ve net
 
 _cb = None
 _piper = {}
@@ -94,23 +100,32 @@ def _chatterbox_checked(who, lang, text, cfg, ref, raw):
         loud = (x > 0.02).nonzero()
         dur = ((loud[-1] - loud[0]).item() / m.sr) if len(loud) else 0.0
         ratio = dur / exp
-        err = abs(ratio - 1)
+        # kesilme testi: son 40 ms tam seste bitiyorsa kelime yarıda kalmış demektir (doğal bitişte ses söner)
+        cut = 0.0
+        if len(loud):
+            w = int(0.04 * m.sr); end = loud[-1].item()
+            tail = x[max(0, end - w):end].pow(2).mean().sqrt().item()
+            peak = max(x[i:i + w].pow(2).mean().sqrt().item() for i in range(0, max(1, len(x) - w), w))
+            cut = tail / (peak + 1e-9)
+        err = abs(ratio - 1) + (cut if cut > 0.45 else 0)
         if best is None or err < best[0]:
             best = (err, wav, dur)
-        if 0.55 <= ratio <= 1.9:
+        if 0.55 <= ratio <= 1.9 and cut <= 0.45:
             break
-        print(f'[tts] süre şüpheli ({dur:.1f} sn, beklenen ~{exp:.1f}): tekrar üretiliyor — {text!r}', flush=True)
+        print(f'[tts] şüpheli (konuşma {dur:.1f} sn, beklenen ~{exp:.1f}, son/tepe {cut:.2f}): tekrar üretiliyor — {text!r}', flush=True)
     torchaudio.save(str(raw), best[1].cpu(), m.sr)
 
 
 def synth(who, lang, text):
     """-> (wav yolu 48 kHz mono, süre sn)"""
     eng = engine() if not (engine() == 'piper' and lang != 'de') else 'chatterbox'
+    if lang == 'de' and CAST[who]['piper'] and eng == 'chatterbox':
+        eng = GERMAN_ENGINE
     if os.environ.get('GITHUB_ACTIONS') and eng == 'edge':
         raise RuntimeError('edge-tts yayında kullanılamaz')
     ref = VOICES / f'{who}.wav'
     cfg = CAST[who]
-    key = hashlib.sha1(json.dumps([eng, who, lang, text, cfg, ref.exists() and ref.stat().st_size, SOFTEN]).encode()).hexdigest()[:16]
+    key = hashlib.sha1(json.dumps([eng, who, lang, text, cfg, ref.exists() and ref.stat().st_size, SOFTEN, PIPER_SLOW]).encode()).hexdigest()[:16]
     TTS_CACHE.mkdir(parents=True, exist_ok=True)
     out = TTS_CACHE / f'{key}.wav'
     if out.exists():
@@ -125,9 +140,10 @@ def synth(who, lang, text):
         asyncio.run(edge_tts.Communicate(text, name).save(str(mp3)))
         raw = mp3
     else:
+        from piper import SynthesisConfig
         v = _piper_voice(cfg['piper'])
         with wave.open(str(raw), 'wb') as wf:
-            v.synthesize_wav(text, wf)
+            v.synthesize_wav(text, wf, syn_config=SynthesisConfig(length_scale=PIPER_SLOW))
     subprocess.run([FFMPEG, '-y', '-v', 'error', '-i', str(raw), '-af', SOFTEN, '-ar', '48000', '-ac', '1', str(out)], check=True)
     raw.unlink(missing_ok=True)
     return out, wav_len(out)
