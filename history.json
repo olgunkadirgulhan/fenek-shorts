@@ -1,0 +1,17 @@
+{
+ "recent": [
+  {
+   "id": "20260928-2044-hata",
+   "format": "hata",
+   "topic": "cafe",
+   "title": "Almanya'da kafede bu hatayı yapma! ☕ #almanca"
+  }
+ ],
+ "bank_used": [
+  "001_kafe_will_moechte"
+ ],
+ "count": 1,
+ "sigs": [
+  "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen"
+ ]
+}
