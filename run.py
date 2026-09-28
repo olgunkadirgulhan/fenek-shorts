@@ -30,7 +30,7 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from fenek import audio, episodes, voice  # noqa: E402
+from fenek import audio, episodes, lipsync, voice  # noqa: E402
 
 HIST = HERE / 'history.json'
 PUBLISHED = HERE / 'published.csv'
@@ -90,6 +90,9 @@ def build(ep, out):
         else:
             wav, dur = voice.synth(b['who'], b['lang'], b['text'])
             voices.append((t, read_wav(wav), 1.0))
+            b['mouth'] = lipsync.mouth_cues(wav)                      # gerçek dudak senkronu
+            if not st.get('nosub'):
+                b['words'] = lipsync.word_starts(wav, b['text'], b['lang'])   # karaoke altyazı
             speech += [(t - 0.05, 1), (t + dur, 1), (t + dur + 0.2, 0)]
             if st.get('sfx') == 'ding':
                 effects.append((t, audio.sfx('ding'), 0.35))
@@ -102,8 +105,12 @@ def build(ep, out):
     ys = [0] + [p[1] for p in pts] + [0]
     stereo = audio.mix(total, voices, effects, audio.music(total, seed=hash(ep['id']) % 1000), (np.array(xs), np.array(ys, np.float32)))
     pcm = (np.clip(stereo, -1, 1) * 32767).astype(np.int16)
-    with wave.open(str(out / 'track.wav'), 'wb') as w:
+    raw = out / 'track_raw.wav'
+    with wave.open(str(raw), 'wb') as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(audio.SR); w.writeframes(pcm.tobytes())
+    # mastering: YouTube standardı -14 LUFS, tepe -1.5 dB (videolar arası ses seviyesi eşit)
+    subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', str(raw), '-af', 'loudnorm=I=-14:TP=-1.5:LRA=9', '-ar', str(audio.SR), str(out / 'track.wav')], check=True)
+    raw.unlink(missing_ok=True)
     return total
 
 

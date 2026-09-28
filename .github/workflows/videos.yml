@@ -77,8 +77,19 @@ jobs:
           path: |
             ~/.cache/huggingface
             ~/.cache/fenek
-          key: models-chatterbox-mtl-v1-${{ hashFiles('fenek/voice.py', 'voices/**') }}
-          restore-keys: models-chatterbox-mtl-v1-
+          key: models-chatterbox-mtl-v2-${{ hashFiles('fenek/voice.py', 'voices/**') }}
+          restore-keys: models-chatterbox-mtl-
+      - name: Rhubarb Lip Sync cache
+        id: rhubarb
+        uses: actions/cache@v4
+        with:
+          path: ~/rhubarb
+          key: rhubarb-1.14.0-linux
+      - name: Rhubarb Lip Sync (MIT) — dudak senkronu
+        if: steps.rhubarb.outputs.cache-hit != 'true'
+        run: |
+          curl -sSL -o /tmp/rh.zip https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.14.0/Rhubarb-Lip-Sync-1.14.0-Linux.zip
+          unzip -q /tmp/rh.zip -d /tmp/rh && mkdir -p ~/rhubarb && cp -r /tmp/rh/*/* ~/rhubarb/ && chmod +x ~/rhubarb/rhubarb
       - name: Run pipeline
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
@@ -90,6 +101,8 @@ jobs:
           LEVELS: ${{ vars.LEVELS }}
           SITE_URL: ${{ vars.SITE_URL }}
           TTS_ENGINE: ${{ vars.TTS_ENGINE }}
+          RHUBARB: /home/runner/rhubarb/rhubarb
+          WHISPER_MODEL: small
         run: python run.py ${{ inputs.format && format('--format {0}', inputs.format) || '' }} ${{ inputs.bank && format('--bank {0}', inputs.bank) || '' }} ${{ inputs.no_upload && '--no-upload' || '' }}
       - name: Keep video for review
         if: always()

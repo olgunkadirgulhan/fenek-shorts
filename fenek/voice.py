@@ -22,16 +22,21 @@ VOICES = ROOT / 'voices'
 FFMPEG = os.environ.get('FFMPEG', 'ffmpeg')
 
 # karakter -> (dil, piper sesi, chatterbox ayarları)
+# Sakin, net "öğretmen" tonu: düşük exaggeration = daha az abartı; düşük cfg_weight = daha yavaş, yumuşak tempo
 CAST = {
-    'emre': {'piper': 'de_DE-thorsten-high', 'cb': {'exaggeration': 0.45, 'cfg_weight': 0.45, 'temperature': 0.7}},
-    'lena': {'piper': 'de_DE-kerstin-low', 'cb': {'exaggeration': 0.5, 'cfg_weight': 0.45, 'temperature': 0.7}},
-    'fenek': {'piper': None, 'cb': {'exaggeration': 0.55, 'cfg_weight': 0.4, 'temperature': 0.75}},
+    'emre': {'piper': 'de_DE-thorsten-high', 'cb': {'exaggeration': 0.4, 'cfg_weight': 0.35, 'temperature': 0.65}},
+    'lena': {'piper': 'de_DE-kerstin-low', 'cb': {'exaggeration': 0.42, 'cfg_weight': 0.35, 'temperature': 0.65}},
+    'fenek': {'piper': None, 'cb': {'exaggeration': 0.45, 'cfg_weight': 0.32, 'temperature': 0.65}},
 }
-SOFTEN = ('highpass=f=75,lowpass=f=10500,deesser=i=0.35:m=0.5:f=0.5,'
-          'acompressor=threshold=-21dB:ratio=2.2:attack=8:release=120:makeup=1.5,'
-          'aecho=0.9:0.5:28|46:0.07|0.04,'
+# Yumuşatma zinciri: gürültü/uğultu temizliği, hafif sıcaklık (200 Hz), sertlik azaltma (3.2 kHz), cızırtı giderici,
+# nazik kompresör, baş/son sessizlik kırpma, her replik aynı ses seviyesine (-18 LUFS)
+SOFTEN = ('highpass=f=80,lowpass=f=11000,'
+          'equalizer=f=200:t=q:w=1.0:g=1.5,equalizer=f=3200:t=q:w=1.2:g=-2.5,'
+          'deesser=i=0.4:m=0.5:f=0.5,'
+          'acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.3,'
           'silenceremove=start_periods=1:start_threshold=-45dB:stop_periods=-1:stop_duration=0.25:stop_threshold=-45dB,'
-          'apad=pad_dur=0.04')
+          'loudnorm=I=-18:TP=-2:LRA=7,'
+          'apad=pad_dur=0.05')
 
 _cb = None
 _piper = {}
