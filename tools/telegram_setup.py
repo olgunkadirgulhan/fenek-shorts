@@ -18,7 +18,16 @@ def main():
     ap.add_argument('--repo', action='append', help='GitHub repo(ları); varsayılan olgunkadirgulhan/fenek-shorts')
     a = ap.parse_args()
     repos = a.repo or ['olgunkadirgulhan/fenek-shorts']
-    token = getpass.getpass('BotFather token (yapıştır, görünmez): ').strip()
+    token = ''
+    # Önce panodan dene (terminale yapıştırma sorunu olmasın): BotFather token biçimi 123456:ABC...
+    if sys.platform == 'win32':
+        clip = subprocess.run(['powershell', '-NoProfile', '-Command', 'Get-Clipboard'], capture_output=True, text=True).stdout.strip()
+        import re
+        if re.fullmatch(r'\d{6,}:[\w-]{30,}', clip):
+            token = clip
+            print('Token panodan alındı.')
+    if not token:
+        token = getpass.getpass('BotFather token (yapıştır, görünmez): ').strip()
     api = f'https://api.telegram.org/bot{token}/'
     me = requests.get(api + 'getMe', timeout=20).json()
     if not me.get('ok'):
