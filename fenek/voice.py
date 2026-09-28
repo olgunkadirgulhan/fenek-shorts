@@ -36,8 +36,10 @@ SOFTEN = ('highpass=f=75,lowpass=f=10500,deesser=i=0.35:m=0.5:f=0.5,'
           'apad=pad_dur=0.06')
 PIPER_SLOW = 1.2   # Piper'ın konuşma süresi çarpanı: öğrenenler için ~%20 daha yavaş ve net
 
-# Microsoft sinir ağı sesleri (Azure ve edge-tts'de aynı isimler)
-MS_VOICE = {'emre': 'de-DE-ConradNeural', 'lena': 'de-DE-KatjaNeural', 'fenek': 'tr-TR-EmelNeural'}
+# Microsoft sinir ağı sesleri (Azure ve edge-tts'de aynı isimler). Tilki: çok dilli Vivienne (kullanıcı seçimi,
+# yerli tr-TR sesleri beğenilmedi). Yedek erkek Türkçe ses: de-DE-FlorianMultilingualNeural.
+MS_VOICE = {'emre': 'de-DE-ConradNeural', 'lena': 'de-DE-KatjaNeural', 'fenek': 'fr-FR-VivienneMultilingualNeural'}
+LOCALE = {'de': 'de-DE', 'tr': 'tr-TR'}
 MS_RATE = {'de': '-8%', 'tr': '+0%'}   # Almanca biraz yavaş: öğrenenler rahat takip etsin
 # Microsoft sesleri zaten temiz: sadece baş/son sessizlik kırpılır
 CLEAN = ('silenceremove=start_periods=1:start_threshold=-50dB,'
@@ -68,8 +70,10 @@ def _azure(who, lang, text, raw):
     import requests
     region = os.environ.get('AZURE_SPEECH_REGION', 'westeurope')
     locale = MS_VOICE[who][:5]
-    ssml = (f"<speak version='1.0' xml:lang='{locale}'><voice name='{MS_VOICE[who]}'>"
-            f"<prosody rate='{MS_RATE[lang]}'>{_xml(text)}</prosody></voice></speak>")
+    body = f"<prosody rate='{MS_RATE[lang]}'>{_xml(text)}</prosody>"
+    if 'Multilingual' in MS_VOICE[who]:   # çok dilli ses: hangi dilde konuşacağı açıkça söylenir
+        body = f"<lang xml:lang='{LOCALE[lang]}'>{body}</lang>"
+    ssml = f"<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='{locale}'><voice name='{MS_VOICE[who]}'>{body}</voice></speak>"
     r = requests.post(f'https://{region}.tts.speech.microsoft.com/cognitiveservices/v1', data=ssml.encode('utf-8'), timeout=30,
                       headers={'Ocp-Apim-Subscription-Key': os.environ['AZURE_SPEECH_KEY'], 'Content-Type': 'application/ssml+xml',
                                'X-Microsoft-OutputFormat': 'riff-24khz-16bit-mono-pcm', 'User-Agent': 'fenek-shorts'})
