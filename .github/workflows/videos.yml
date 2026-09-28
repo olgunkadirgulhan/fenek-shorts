@@ -93,6 +93,9 @@ jobs:
           # Ses zinciri: Azure (anahtar varsa) → edge-tts → Piper/Chatterbox
           AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
           AZURE_SPEECH_REGION: ${{ vars.AZURE_SPEECH_REGION }}
+          # Telegram bildirimi (video + TikTok/Instagram açıklamaları)
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python run.py ${{ inputs.format && format('--format {0}', inputs.format) || '' }} ${{ inputs.bank && format('--bank {0}', inputs.bank) || '' }} ${{ inputs.no_upload && '--no-upload' || '' }}
       - name: Keep video for review
         if: always()

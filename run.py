@@ -30,7 +30,7 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from fenek import audio, episodes, voice  # noqa: E402
+from fenek import audio, episodes, notify, voice  # noqa: E402
 
 HIST = HERE / 'history.json'
 PUBLISHED = HERE / 'published.csv'
@@ -148,6 +148,28 @@ def debrand(ep):
             b['text'] = random.choice(episodes.FOLLOW_CTAS)
 
 
+FORMAT_TAGS = {
+    'sahne': ['#almancakonuşma', '#almancadiyalog'], 'hata': ['#almancakonuşma', '#almancahatalar'],
+    'kelime': ['#almancakelimeler', '#almancakelime'], 'quiz': ['#almancaquiz', '#derdiedas'],
+    'av': ['#kelimeavı', '#almancakelimeler'],
+}
+
+
+def social_captions(ep, title):
+    """TikTok ve Instagram için hazır açıklama + hashtag (Türkiye'de Almanca öğrenenlere yönelik)."""
+    import re
+    lvl = (re.search(r'\b([ABC][12])\b', ep.get('tag', '')) or [None, 'A1'])[1]
+    clean = re.sub(r'\s*[|#].*$', '', title).strip()          # YouTube başlığındaki "| A1 #almanca" kısmı atılır
+    ftags = FORMAT_TAGS.get(ep['format'], [])
+    ask = {'quiz': 'Kaç tanesini bildin? Yoruma yaz 👇', 'av': 'Kaç kelime buldun? Yoruma yaz 👇',
+           'kelime': 'Kaydet, yarın tekrar et 📌', 'sahne': 'Kaydet ve sesli tekrar et 🗣️', 'hata': 'Sen de bu hatayı yapıyor muydun? 👇'}.get(ep['format'], 'Kaydet 📌')
+    tiktok = f"{clean}\n{ask}\n\n" + ' '.join(['#almanca', '#almancaöğren', ftags[0] if ftags else '#deutsch', f'#almanca{lvl.lower()}', '#fyp'])
+    insta = (f"{clean} 🇩🇪\n{ask}\nHer gün yeni Almanca! Takip et 🔔\n\n"
+             + ' '.join(['#almanca', '#almancaöğren', '#almancadersi', *ftags, f'#almanca{lvl.lower()}', '#deutsch',
+                         '#deutschlernen', '#almanya', '#almancakursu', '#keşfet']))
+    return tiktok, insta
+
+
 def metadata(ep):
     # Site açılana kadar (SITE_URL boş) marka/site adı geçmez; sadece kanal takibi istenir
     site = os.environ.get('SITE_URL', '').strip()
@@ -180,6 +202,7 @@ def main():
         try:
             log(f'channel: {upload.check_channel()}')
         except Exception as e:
+            notify.message(f'❌ Almanca kanalı: YouTube bağlantısı kurulamadı (yetki süresi dolmuş olabilir).\n{str(e)[:300]}')
             gh('error', f'channel check failed: {e}'); raise SystemExit(1)
 
     hist = load_hist()
@@ -216,7 +239,9 @@ def main():
         log(f'audio ok ({total}s)')
         mp4 = render(ep, out)
     except Exception as e:
-        traceback.print_exc(); gh('error', f'build failed: {e}'); raise SystemExit(1)
+        traceback.print_exc()
+        notify.message(f"❌ Almanca kanalı: video üretilemedi ({ep['format']}).\n{str(e)[:300]}")
+        gh('error', f'build failed: {e}'); raise SystemExit(1)
     title, desc, tags = metadata(ep)
     (out / 'meta.json').write_text(json.dumps({'title': title, 'description': desc, 'tags': tags, 'duration': total}, indent=2, ensure_ascii=False), encoding='utf-8')
     log(f'rendered {mp4}')
@@ -234,10 +259,12 @@ def main():
         vid = upload.upload(mp4, title, desc, tags, mode, category='27')
     except upload.QuotaError as e:
         QUEUE.mkdir(exist_ok=True); (QUEUE / f"{ep['id']}.json").write_text(json.dumps(ep, ensure_ascii=False), encoding='utf-8')
+        notify.video(mp4, f'⏳ Almanca kanalı: YouTube kotası doldu, video sıraya alındı (sonraki saatte tekrar denenecek).\n{title}')
         gh('warning', f'quota: queued ({e})'); return
     except Exception as e:
         traceback.print_exc()
         QUEUE.mkdir(exist_ok=True); (QUEUE / f"{ep['id']}.json").write_text(json.dumps(ep, ensure_ascii=False), encoding='utf-8')
+        notify.video(mp4, f'❌ Almanca kanalı: yükleme başarısız, sıraya alındı.\n{title}\n{str(e)[:300]}')
         gh('error', f'upload failed: {e}'); raise SystemExit(1)
     new = not PUBLISHED.exists()
     with PUBLISHED.open('a', newline='', encoding='utf-8') as f:
@@ -249,6 +276,13 @@ def main():
     if qpath:
         qpath.unlink(missing_ok=True)
     log(f'uploaded https://youtube.com/shorts/{vid} ({mode})')
+    n = today_count()
+    # Telegram: orijinal dosya (TikTok/Instagram'a kaliteli yüklemek için) + hazır açıklamalar (ayrı mesaj: kolay kopyalama)
+    notify.document(mp4, f'✅ Almanca kanalına yüklendi ({n}/{os.environ.get("MAX_PER_DAY") or 4} bugün)\n'
+                         f'{title}\nhttps://youtube.com/shorts/{vid}\nFormat: {ep["format"]} · {total:.0f} sn')
+    tiktok, insta = social_captions(ep, title)
+    notify.copyable('🎵 TikTok açıklaması (kutuya dokun → kopyalanır):', tiktok)
+    notify.copyable('📸 Instagram açıklaması (kutuya dokun → kopyalanır):', insta)
 
 
 if __name__ == '__main__':
