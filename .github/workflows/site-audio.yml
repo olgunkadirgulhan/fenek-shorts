@@ -1,0 +1,41 @@
+name: site-audio
+# Sitenin telaffuz dosyalarını üretir (Chatterbox, CPU). Elle tetiklenir; sonuç artifact olarak indirilir.
+on:
+  workflow_dispatch:
+    inputs:
+      langs:
+        description: 'Diller (JSON dizi), örn. ["tr","ar"]'
+        default: '["tr","ar"]'
+
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        lang: ${{ fromJSON(inputs.langs) }}
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ffmpeg
+      - run: |
+          pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install chatterbox-tts
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: models-chatterbox-mtl-v1
+          restore-keys: models-chatterbox-mtl-
+      - run: python tools/site_audio.py ${{ matrix.lang }} ${{ matrix.shard }} 8
+      - uses: actions/upload-artifact@v5
+        with:
+          name: audio-${{ matrix.lang }}-${{ matrix.shard }}
+          path: out/${{ matrix.lang }}/*.mp3
+          retention-days: 14
