@@ -1,11 +1,10 @@
-"""Karakter sesleri.
+"""Karakter sesleri — yedekli zincir (TTS_ENGINE=auto, varsayılan):
 
-Motorlar (TTS_ENGINE):
-  chatterbox  Resemble AI Chatterbox Multilingual (MIT). Almanca + Türkçe, doğal ve yumuşak. Varsayılan.
-  piper       Piper + Thorsten/Kerstin (CC0). Sadece Almanca; hızlı yedek.
-  edge        edge-tts, SADECE yerel önizleme/test (ticari lisansı yok, yayında kullanma).
-Ses kimliği: voices/<karakter>.wav varsa referans alınır (sadece hakkına sahip olduğun kayıtlar!).
-Her ses ffmpeg ile yumuşatılır: EQ + de-esser + hafif kompresör + çok hafif oda yankısı.
+  1. azure     Microsoft Azure Speech (resmî, ticari kullanım serbest). AZURE_SPEECH_KEY + AZURE_SPEECH_REGION varsa.
+  2. edge      edge-tts: AYNI Microsoft sesleri (gayriresmî uç). Azure yoksa / hata verirse / kota dolarsa.
+  3. fallback  İkisi de çalışmazsa: Almanca → Piper (Thorsten/Kerstin, CC0), Türkçe → Chatterbox (MIT). Gün boş geçmez.
+Azure ile edge aynı ses kataloğunu kullanır: yedeğe geçilse de izleyici fark etmez (önbellekte ortak anahtar 'ms').
+TTS_ENGINE ile tek motor da zorlanabilir: azure | edge | piper | chatterbox.
 Aynı cümle tekrar üretilmez (önbellek: ~/.cache/fenek/tts).
 """
 import hashlib
@@ -35,16 +34,65 @@ SOFTEN = ('highpass=f=75,lowpass=f=10500,deesser=i=0.35:m=0.5:f=0.5,'
           'silenceremove=start_periods=1:start_threshold=-50dB,'
           'areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.12,areverse,'
           'apad=pad_dur=0.06')
-# Almanca replikler Piper ile (Chatterbox Almancada kısa kelimeleri ve cümle sonlarını kesiyor — tts_probe testi)
-GERMAN_ENGINE = (os.environ.get('GERMAN_ENGINE') or 'piper').lower()
 PIPER_SLOW = 1.2   # Piper'ın konuşma süresi çarpanı: öğrenenler için ~%20 daha yavaş ve net
+
+# Microsoft sinir ağı sesleri (Azure ve edge-tts'de aynı isimler)
+MS_VOICE = {'emre': 'de-DE-ConradNeural', 'lena': 'de-DE-KatjaNeural', 'fenek': 'tr-TR-EmelNeural'}
+MS_RATE = {'de': '-8%', 'tr': '+0%'}   # Almanca biraz yavaş: öğrenenler rahat takip etsin
+# Microsoft sesleri zaten temiz: sadece baş/son sessizlik kırpılır
+CLEAN = ('silenceremove=start_periods=1:start_threshold=-50dB,'
+         'areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.12,areverse,'
+         'apad=pad_dur=0.06')
 
 _cb = None
 _piper = {}
 
 
 def engine():
-    return (os.environ.get('TTS_ENGINE') or 'chatterbox').lower()
+    return (os.environ.get('TTS_ENGINE') or 'auto').lower()
+
+
+def chain():
+    """Denenecek motorlar sırası."""
+    e = engine()
+    if e == 'auto':
+        return (['azure'] if os.environ.get('AZURE_SPEECH_KEY') else []) + ['edge', 'fallback']
+    return [e] if e == 'fallback' else [e, 'fallback']
+
+
+def _xml(s):
+    return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+
+def _azure(who, lang, text, raw):
+    import requests
+    region = os.environ.get('AZURE_SPEECH_REGION', 'westeurope')
+    locale = MS_VOICE[who][:5]
+    ssml = (f"<speak version='1.0' xml:lang='{locale}'><voice name='{MS_VOICE[who]}'>"
+            f"<prosody rate='{MS_RATE[lang]}'>{_xml(text)}</prosody></voice></speak>")
+    r = requests.post(f'https://{region}.tts.speech.microsoft.com/cognitiveservices/v1', data=ssml.encode('utf-8'), timeout=30,
+                      headers={'Ocp-Apim-Subscription-Key': os.environ['AZURE_SPEECH_KEY'], 'Content-Type': 'application/ssml+xml',
+                               'X-Microsoft-OutputFormat': 'riff-24khz-16bit-mono-pcm', 'User-Agent': 'fenek-shorts'})
+    if r.status_code != 200 or len(r.content) < 2000:
+        raise RuntimeError(f'azure {r.status_code}: {r.text[:120]}')
+    raw.write_bytes(r.content)
+    return raw
+
+
+def _edge(who, lang, text, raw):
+    import asyncio, edge_tts
+    mp3 = raw.with_suffix('.mp3')
+    async def go():
+        await asyncio.wait_for(edge_tts.Communicate(text, MS_VOICE[who], rate=MS_RATE[lang]).save(str(mp3)), timeout=40)
+    last = None
+    for _ in range(3):
+        try:
+            asyncio.run(go())
+            if mp3.exists() and mp3.stat().st_size > 1000:
+                return mp3
+        except Exception as e:
+            last = e
+    raise RuntimeError(f'edge: {last}')
 
 
 def _chatterbox():
@@ -117,33 +165,42 @@ def _chatterbox_checked(who, lang, text, cfg, ref, raw):
 
 
 def synth(who, lang, text):
-    """-> (wav yolu 48 kHz mono, süre sn)"""
-    eng = engine() if not (engine() == 'piper' and lang != 'de') else 'chatterbox'
-    if lang == 'de' and CAST[who]['piper'] and eng == 'chatterbox':
-        eng = GERMAN_ENGINE
-    if os.environ.get('GITHUB_ACTIONS') and eng == 'edge':
-        raise RuntimeError('edge-tts yayında kullanılamaz')
+    """-> (wav yolu 48 kHz mono, süre sn). Motor zinciri: azure → edge → yedek (piper/chatterbox)."""
     ref = VOICES / f'{who}.wav'
     cfg = CAST[who]
-    key = hashlib.sha1(json.dumps([eng, who, lang, text, cfg, ref.exists() and ref.stat().st_size, SOFTEN, PIPER_SLOW]).encode()).hexdigest()[:16]
     TTS_CACHE.mkdir(parents=True, exist_ok=True)
-    out = TTS_CACHE / f'{key}.wav'
-    if out.exists():
+    errors = []
+    for eng in chain():
+        if eng == 'fallback':
+            eng = 'piper' if (lang == 'de' and cfg['piper']) else 'chatterbox'
+        group = 'ms' if eng in ('azure', 'edge') else eng        # Azure ve edge aynı ses → ortak önbellek
+        key = hashlib.sha1(json.dumps([group, who, lang, text, MS_VOICE.get(who), MS_RATE.get(lang), cfg, SOFTEN, CLEAN, PIPER_SLOW]).encode()).hexdigest()[:16]
+        out = TTS_CACHE / f'{key}.wav'
+        if out.exists():
+            return out, wav_len(out)
+        raw = TTS_CACHE / f'{key}.raw.wav'
+        try:
+            if eng == 'azure':
+                src = _azure(who, lang, text, raw)
+            elif eng == 'edge':
+                src = _edge(who, lang, text, raw)
+            elif eng == 'chatterbox':
+                _chatterbox_checked(who, lang, text, cfg, ref, raw); src = raw
+            else:
+                from piper import SynthesisConfig
+                v = _piper_voice(cfg['piper'])
+                with wave.open(str(raw), 'wb') as wf:
+                    v.synthesize_wav(text, wf, syn_config=SynthesisConfig(length_scale=PIPER_SLOW))
+                src = raw
+        except Exception as e:
+            errors.append(f'{eng}: {str(e)[:150]}')
+            print(f'[tts] {eng} başarısız, sıradaki motor deneniyor — {errors[-1]}', flush=True)
+            continue
+        if errors:   # yedeğe geçildi: GitHub'da uyarı olarak görünsün
+            msg = f'ses yedeğe geçti ({eng}): ' + ' | '.join(errors)
+            print(f'::warning::{msg}' if os.environ.get('GITHUB_ACTIONS') else f'[tts] {msg}', flush=True)
+        af = CLEAN if group == 'ms' else SOFTEN
+        subprocess.run([FFMPEG, '-y', '-v', 'error', '-i', str(src), '-af', af, '-ar', '48000', '-ac', '1', str(out)], check=True)
+        src.unlink(missing_ok=True)
         return out, wav_len(out)
-    raw = TTS_CACHE / f'{key}.raw.wav'
-    if eng == 'chatterbox':
-        _chatterbox_checked(who, lang, text, cfg, ref, raw)
-    elif eng == 'edge':
-        import asyncio, edge_tts
-        name = {'emre': 'de-DE-ConradNeural', 'lena': 'de-DE-KatjaNeural', 'fenek': 'tr-TR-EmelNeural'}[who]
-        mp3 = raw.with_suffix('.mp3')
-        asyncio.run(edge_tts.Communicate(text, name).save(str(mp3)))
-        raw = mp3
-    else:
-        from piper import SynthesisConfig
-        v = _piper_voice(cfg['piper'])
-        with wave.open(str(raw), 'wb') as wf:
-            v.synthesize_wav(text, wf, syn_config=SynthesisConfig(length_scale=PIPER_SLOW))
-    subprocess.run([FFMPEG, '-y', '-v', 'error', '-i', str(raw), '-af', SOFTEN, '-ar', '48000', '-ac', '1', str(out)], check=True)
-    raw.unlink(missing_ok=True)
-    return out, wav_len(out)
+    raise RuntimeError('hiçbir ses motoru çalışmadı: ' + ' | '.join(errors))
