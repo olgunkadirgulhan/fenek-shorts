@@ -35,7 +35,10 @@ jobs:
           restore-keys: models-chatterbox-mtl-
       - run: python tools/site_audio.py ${{ matrix.lang }} ${{ matrix.shard }} 8
       - uses: actions/upload-artifact@v5
+        if: always()
         with:
           name: audio-${{ matrix.lang }}-${{ matrix.shard }}
-          path: out/${{ matrix.lang }}/*.mp3
+          path: |
+            out/${{ matrix.lang }}/*.mp3
+            out/${{ matrix.lang }}/skipped_*.json
           retention-days: 14

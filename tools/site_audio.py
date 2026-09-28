@@ -35,16 +35,27 @@ def main():
     model = ChatterboxMultilingualTTS.from_pretrained(device="cpu")
     ref = ROOT / "voices" / f"site_{lang}.wav"
     t0 = time.time()
+    skipped = []
     for i, text in enumerate(mine):
         mp3 = out / f"{fnv(text)}.mp3"
         if mp3.exists():
             continue
         # çok kısa metinler (tek kelime) modelde kararsız olabiliyor: noktalama ekleyerek cümle gibi okut
         say = text if text[-1:] in ".!?؟" else text + "."
-        kw = {"exaggeration": 0.4, "cfg_weight": 0.5, "temperature": 0.6}
-        if ref.exists():
-            kw["audio_prompt_path"] = str(ref)
-        wav = model.generate(say, language_id=lang, **kw)
+        wav = None
+        # Chatterbox bazı metinlerde hizalama hatası veriyor: farklı ayarlarla tekrar dene, olmazsa atla
+        for attempt, (temp, cfg) in enumerate([(0.6, 0.5), (0.8, 0.5), (0.5, 0.3)]):
+            kw = {"exaggeration": 0.4, "cfg_weight": cfg, "temperature": temp}
+            if ref.exists():
+                kw["audio_prompt_path"] = str(ref)
+            try:
+                wav = model.generate(say, language_id=lang, **kw)
+                break
+            except Exception as e:
+                print(f"  retry {attempt + 1} for {text!r}: {type(e).__name__}", flush=True)
+        if wav is None:
+            skipped.append(text)
+            continue
         raw = out / "_tmp.wav"
         torchaudio.save(str(raw), wav.cpu(), model.sr)
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(raw), "-af", FILTER, "-ac", "1", "-ar", "24000",
@@ -52,7 +63,8 @@ def main():
         raw.unlink(missing_ok=True)
         if i % 25 == 0:
             print(f"[{lang} {shard}/{n}] {i + 1}/{len(mine)} ({time.time() - t0:.0f}s)", flush=True)
-    print(f"OK {lang} shard {shard}: {len(mine)} metin, {time.time() - t0:.0f}s")
+    print(f"OK {lang} shard {shard}: {len(mine)} metin, {len(skipped)} atlandı, {time.time() - t0:.0f}s")
+    (out / f"skipped_{shard}.json").write_text(json.dumps(skipped, ensure_ascii=False), encoding="utf-8")
 
 
 if __name__ == "__main__":
