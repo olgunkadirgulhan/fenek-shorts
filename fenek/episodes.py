@@ -24,10 +24,11 @@ ART_COLOR = {'der': '#2F6FEB', 'die': '#E5484D', 'das': '#16A37E'}
 SLOT_FORMATS = ['sahne', 'kelime', 'quiz', 'av']
 LEVELS = [l.strip() for l in (os.environ.get('LEVELS') or 'A1,A2,B1').split(',')]  # kanalın hedef seviyeleri
 
+# Açılış cümleleri: konu adı söylenmez (zaten ekranın üstünde yazıyor), kısa ve doğrudan
 HOOKS = {
-    'sahne': ['{t}: Almancada böyle konuşulur!', '{t}: bu diyaloğu ezberle!', 'Almanya\'da {tl} ne denir? Dinle!'],
-    'kelime': ['{t}: beş Almanca kelime. Hazır mısın?', 'Bugün {tl} kelimeleri! Beş kelime, otuz saniye.'],
-    'quiz': ['Almanca quiz! {t}: üç soru, üç saniye.', 'Kendini dene! {t} hakkında üç soru.'],
+    'sahne': ['Almancada böyle konuşulur!', 'Bu diyaloğu ezberle!', 'Dinle ve tekrar et!'],
+    'kelime': ['Beş Almanca kelime. Hazır mısın?', 'Beş kelime, otuz saniye!'],
+    'quiz': ['Üç soru, üç saniye. Hazır mısın?', 'Kendini dene! Üç soru.'],
     'av': ['Bu tabloda beş Almanca kelime saklı. On saniyen var!', 'Beş kelime saklı. Kaç tanesini bulabilirsin?'],
 }
 SITE_CTAS = ['Tüm ünite sitede ücretsiz. Link profilde!', 'Bunun devamı sitede, ücretsiz. Link profilde!']
@@ -87,7 +88,7 @@ def ep_sahne(unit, rng):
         w = rng.choice(nouns)
         art, n = noun(w)
         q = {'type': 'quiz', 'kind': 'art', 'emoji': w['emoji'], 'word': n, 'opts': ['der', 'die', 'das'], 'answer': art, 'tr': w[SRC]}
-        beats += [beat('fenek', SRC, 'Soru! Bu kelimenin artikeli ne?', overlay=q, key='q', fenek=True),
+        beats += [beat('fenek', SRC, 'Bu kelimenin artikeli ne?', overlay=q, key='q', fenek=True),
                   pause(3.0, overlay=q, key='q', countdown=3, fenek=True),
                   beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key='q', sfx='ding', fenek=True, mood={'emre': 'happy'})]
     beats.append(beat('fenek', SRC, rng.choice([c for c in CTAS if 'Kaç tanesini' not in c]), overlay={'type': 'cta', 'unit': t, 'emoji': unit['emoji'], 'cefr': unit['cefr']}, key='cta', fenek=True, sfx_before='pop'))
@@ -136,8 +137,8 @@ def ep_quiz(pack, rng):
     beats = [beat('fenek', SRC, rng.choice(HOOKS['quiz']).format(t=t, tl=lower_first(t)), phase='hook', fenek=True)]
     for i, item in enumerate(qs):
         q, w = dict(item['q'], i=i + 1, n=len(qs)), item['w']
-        ask = 'Artikeli ne?' if q['kind'] == 'art' else 'Bu kelime ne demek?'
-        beats += [beat('fenek', SRC, f"{i + 1}. soru. {ask}", overlay=q, key=f'q{i}', fenek=True, sfx_before='whoosh', nosub=True)]
+        ask = 'Artikeli ne?' if q['kind'] == 'art' else 'Bu kelime ne demek?'   # soru numarası kartta yazıyor, söylenmez
+        beats += [beat('fenek', SRC, ask, overlay=q, key=f'q{i}', fenek=True, sfx_before='whoosh', nosub=True)]
         if q['kind'] == 'mean':
             beats.append(beat('lena', TGT, w[TGT], '', overlay=q, key=f'q{i}', fenek=True, nosub=True))
         beats.append(pause(3.0, overlay=q, key=f'q{i}', countdown=3, fenek=True))
