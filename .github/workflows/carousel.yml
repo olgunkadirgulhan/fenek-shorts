@@ -1,0 +1,52 @@
+name: carousel
+on:
+  schedule:
+    # Her gün TR 09:00 (UTC 06:00) — GitHub gecikirse diye 07:00 ve 09:00'da da dener; günde yalnız bir kez gönderilir
+    - cron: "0 6,7,9 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Bugün gönderilmiş olsa da yeniden üret
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repo-writes
+  cancel-in-progress: false
+
+jobs:
+  carousel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Emoji yazı tipi
+        run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends fonts-noto-color-emoji
+      - run: pip install requests
+      - name: Günün kaydırmalı gönderisi → Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          LEVELS: ${{ vars.LEVELS }}
+        run: python tools/carousel.py ${{ inputs.force && '--force' || '' }}
+      - name: Kaydet (tekrar olmasın)
+        if: always()
+        run: |
+          git config user.name "fenek-bot"
+          git config user.email "bot@users.noreply.github.com"
+          [ -e carousel_history.json ] && git add carousel_history.json || true
+          git diff --cached --quiet && exit 0
+          git commit -m "carousel: $(date -u +%F)"
+          git pull --rebase
+          git push

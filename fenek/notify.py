@@ -41,6 +41,26 @@ def copyable(label, text):
         message(f'{label}\n\n{text}')
 
 
+def album(paths, caption=''):
+    """Fotoğraf albümü (en fazla 10): kaydırmalı gönderi slaytları."""
+    if not enabled():
+        return False
+    import json
+    files, media = {}, []
+    try:
+        for i, p in enumerate(paths[:10]):
+            files[f'p{i}'] = (os.path.basename(str(p)), open(p, 'rb'), 'image/jpeg')
+            media.append({'type': 'photo', 'media': f'attach://p{i}', **({'caption': caption[:1000]} if i == 0 and caption else {})})
+        _call('sendMediaGroup', files=files, media=json.dumps(media))
+        return True
+    except Exception as e:
+        print(f'[notify] telegram albümü gönderilemedi: {e}', flush=True)
+        return False
+    finally:
+        for f in files.values():
+            f[1].close()
+
+
 def document(path, caption):
     """Orijinal dosyayı sıkıştırmadan gönder (TikTok/Instagram'a kaliteli yüklemek için)."""
     if not enabled():
