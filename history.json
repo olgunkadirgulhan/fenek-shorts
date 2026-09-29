@@ -5,13 +5,20 @@
    "format": "hata",
    "topic": "cafe",
    "title": "Almanya'da kafede bu hatayı yapma! ☕ #almanca"
+  },
+  {
+   "id": "20260929-1123-kelime",
+   "format": "kelime",
+   "topic": "a1col",
+   "title": "5 Almanca kelime: Renkler 🎨 | A1 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 1,
+ "count": 2,
  "sigs": [
-  "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen"
+  "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
+  "kelime|a1col|beige/dunkel/golden/rot/schwarz"
  ]
 }
