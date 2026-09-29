@@ -17,15 +17,22 @@
    "format": "quiz",
    "topic": "a2sport",
    "title": "Almanca quiz: Spor 🤔 3 soruda kendini dene! | A2"
+  },
+  {
+   "id": "20260929-2215-av",
+   "format": "av",
+   "topic": "a2house",
+   "title": "Bu tabloda 5 Almanca kelime saklı 🔍 Bulabilir misin? | Ev işleri"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 3,
+ "count": 4,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
-  "quiz|a2sport|das Fitnessstudio/der Pokal/der Trainer"
+  "quiz|a2sport|das Fitnessstudio/der Pokal/der Trainer",
+  "av|a2house|der Aufzug/der Hammer/der Mieter/die Klingel/die Seife"
  ]
 }
