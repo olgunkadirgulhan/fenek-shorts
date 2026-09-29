@@ -11,14 +11,21 @@
    "format": "kelime",
    "topic": "a1col",
    "title": "5 Almanca kelime: Renkler 🎨 | A1 #almanca"
+  },
+  {
+   "id": "20260929-1806-quiz",
+   "format": "quiz",
+   "topic": "a2sport",
+   "title": "Almanca quiz: Spor 🤔 3 soruda kendini dene! | A2"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 2,
+ "count": 3,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
-  "kelime|a1col|beige/dunkel/golden/rot/schwarz"
+  "kelime|a1col|beige/dunkel/golden/rot/schwarz",
+  "quiz|a2sport|das Fitnessstudio/der Pokal/der Trainer"
  ]
 }
