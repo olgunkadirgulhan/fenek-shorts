@@ -8,11 +8,23 @@
     "das Haus",
     "der Hund"
    ]
+  },
+  {
+   "date": "2026-09-30",
+   "unit": "routine",
+   "words": [
+    "das Abendessen",
+    "der Bus",
+    "die Arbeit"
+   ]
   }
  ],
  "sentences": [
   "Hast du Geschwister?",
   "Meine Familie ist groß.",
-  "Meine Mutter und mein Vater wohnen in Berlin."
+  "Meine Mutter und mein Vater wohnen in Berlin.",
+  "Um wie viel Uhr wachst du morgens auf?",
+  "Ja, dann fahre ich mit dem Bus zur Arbeit.",
+  "Was machst du am Abend?"
  ]
 }
