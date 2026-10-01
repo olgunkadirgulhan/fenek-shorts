@@ -17,6 +17,15 @@
     "der Bus",
     "die Arbeit"
    ]
+  },
+  {
+   "date": "2026-10-01",
+   "unit": "city",
+   "words": [
+    "der Bahnhof",
+    "die Karte",
+    "der Zug"
+   ]
   }
  ],
  "sentences": [
@@ -25,6 +34,9 @@
   "Meine Mutter und mein Vater wohnen in Berlin.",
   "Um wie viel Uhr wachst du morgens auf?",
   "Ja, dann fahre ich mit dem Bus zur Arbeit.",
-  "Was machst du am Abend?"
+  "Was machst du am Abend?",
+  "Entschuldigung, wo ist der Bahnhof?",
+  "Gehen Sie geradeaus und dann links.",
+  "Nein, etwa zehn Minuten zu Fuß."
  ]
 }
