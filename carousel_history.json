@@ -26,6 +26,15 @@
     "die Karte",
     "der Zug"
    ]
+  },
+  {
+   "date": "2026-10-02",
+   "unit": "clothes",
+   "words": [
+    "die Größe",
+    "der Hut",
+    "das T-Shirt"
+   ]
   }
  ],
  "sentences": [
@@ -37,6 +46,9 @@
   "Was machst du am Abend?",
   "Entschuldigung, wo ist der Bahnhof?",
   "Gehen Sie geradeaus und dann links.",
-  "Nein, etwa zehn Minuten zu Fuß."
+  "Nein, etwa zehn Minuten zu Fuß.",
+  "Vierzig Euro. Welche Größe?",
+  "Mittel, bitte. Haben Sie sie in Blau?",
+  "Super! Ich nehme das Kleid und einen Hut."
  ]
 }
