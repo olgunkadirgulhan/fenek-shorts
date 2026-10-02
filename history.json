@@ -65,12 +65,18 @@
    "format": "quiz",
    "topic": "a2tech",
    "title": "Almanca quiz: İletişim ve teknoloji 🤔 3 soruda kendini dene! | A2"
+  },
+  {
+   "id": "20261002-1639-av",
+   "format": "av",
+   "topic": "b1rent",
+   "title": "Bu tabloda 5 Almanca kelime saklı 🔍 Bulabilir misin? | Konut ve kira"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 11,
+ "count": 12,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -82,6 +88,7 @@
   "av|a2dir|der Süden/draußen/hinter/unter/vor",
   "sahne|greet|Danke, tschüss!/Freut mich!/Hallo! Wie heißt du?/Ich bin Tom. Woher kommst du?/Ich heiße Anna. Und du?/Ich komme aus Spanien./Ja, ein bisschen./Sprichst du Englisch?/die Sprache",
   "kelime|a2char|egoistisch/ernst/faul/freundlich/nett",
-  "quiz|a2tech|das Passwort/der Anruf/die Nachricht"
+  "quiz|a2tech|das Passwort/der Anruf/die Nachricht",
+  "av|b1rent|der Lärm/der Schaden/der Schimmel/der Strom/der Umzug"
  ]
 }
