@@ -59,12 +59,18 @@
    "format": "kelime",
    "topic": "a2char",
    "title": "5 Almanca kelime: Karakter 🧑 | A2 #almanca"
+  },
+  {
+   "id": "20261002-1107-quiz",
+   "format": "quiz",
+   "topic": "a2tech",
+   "title": "Almanca quiz: İletişim ve teknoloji 🤔 3 soruda kendini dene! | A2"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 10,
+ "count": 11,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -75,6 +81,7 @@
   "quiz|b1rel|das Date/der Rat/die Unterstützung",
   "av|a2dir|der Süden/draußen/hinter/unter/vor",
   "sahne|greet|Danke, tschüss!/Freut mich!/Hallo! Wie heißt du?/Ich bin Tom. Woher kommst du?/Ich heiße Anna. Und du?/Ich komme aus Spanien./Ja, ein bisschen./Sprichst du Englisch?/die Sprache",
-  "kelime|a2char|egoistisch/ernst/faul/freundlich/nett"
+  "kelime|a2char|egoistisch/ernst/faul/freundlich/nett",
+  "quiz|a2tech|das Passwort/der Anruf/die Nachricht"
  ]
 }
