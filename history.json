@@ -83,12 +83,18 @@
    "format": "kelime",
    "topic": "a2money",
    "title": "5 Almanca kelime: Para ve alışveriş 💶 | A2 #almanca"
+  },
+  {
+   "id": "20261003-1510-quiz",
+   "format": "quiz",
+   "topic": "b1wild",
+   "title": "Almanca quiz: Vahşi yaşam 🤔 3 soruda kendini dene! | B1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 14,
+ "count": 15,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -103,6 +109,7 @@
   "quiz|a2tech|das Passwort/der Anruf/die Nachricht",
   "av|b1rent|der Lärm/der Schaden/der Schimmel/der Strom/der Umzug",
   "sahne|routine|Frühstückst du?/Ich koche Abendessen und sehe fern./Ich putze mir die Zähne und schlafe früh./Ich wache um sieben auf und dusche./Ja, dann fahre ich mit dem Bus zur Arbeit./Um wie viel Uhr wachst du morgens auf?/Was für ein langweiliger Tag! Lass uns am Wochenende ins Kino gehen./Was machst du am Abend?/das Frühstück",
-  "kelime|a2money|das Paket/das Portemonnaie/der Kassenbon/die Tüte/die Öffnungszeiten"
+  "kelime|a2money|das Paket/das Portemonnaie/der Kassenbon/die Tüte/die Öffnungszeiten",
+  "quiz|b1wild|der Oktopus/der Schwanz/die Mücke"
  ]
 }
