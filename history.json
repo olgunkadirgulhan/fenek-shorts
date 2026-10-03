@@ -95,12 +95,18 @@
    "format": "av",
    "topic": "a1kitchen",
    "title": "Bu tabloda 5 Almanca kelime saklı 🔍 Bulabilir misin? | İçecek ve mutfak"
+  },
+  {
+   "id": "20261003-2209-sahne",
+   "format": "sahne",
+   "topic": "clothes",
+   "title": "Kıyafet alışverişi: Almanca diyalog 👗 | A1 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 16,
+ "count": 17,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -117,6 +123,7 @@
   "sahne|routine|Frühstückst du?/Ich koche Abendessen und sehe fern./Ich putze mir die Zähne und schlafe früh./Ich wache um sieben auf und dusche./Ja, dann fahre ich mit dem Bus zur Arbeit./Um wie viel Uhr wachst du morgens auf?/Was für ein langweiliger Tag! Lass uns am Wochenende ins Kino gehen./Was machst du am Abend?/das Frühstück",
   "kelime|a2money|das Paket/das Portemonnaie/der Kassenbon/die Tüte/die Öffnungszeiten",
   "quiz|b1wild|der Oktopus/der Schwanz/die Mücke",
-  "av|a1kitchen|das Bier/das Messer/der Ofen/der Wein/die Schüssel"
+  "av|a1kitchen|das Bier/das Messer/der Ofen/der Wein/die Schüssel",
+  "sahne|clothes|Es ist sehr billig, nur zwanzig Euro./Gern. Und dieses T-Shirt ist ein Geschenk!/Hallo, was kostet diese Jacke?/Ja, aber die blaue ist teurer./Mittel, bitte. Haben Sie sie in Blau?/Super! Ich nehme das Kleid und einen Hut./Und was ist der Preis für dieses rote Kleid?/Vierzig Euro. Welche Größe?/der Preis"
  ]
 }
