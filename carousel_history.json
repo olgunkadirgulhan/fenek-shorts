@@ -35,6 +35,15 @@
     "der Hut",
     "das T-Shirt"
    ]
+  },
+  {
+   "date": "2026-10-03",
+   "unit": "town",
+   "words": [
+    "der Bahnhof",
+    "die Apotheke",
+    "das Hotel"
+   ]
   }
  ],
  "sentences": [
@@ -49,6 +58,9 @@
   "Nein, etwa zehn Minuten zu Fuß.",
   "Vierzig Euro. Welche Größe?",
   "Mittel, bitte. Haben Sie sie in Blau?",
-  "Super! Ich nehme das Kleid und einen Hut."
+  "Super! Ich nehme das Kleid und einen Hut.",
+  "Ganz nah. Gehen Sie am Park vorbei.",
+  "Gibt es hier eine Apotheke in der Nähe?",
+  "Danke! Haben Sie einen Stadtplan?"
  ]
 }
