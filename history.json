@@ -77,12 +77,18 @@
    "format": "sahne",
    "topic": "routine",
    "title": "Günlük rutin: Almanca diyalog ⏰ | A1 #almanca"
+  },
+  {
+   "id": "20261003-1025-kelime",
+   "format": "kelime",
+   "topic": "a2money",
+   "title": "5 Almanca kelime: Para ve alışveriş 💶 | A2 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 13,
+ "count": 14,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -96,6 +102,7 @@
   "kelime|a2char|egoistisch/ernst/faul/freundlich/nett",
   "quiz|a2tech|das Passwort/der Anruf/die Nachricht",
   "av|b1rent|der Lärm/der Schaden/der Schimmel/der Strom/der Umzug",
-  "sahne|routine|Frühstückst du?/Ich koche Abendessen und sehe fern./Ich putze mir die Zähne und schlafe früh./Ich wache um sieben auf und dusche./Ja, dann fahre ich mit dem Bus zur Arbeit./Um wie viel Uhr wachst du morgens auf?/Was für ein langweiliger Tag! Lass uns am Wochenende ins Kino gehen./Was machst du am Abend?/das Frühstück"
+  "sahne|routine|Frühstückst du?/Ich koche Abendessen und sehe fern./Ich putze mir die Zähne und schlafe früh./Ich wache um sieben auf und dusche./Ja, dann fahre ich mit dem Bus zur Arbeit./Um wie viel Uhr wachst du morgens auf?/Was für ein langweiliger Tag! Lass uns am Wochenende ins Kino gehen./Was machst du am Abend?/das Frühstück",
+  "kelime|a2money|das Paket/das Portemonnaie/der Kassenbon/die Tüte/die Öffnungszeiten"
  ]
 }
