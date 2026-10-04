@@ -44,6 +44,15 @@
     "die Apotheke",
     "das Hotel"
    ]
+  },
+  {
+   "date": "2026-10-04",
+   "unit": "housing",
+   "words": [
+    "die Heizung",
+    "das Zimmer",
+    "der Vermieter"
+   ]
   }
  ],
  "sentences": [
@@ -61,6 +70,9 @@
   "Super! Ich nehme das Kleid und einen Hut.",
   "Ganz nah. Gehen Sie am Park vorbei.",
   "Gibt es hier eine Apotheke in der Nähe?",
-  "Danke! Haben Sie einen Stadtplan?"
+  "Danke! Haben Sie einen Stadtplan?",
+  "Wie hoch ist die Miete?",
+  "Sind die Nachbarn ruhig?",
+  "Sehr ruhig. Sie können die Wohnung morgen besichtigen."
  ]
 }
