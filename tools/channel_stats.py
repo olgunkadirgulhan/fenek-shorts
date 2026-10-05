@@ -1,6 +1,7 @@
 """Kanalların herkese açık istatistikleri, resmi YouTube API ile (sadece okuma, hiçbir şey değiştirmez).
     python tools/channel_stats.py VIDEO_ID [VIDEO_ID ...]   # her kanaldan bir video yeter
 """
+import json
 import os
 import statistics
 import sys
@@ -16,6 +17,7 @@ def main():
     yt = build('youtube', 'v3', credentials=creds, cache_discovery=False)
     seeds = yt.videos().list(part='snippet', id=','.join(sys.argv[1:])).execute()['items']
     now = datetime.now(timezone.utc)
+    dump = {}
     for ch_id in dict.fromkeys(s['snippet']['channelId'] for s in seeds):
         ch = yt.channels().list(part='snippet,statistics,contentDetails,status', id=ch_id).execute()['items'][0]
         st = ch['statistics']
@@ -37,11 +39,17 @@ def main():
         print(f"\n=== {ch['snippet']['title']} | abone {st.get('subscriberCount')} | toplam izlenme {st.get('viewCount')}"
               f" | video {len(vids)} (public {len(pub)}) | medyan {statistics.median(views) if views else 0}"
               f" | beğeni {likes} | yorum {comments} | ilk video {first[:10]} | madeForKids {ch['status'].get('madeForKids')}")
+        dump[ch['snippet']['title']] = [{'id': v['id'], 'title': v['snippet']['title'], 'published': v['snippet']['publishedAt'],
+                                         'views': int(v['statistics'].get('viewCount', 0)), 'likes': int(v['statistics'].get('likeCount', 0)),
+                                         'duration': v['contentDetails']['duration']} for v in vids]
         pub.sort(key=lambda v: -int(v['statistics'].get('viewCount', 0)))
         for tag, part in (('EN İYİ', pub[:5]), ('EN KÖTÜ', pub[-3:] if len(pub) > 5 else [])):
             for v in part:
                 age = (now - datetime.fromisoformat(v['snippet']['publishedAt'].replace('Z', '+00:00'))).days
                 print(f"  {tag:7} {int(v['statistics'].get('viewCount', 0)):>7} izl | {age:>2}g | {v['contentDetails']['duration']:>8} | {v['snippet']['title'][:75]}")
+
+    with open('stats.json', 'w', encoding='utf-8') as f:
+        json.dump(dump, f, ensure_ascii=False, indent=1)
 
 
 if __name__ == '__main__':

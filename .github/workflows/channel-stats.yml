@@ -25,3 +25,8 @@ jobs:
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
         run: python tools/channel_stats.py ${{ inputs.ids }}
+      - uses: actions/upload-artifact@v5
+        with:
+          name: stats
+          path: stats.json
+          retention-days: 30
