@@ -44,6 +44,8 @@ jobs:
         env:
           LOG_FILE: published.csv
           SLOTS: "05:00,10:00,16:00,19:00"
+          # published.csv'de format sütunu bölüm türünü tutar ('short' değil): hepsi Shorts sayılır
+          SHORT_KINDS: "sahne,kelime,quiz,av,hata"
           HAS_YT: ${{ secrets.YT_REFRESH_TOKEN != '' }}
         run: |
           if [ "$HAS_YT" != "true" ]; then echo "YouTube bağlı değil (auth_setup.py), atlanıyor"; echo "go=0" >> $GITHUB_OUTPUT; exit 0; fi
