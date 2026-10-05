@@ -185,7 +185,7 @@ def metadata(ep):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--no-upload', action='store_true')
-    ap.add_argument('--format', choices=episodes.SLOT_FORMATS)
+    ap.add_argument('--format', choices=sorted(set(episodes.SLOT_FORMATS)))
     ap.add_argument('--slot', type=int)
     ap.add_argument('--bank', help='bank/ içinden belirli bir skeç dosyası')
     a = ap.parse_args()
