@@ -113,12 +113,18 @@
    "format": "sahne",
    "topic": "restaurant",
    "title": "Restoranda şikâyet: Almanca diyalog 🍽️ | B1 #almanca"
+  },
+  {
+   "id": "20261005-1649-kelime",
+   "format": "kelime",
+   "topic": "b1edu",
+   "title": "5 Almanca kelime: Eğitim 🎓 | B1 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 19,
+ "count": 20,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -138,6 +144,7 @@
   "av|a1kitchen|das Bier/das Messer/der Ofen/der Wein/die Schüssel",
   "sahne|clothes|Es ist sehr billig, nur zwanzig Euro./Gern. Und dieses T-Shirt ist ein Geschenk!/Hallo, was kostet diese Jacke?/Ja, aber die blaue ist teurer./Mittel, bitte. Haben Sie sie in Blau?/Super! Ich nehme das Kleid und einen Hut./Und was ist der Preis für dieses rote Kleid?/Vierzig Euro. Welche Größe?/der Preis",
   "kelime|a1places|das Museum/das Restaurant/das Schloss/der Park/der Turm",
-  "sahne|restaurant|Außerdem wollte ich das Steak blutig, aber es ist durchgebraten./Danke. Eigentlich beschwere ich mich nicht gern./Das tut mir sehr leid. Ich spreche sofort mit dem Koch./Der Nachtisch geht als Entschuldigung auf uns./Entschuldigung, es gibt ein Problem. Mein Hauptgericht ist kalt./Natürlich. Und probieren Sie unbedingt den neuen Nachtisch auf der Speisekarte!/Sehr nett. Kann ich die Rechnung haben? Rechnen Sie bitte auch das Trinkgeld dazu./Sie haben recht. Ich bringe Ihnen ein neues. War die Soße übrigens zu scharf?/das Hauptgericht"
+  "sahne|restaurant|Außerdem wollte ich das Steak blutig, aber es ist durchgebraten./Danke. Eigentlich beschwere ich mich nicht gern./Das tut mir sehr leid. Ich spreche sofort mit dem Koch./Der Nachtisch geht als Entschuldigung auf uns./Entschuldigung, es gibt ein Problem. Mein Hauptgericht ist kalt./Natürlich. Und probieren Sie unbedingt den neuen Nachtisch auf der Speisekarte!/Sehr nett. Kann ich die Rechnung haben? Rechnen Sie bitte auch das Trinkgeld dazu./Sie haben recht. Ich bringe Ihnen ein neues. War die Soße übrigens zu scharf?/das Hauptgericht",
+  "kelime|b1edu|das Zertifikat/der Wortschatz/die Aussprache/die Chemie/die Vorlesung"
  ]
 }
