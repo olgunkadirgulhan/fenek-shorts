@@ -1,0 +1,27 @@
+name: channel-stats
+# Sadece okuma: kanalların abone/izlenme istatistikleri (elle çalıştırılır, hiçbir şey yüklemez)
+on:
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: Her kanaldan bir video id (boşlukla)
+        type: string
+        default: "tU35nbqGKME SO3ZcE-QgKc IjjH06w1I_w D5uyEHgAfUQ pmUNKe3bNZg 7AyJ4fS-8B4 Wa3KXCSGjIo"
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install google-api-python-client google-auth
+      - env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python tools/channel_stats.py ${{ inputs.ids }}
