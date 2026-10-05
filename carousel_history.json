@@ -53,6 +53,15 @@
     "das Zimmer",
     "der Vermieter"
    ]
+  },
+  {
+   "date": "2026-10-05",
+   "unit": "travel",
+   "words": [
+    "der Strand",
+    "das Hotel",
+    "die Reservierung"
+   ]
   }
  ],
  "sentences": [
@@ -73,6 +82,9 @@
   "Danke! Haben Sie einen Stadtplan?",
   "Wie hoch ist die Miete?",
   "Sind die Nachbarn ruhig?",
-  "Sehr ruhig. Sie können die Wohnung morgen besichtigen."
+  "Sehr ruhig. Sie können die Wohnung morgen besichtigen.",
+  "Wo hast du deinen letzten Urlaub verbracht?",
+  "Zum Glück nicht. Nächstes Jahr möchte ich in die Berge fahren.",
+  "Dann solltest du früh buchen."
  ]
 }
