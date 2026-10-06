@@ -84,8 +84,11 @@ def build(ep, out):
             t += 0.22
         if b.get('silence'):
             b['t0'], b['t1'] = round(t, 3), round(t + b['silence'], 3)
-            for k in range(int(b['silence'])):
-                effects.append((t + k, audio.sfx('tick'), 0.45))
+            if not st.get('quiet'):   # sessiz gösterim (NARRATION=lite) tik sesi çalmaz
+                for k in range(int(b['silence'])):
+                    effects.append((t + k, audio.sfx('tick'), 0.45))
+            if st.get('sfx') == 'ding':
+                effects.append((t, audio.sfx('ding'), 0.35))
             t += b['silence']
         else:
             wav, dur = voice.synth(b['who'], b['lang'], b['text'])

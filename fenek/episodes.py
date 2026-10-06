@@ -220,6 +220,29 @@ def ep_bank(item):
     return dict(item, beats=item['beats'])
 
 
+# ------------------------------------------------------------------ anlatım sesi
+
+# NARRATION=lite (varsayılan, 2026-10-06'dan beri): anlatım dilinde yalnız açılış kancası ve kapanış çağrısı seslendirilir;
+# kart anlamları, sorular ve cevaplar sadece ekranda yazı olarak kalır (daha çok hedef dil, daha kısa video).
+# NARRATION=full: eski davranış (her şey seslendirilir). Karşılaştırma: memory/youtube-kanal-stratejisi.
+NARRATION = (os.environ.get('NARRATION') or 'lite').lower()
+
+
+def lite(ep):
+    out = []
+    for i, b in enumerate(ep['beats']):
+        st = b.get('st', {})
+        ov = st.get('overlay') or {}
+        if i > 0 and b.get('who') == 'fenek' and b.get('lang') == SRC and st.get('phase') != 'hook' and ov.get('type') != 'cta':
+            reveal = bool(ov.get('reveal'))
+            keep = {k: v for k, v in st.items() if k in ('overlay', 'key', 'fenek', 'mood', 'sfx', 'sfx_before', 'caption', 'tag')}
+            out.append(pause(1.6 if reveal else (1.3 if ov.get('type') == 'card' else 0.9), quiet=True, **keep))
+        else:
+            out.append(b)
+    ep['beats'] = out
+    return ep
+
+
 # ------------------------------------------------------------------ seçim
 
 def make_episode(slot, hist, seed):
@@ -243,4 +266,6 @@ def make_episode(slot, hist, seed):
         pack = pick_least_used(packs, lambda p: p['id'], used, rng, lw)
         ep = {'kelime': ep_kelime, 'quiz': ep_quiz, 'av': ep_av}[fmt](pack, rng)
     ep['format'] = fmt
+    if NARRATION == 'lite':
+        lite(ep)
     return ep
