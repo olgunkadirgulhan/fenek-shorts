@@ -137,12 +137,18 @@
    "format": "sahne",
    "topic": "city",
    "title": "Şehirde: Almanca diyalog 🚇 | A2 #almanca"
+  },
+  {
+   "id": "20261006-1649-av",
+   "format": "av",
+   "topic": "b1eat",
+   "title": "Bu tabloda 5 Almanca kelime saklı 🔍 Bulabilir misin? | Dışarıda yemek"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 23,
+ "count": 24,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -166,6 +172,7 @@
   "kelime|b1edu|das Zertifikat/der Wortschatz/die Aussprache/die Chemie/die Vorlesung",
   "quiz|b1adj|klar/wahrscheinlich",
   "kelime|a2verbs|benutzen/bringen/sich leihen/vorbereiten/zeigen",
-  "sahne|city|Am Automaten neben dem Eingang./Entschuldigung, wo ist der Bahnhof?/Fährt der Bus auch ins Zentrum?/Gehen Sie geradeaus und dann links./Ist es weit?/Ja, die Linie 5 fährt alle zehn Minuten./Nein, etwa zehn Minuten zu Fuß./Wo kann ich eine Fahrkarte kaufen?/die Karte"
+  "sahne|city|Am Automaten neben dem Eingang./Entschuldigung, wo ist der Bahnhof?/Fährt der Bus auch ins Zentrum?/Gehen Sie geradeaus und dann links./Ist es weit?/Ja, die Linie 5 fährt alle zehn Minuten./Nein, etwa zehn Minuten zu Fuß./Wo kann ich eine Fahrkarte kaufen?/die Karte",
+  "av|b1eat|das Buffet/das Fast Food/die Beilage/die Kantine/gegrillt"
  ]
 }
