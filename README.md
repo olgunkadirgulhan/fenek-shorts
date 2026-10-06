@@ -10,7 +10,7 @@ content/course.json (sitenin 35 ünitesi + 3000 kelimesi)
   → YouTube (upload.py)
 ```
 
-**Takvim:** Günde 4 Shorts, TR 08:00 · 13:00 · 19:00 · 22:00. Workflow saatlik tetiklenir; `.github/slot_guard.py` sadece zamanı gelmiş ve yüklenmemiş slot varsa video yapar (GitHub cron gecikmelerine karşı).
+**Takvim:** Günde 3 Shorts, TR 08:00 · 15:00 · 22:00. Workflow saatlik tetiklenir; `.github/slot_guard.py` sadece zamanı gelmiş ve yüklenmemiş slot varsa video yapar (GitHub cron gecikmelerine karşı).
 
 **Formatlar** (slot sırasıyla dönüşümlü): diyalog sahnesi (veya `bank/` içindeki "tipik hata" skeçleri) → 5 kelime kartı → 3 soruluk quiz → kelime avı. İçerik uydurulmaz; hepsi sitenin onaylı verisinden gelir ve kısa sürede tekrar etmez (`history.json`).
 
