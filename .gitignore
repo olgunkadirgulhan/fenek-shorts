@@ -4,3 +4,4 @@ client_secret*.json
 secrets*.env
 .env
 *.raw.wav
+graphify-out/
