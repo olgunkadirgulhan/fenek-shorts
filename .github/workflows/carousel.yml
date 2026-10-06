@@ -1,7 +1,7 @@
 name: carousel
 on:
   schedule:
-    # Her gün TR 09:00 (UTC 06:00) — GitHub gecikirse diye 07:00 ve 09:00'da da dener; günde yalnız bir kez gönderilir
+    # 4 günde bir (notify.CYCLE: 3 gün video, 1 gün kaydırmalı) TR 09:00 (UTC 06:00) — GitHub gecikirse diye 07:00 ve 09:00'da da dener; günde yalnız bir kez gönderilir
     - cron: "0 6,7,9 * * *"
   workflow_dispatch:
     inputs:

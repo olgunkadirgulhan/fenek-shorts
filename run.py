@@ -259,7 +259,7 @@ def main():
         vid = upload.upload(mp4, title, desc, tags, mode, category='27')
     except upload.QuotaError as e:
         QUEUE.mkdir(exist_ok=True); (QUEUE / f"{ep['id']}.json").write_text(json.dumps(ep, ensure_ascii=False), encoding='utf-8')
-        notify.video(mp4, f'⏳ Almanca kanalı: YouTube kotası doldu, video sıraya alındı (sonraki saatte tekrar denenecek).\n{title}')
+        notify.message(f'⏳ Almanca kanalı: YouTube kotası doldu, video sıraya alındı (sonraki saatte tekrar denenecek).\n{title}')
         gh('warning', f'quota: queued ({e})'); return
     except Exception as e:
         traceback.print_exc()
@@ -277,6 +277,9 @@ def main():
         qpath.unlink(missing_ok=True)
     log(f'uploaded https://youtube.com/shorts/{vid} ({mode})')
     n = today_count()
+    # Telegram günde tek gönderi (notify.CYCLE): video günlerinde yalnız günün ilk videosu
+    if notify.todays_post() != 'video' or n != 1:
+        log('telegram: bugün video gönderilmiyor (günde 1 gönderi)'); return
     # Telegram: orijinal dosya (TikTok/Instagram'a kaliteli yüklemek için) + hazır açıklamalar (ayrı mesaj: kolay kopyalama)
     notify.document(mp4, f'✅ Almanca kanalına yüklendi ({n}/{os.environ.get("MAX_PER_DAY") or 4} bugün)\n'
                          f'{title}\nhttps://youtube.com/shorts/{vid}\nFormat: {ep["format"]} · {total:.0f} sn')

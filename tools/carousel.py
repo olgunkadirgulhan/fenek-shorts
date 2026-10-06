@@ -106,6 +106,8 @@ def main():
     today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     if not a.force and any(d['date'] == today for d in hist['days']):
         print('bugünkü kaydırmalı gönderi zaten gönderildi'); return
+    if not a.force and not a.no_send and notify.todays_post() != 'carousel':
+        print('bugün video günü (günde 1 Telegram gönderisi: 3 gün video, 1 gün kaydırmalı)'); return
     rng = random.Random(int(datetime.now().timestamp()))
     unit, words, sents, slides = build(hist, rng)
     out = ROOT / 'output' / 'carousel' / f"{today}-{unit['id']}"

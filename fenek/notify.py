@@ -3,8 +3,18 @@ Env: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID (ikisi de GitHub Secrets). Yoksa sessi
 Kurulum: python tools/telegram_setup.py
 """
 import os
+from datetime import date, datetime, timezone
 
 API = 'https://api.telegram.org/bot{token}/{method}'
+# Telegram'a günde tek gönderi, 4 günlük döngü: 3 gün video, 1 gün kaydırmalı gönderi (UTC gün)
+CYCLE_START = date(2026, 10, 7)
+CYCLE = ['video', 'video', 'video', 'carousel']
+
+
+def todays_post():
+    """Bugün Telegram'a ne gidecek: 'video' (günün ilk yüklenen videosu) ya da 'carousel'."""
+    today = datetime.now(timezone.utc).date()
+    return CYCLE[(today - CYCLE_START).days % len(CYCLE)]
 
 
 def enabled():
