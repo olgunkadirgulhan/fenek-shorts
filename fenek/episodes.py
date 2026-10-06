@@ -94,7 +94,11 @@ def ep_sahne(unit, rng):
                   pause(3.0, overlay=q, key='q', countdown=3, fenek=True),
                   beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key='q', sfx='ding', fenek=True, mood={'emre': 'happy'})]
     beats.append(beat('fenek', SRC, rng.choice([c for c in CTAS if 'Kaç tanesini' not in c]), overlay={'type': 'cta', 'unit': t, 'emoji': unit['emoji'], 'cefr': unit['cefr']}, key='cta', fenek=True, sfx_before='pop'))
-    title = f"{t}: Almanca diyalog {unit['emoji']} | {unit['cefr']} #almanca"
+    title = rng.choice([f"{t}: Almanca diyalog {unit['emoji']} | {unit['cefr']} #almanca",
+                        f"Almanyada {t.lower()} böyle konuşulur {unit['emoji']} | {unit['cefr']}",
+                        f"{t} sahnesi: Emre ve Lena Almanca konuşuyor {unit['emoji']}",
+                        f"Bu Almanca konuşmayı anlıyor musun? {t} {unit['emoji']} #almanca",
+                        f"Gerçek hayattan Almanca: {t} {unit['emoji']} {unit['cefr']}"])
     return dict(caption=[f"{up(t)}", "ALMANCA DİYALOG " + unit['emoji']], tag=f"{unit['cefr']} · ÜNİTE", title=title,
                 topic=unit['id'], theme=unit['id'], poster={'emoji': unit['emoji'], 'label': unit['title'][TGT].upper()[:18]}, beats=beats,
                 desc=f"{t} ({unit['cefr']}) ünitesinden Almanca diyalog. Türkçe altyazılı, sesli.")
@@ -112,7 +116,7 @@ def ep_kelime(pack, rng):
                   beat('fenek', SRC, w[SRC], '', overlay=card, key=f'c{i}', fenek=True, nosub=True)]
     beats.append(beat('fenek', SRC, rng.choice(CTAS), overlay={'type': 'cta', 'unit': t, 'emoji': pack['emoji'], 'cefr': pack['cefr']}, key='cta', fenek=True, sfx_before='pop'))
     return dict(caption=[f"5 ALMANCA KELİME", f"{up(t)} {pack['emoji']}"], tag=f"{pack['cefr']} · KELİME", topic=pack['id'], theme='study', poster={'emoji': pack['emoji'], 'label': pack['title'][TGT].upper()[:18]},
-                title=f"5 Almanca kelime: {t} {pack['emoji']} | {pack['cefr']} #almanca", beats=beats,
+                title=rng.choice([f"5 Almanca kelime: {t} {pack['emoji']} | {pack['cefr']} #almanca", f"{t} Almancada nasıl söylenir? {pack['emoji']} | {pack['cefr']}", f"Bu 5 kelimeyi biliyor musun? {t} {pack['emoji']} #almanca", f"{t}: günlük hayatta en çok lazım olan 5 Almanca kelime {pack['emoji']}", f"Almanca {t} kelimeleri {pack['emoji']} {pack['cefr']} seviyesi"]), beats=beats,
                 desc=f"{t} konusunda 5 Almanca kelime ({pack['cefr']}). Artikelleriyle, sesli ve Türkçe anlamlarıyla.")
 
 
@@ -151,7 +155,7 @@ def ep_quiz(pack, rng):
             beats.append(beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key=f'q{i}', sfx='ding', fenek=True, mood={'emre': 'happy'}))
     beats.append(beat('fenek', SRC, rng.choice(CTAS), overlay={'type': 'cta', 'unit': t, 'emoji': pack['emoji'], 'cefr': pack['cefr']}, key='cta', fenek=True, sfx_before='pop'))
     return dict(caption=['ALMANCA QUIZ 🤔', f"{up(t)}"], tag=f"{pack['cefr']} · QUIZ", topic=pack['id'], theme='study', poster={'emoji': pack['emoji'], 'label': pack['title'][TGT].upper()[:18]},
-                title=f"Almanca quiz: {t} 🤔 3 soruda kendini dene! | {pack['cefr']}", beats=beats,
+                title=rng.choice([f"Almanca quiz: {t} 🤔 3 soruda kendini dene! | {pack['cefr']}", f"{t} konusunda Almancan ne kadar iyi? 🤔 {pack['cefr']}", f"3 soru, 1 konu: {t} 🧠 #almanca", f"Hepsini bilirsen {pack['cefr']} seviyedesin: {t} 🤔", f"Almanca test: {t} ✍️ Kaç doğru yapacaksın?"]), beats=beats,
                 desc=f"{t} ({pack['cefr']}) üzerine 3 soruluk Almanca quiz. Kaç doğru yaptın? Yorumlara yaz!")
 
 
@@ -208,7 +212,7 @@ def ep_av(pack, rng):
     beats.append(beat('fenek', SRC, 'Kaç tanesini buldun? Yorumlara yaz!', overlay={**base, 'found': len(words)}, key='g', fenek=True))
     beats.append(beat('fenek', SRC, rng.choice([c for c in CTAS if 'Yorumlara' not in c]), overlay={'type': 'cta', 'unit': t, 'emoji': pack['emoji'], 'cefr': pack['cefr']}, key='cta', fenek=True, sfx_before='pop'))
     return dict(caption=['5 KELİME SAKLI 🔍', '10 SANİYEN VAR!'], tag=f"{pack['cefr']} · KELİME AVI", topic=pack['id'], theme='study', poster={'emoji': pack['emoji'], 'label': pack['title'][TGT].upper()[:18]},
-                title=f"Bu tabloda 5 Almanca kelime saklı 🔍 Bulabilir misin? | {t}", beats=beats,
+                title=rng.choice([f"Bu tabloda 5 Almanca kelime saklı 🔍 Bulabilir misin? | {t}", f"Kelime avı: {t} 🔍 10 saniyede bul!", f"{t}: harflerin arasına 5 Almanca kelime gizlendi 👀", f"Gözüne güveniyor musun? 🔍 {t} kelime avı", f"10 saniye, 5 kelime: {t} 🔎 #almanca"]), beats=beats,
                 desc=f"Kelime avı: {t} ({pack['cefr']}). Harf tablosunda saklı 5 Almanca kelimeyi 10 saniyede bul!")
 
 
