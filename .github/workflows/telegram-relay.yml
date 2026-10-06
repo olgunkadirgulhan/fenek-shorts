@@ -1,0 +1,42 @@
+name: telegram-relay
+# Moon or Doom ve Why Stocks Moved'un günün videosu (artifact 'social-*') → Fenek botuyla Telegram
+on:
+  schedule:
+    - cron: "41 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: repo-writes
+  cancel-in-progress: false
+
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Gönder
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELAY_REPOS: olgunkadirgulhan/moon-or-doom,olgunkadirgulhan/why-stocks-moved
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python tools/telegram_relay.py
+      - name: Kaydet (tekrar gönderilmesin)
+        if: always()
+        run: |
+          git config user.name "fenek-bot"
+          git config user.email "bot@users.noreply.github.com"
+          [ -e telegram_relay.json ] && git add telegram_relay.json || true
+          git diff --cached --quiet && exit 0
+          git commit -m "telegram relay: $(date -u +%F-%H%M)"
+          git pull --rebase
+          git push
