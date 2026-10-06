@@ -43,7 +43,7 @@ jobs:
       - id: g
         env:
           LOG_FILE: published.csv
-          SLOTS: "05:00,10:00,16:00,19:00"
+          SLOTS: "05:00,12:00,19:00"
           # published.csv'de format sütunu bölüm türünü tutar ('short' değil): hepsi Shorts sayılır
           SHORT_KINDS: "sahne,kelime,quiz,av,hata"
           HAS_YT: ${{ secrets.YT_REFRESH_TOKEN != '' }}
