@@ -126,7 +126,11 @@ def ep_quiz(pack, rng):
     rng.shuffle(pool)
     nouns = [w for w in pool if noun(w)[0]]
     qs = []
-    for kind in ('art', 'mean', 'art' if len(nouns) > 1 else 'mean'):
+    # her zaman 3 soru (açılış "üç soru" diyor): artikel sorusu yapılamayan konularda anlam sorusuyla tamamlanır
+    kinds = ['art', 'mean', 'art' if len(nouns) > 1 else 'mean'] + ['mean'] * 3
+    for kind in kinds:
+        if len(qs) >= 3:
+            break
         cand = [w for w in (nouns if kind == 'art' else pool) if w not in [q['w'] for q in qs]]
         if not cand:
             continue
