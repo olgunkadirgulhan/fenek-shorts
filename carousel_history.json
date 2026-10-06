@@ -62,6 +62,15 @@
     "das Hotel",
     "die Reservierung"
    ]
+  },
+  {
+   "date": "2026-10-06",
+   "unit": "shopping",
+   "words": [
+    "das Geld",
+    "die Größe",
+    "der Preis"
+   ]
   }
  ],
  "sentences": [
@@ -85,6 +94,9 @@
   "Sehr ruhig. Sie können die Wohnung morgen besichtigen.",
   "Wo hast du deinen letzten Urlaub verbracht?",
   "Zum Glück nicht. Nächstes Jahr möchte ich in die Berge fahren.",
-  "Dann solltest du früh buchen."
+  "Dann solltest du früh buchen.",
+  "Welche Größe brauchen Sie?",
+  "Das ist nicht teuer. Ich nehme es.",
+  "Mit Karte, bitte."
  ]
 }
