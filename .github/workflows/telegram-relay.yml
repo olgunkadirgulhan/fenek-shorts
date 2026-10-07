@@ -2,7 +2,7 @@ name: telegram-relay
 # Moon or Doom ve Why Stocks Moved'un günün videosu (artifact 'social-*') → Fenek botuyla Telegram
 on:
   schedule:
-    - cron: "41 * * * *"
+    - cron: "0 * * * *"  # gönderim 15:00 UTC (TR 18:00); cron-job.org da her saat başı tetikler
   workflow_dispatch: {}
 
 permissions:

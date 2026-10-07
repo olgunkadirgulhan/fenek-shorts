@@ -68,9 +68,12 @@ def main():
         print('gönderilecek video yok'); return
     # Hepsi birlikte: her kanalın videosu hazır olunca tek seferde gönder. Biri gelmezse son saatte (veya bekleyen
     # video 20 saati geçince) hazır olanı yalnız gönder — video kaybolmasın.
+    send_h = int(os.environ.get('RELAY_SEND_H', '15'))     # 15 UTC = Türkiye 18:00: günün videoları bu saatte
+    if now.hour < send_h:
+        print(f'gönderim saati {send_h}:00 UTC, bekleniyor'); return
     deadline = int(os.environ.get('RELAY_DEADLINE_H', '22'))
     oldest = min(datetime.fromisoformat(a['created_at'].replace('Z', '+00:00')) for xs in pending.values() for a in xs)
-    if len(pending) < len(repos) and now.hour < deadline and now - oldest < timedelta(hours=20):
+    if len(pending) < len(repos) and now.hour < deadline and now - oldest < timedelta(hours=30):
         print(f"bekleniyor: hazır {sorted(pending)} / {len(repos)} kanal"); return
     total = sum(len(xs) for xs in pending.values())
     if total > 1:
