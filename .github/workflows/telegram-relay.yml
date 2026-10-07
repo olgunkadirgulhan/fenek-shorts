@@ -3,7 +3,12 @@ name: telegram-relay
 on:
   schedule:
     - cron: "0 * * * *"  # gönderim 15:00 UTC (TR 18:00); cron-job.org da her saat başı tetikler
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Saat ve diğer kanalı bekleme, hazır olanı hemen gönder
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -31,6 +36,7 @@ jobs:
           RELAY_REPOS: olgunkadirgulhan/moon-or-doom,olgunkadirgulhan/why-stocks-moved
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RELAY_FORCE: ${{ inputs.force && '1' || '' }}
         run: python tools/telegram_relay.py
       - name: Kaydet (tekrar gönderilmesin)
         if: always()
