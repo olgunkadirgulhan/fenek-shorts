@@ -1,5 +1,5 @@
 name: telegram-relay
-# Moon or Doom ve Why Stocks Moved'un günün videosu (artifact 'social-*') → Fenek botuyla Telegram
+# Bloop Bonkers, Moon or Doom ve Why Stocks Moved'un günün videosu (artifact 'social-*') → Fenek botuyla Telegram
 on:
   schedule:
     - cron: "0 * * * *"  # gönderim 15:00 UTC (TR 18:00); cron-job.org da her saat başı tetikler
@@ -33,7 +33,7 @@ jobs:
       - name: Gönder
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELAY_REPOS: olgunkadirgulhan/moon-or-doom,olgunkadirgulhan/why-stocks-moved
+          RELAY_REPOS: olgunkadirgulhan/bloop-bonkers,olgunkadirgulhan/moon-or-doom,olgunkadirgulhan/why-stocks-moved
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           RELAY_FORCE: ${{ inputs.force && '1' || '' }}
