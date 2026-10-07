@@ -9,8 +9,10 @@ permissions:
   contents: write
   actions: read
 
+# Kendi kuyruğu: video iş akışıyla aynı grupta olunca bekleyen relay iptal ediliyordu (günde ~3 çalışma).
+# Saatlik tetik cron-job.org'dan gelir; GitHub cron'u yedek.
 concurrency:
-  group: repo-writes
+  group: telegram-relay
   cancel-in-progress: false
 
 jobs:
