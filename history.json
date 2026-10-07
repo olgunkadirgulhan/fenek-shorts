@@ -155,12 +155,18 @@
    "format": "kelime",
    "topic": "b1verbs",
    "title": "Bu 5 kelimeyi biliyor musun? B1 fiilleri 🎯 #almanca"
+  },
+  {
+   "id": "20261007-1953-quiz",
+   "format": "quiz",
+   "topic": "b1service",
+   "title": "Almanca test: Hizmetler ve tüketici ✍️ Kaç doğru yapacaksın?"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 26,
+ "count": 27,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -187,6 +193,7 @@
   "sahne|city|Am Automaten neben dem Eingang./Entschuldigung, wo ist der Bahnhof?/Fährt der Bus auch ins Zentrum?/Gehen Sie geradeaus und dann links./Ist es weit?/Ja, die Linie 5 fährt alle zehn Minuten./Nein, etwa zehn Minuten zu Fuß./Wo kann ich eine Fahrkarte kaufen?/die Karte",
   "av|b1eat|das Buffet/das Fast Food/die Beilage/die Kantine/gegrillt",
   "sahne|shopping|Das ist nicht teuer. Ich nehme es./Es kostet dreißig Euro. Heute ist es im Angebot./Größe M. Was kostet dieses hier?/Hallo, kann ich Ihnen helfen?/Ja, ich suche ein Hemd./Mit Karte, bitte./Welche Größe brauchen Sie?/Zahlen Sie bar oder mit Karte?/die Größe",
-  "kelime|b1verbs|abhängen/bevorzugen/lösen/verbessern/vergleichen"
+  "kelime|b1verbs|abhängen/bevorzugen/lösen/verbessern/vergleichen",
+  "quiz|b1service|der Katalog/der Kundendienst/der Onlineshop"
  ]
 }
