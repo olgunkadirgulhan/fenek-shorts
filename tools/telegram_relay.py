@@ -2,7 +2,7 @@
 
 Kaynak repolar günün ilk videosunu 'social-<run_id>' artifact'ı olarak bırakır: video.mp4 + post.json
 ({channel, title, url, tiktok, instagram}) ya da deneme için post.json {"videos": [{"file", "caption"}], "note"}.
-Bu betik saatlik çalışır, yeni artifact'ları indirir, gönderir ve telegram_relay.json'a işler (tekrar gönderilmez).
+Bu betik saatlik çalışır; tüm kanalların yeni videosu hazır olunca HEPSİNİ BİRLİKTE gönderir (biri gelmezse\nRELAY_DEADLINE_H saatinde, UTC, varsayılan 22, hazır olanı gönderir) ve telegram_relay.json'a işler.
 Env: GITHUB_TOKEN, RELAY_REPOS (virgüllü), TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID.
 """
 import io
@@ -52,16 +52,32 @@ def main():
     if not notify.enabled():
         sys.exit('TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID yok')
     state = json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {'sent': []}
-    since = (datetime.now(timezone.utc) - timedelta(days=2)).strftime('%Y-%m-%dT%H:%M:%SZ')
-    for repo in [r.strip() for r in os.environ.get('RELAY_REPOS', '').split(',') if r.strip()]:
+    now = datetime.now(timezone.utc)
+    since = (now - timedelta(days=2)).strftime('%Y-%m-%dT%H:%M:%SZ')
+    repos = [r.strip() for r in os.environ.get('RELAY_REPOS', '').split(',') if r.strip()]
+    pending = {}                                             # repo -> gönderilmemiş artifact'lar (eskiden yeniye)
+    for repo in repos:
         try:
             found = sorted(artifacts(repo, since), key=lambda a: a['created_at'])
         except Exception as e:
             print(f'{repo}: artifact listesi alınamadı: {e}'); continue
-        for a in found:
+        new = [a for a in found if f"{repo}#{a['id']}" not in state['sent']]
+        if new:
+            pending[repo] = new
+    if not pending:
+        print('gönderilecek video yok'); return
+    # Hepsi birlikte: her kanalın videosu hazır olunca tek seferde gönder. Biri gelmezse son saatte (veya bekleyen
+    # video 20 saati geçince) hazır olanı yalnız gönder — video kaybolmasın.
+    deadline = int(os.environ.get('RELAY_DEADLINE_H', '22'))
+    oldest = min(datetime.fromisoformat(a['created_at'].replace('Z', '+00:00')) for xs in pending.values() for a in xs)
+    if len(pending) < len(repos) and now.hour < deadline and now - oldest < timedelta(hours=20):
+        print(f"bekleniyor: hazır {sorted(pending)} / {len(repos)} kanal"); return
+    total = sum(len(xs) for xs in pending.values())
+    if total > 1:
+        notify.message(f"📦 Günün sosyal medya videoları ({total})")
+    for repo in repos:
+        for a in pending.get(repo, []):
             key = f"{repo}#{a['id']}"
-            if key in state['sent']:
-                continue
             z = requests.get(a['archive_download_url'], headers=HDR, timeout=300)
             if not z.ok:
                 print(f'{key}: indirilemedi {z.status_code} {z.text[:200]}'); continue
