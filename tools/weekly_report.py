@@ -32,6 +32,29 @@ SEED_VIDEOS = ['tU35nbqGKME', 'SO3ZcE-QgKc', 'IjjH06w1I_w', 'D5uyEHgAfUQ', 'pmUN
                'THLkUkT0zpc', 'BkOW0HgV36o', 'yzSnhl69zXo', 'bQysUnZx0Io']
 
 
+REQUEST_FILES = [('dex-and-friends', 'viewer_requests.json'), ('konusan-meyveler', 'viewer_requests.json'),
+                 ('konusan-meyveler', 'viewer_requests_en.json'), ('bloop-bonkers', 'viewer_requests.json'),
+                 ('fenek-de-en', 'viewer_requests.json'), ('fenek-shorts', 'viewer_requests.json'),
+                 ('maya-builds-cozy', 'viewer_requests.json')]
+
+
+def viewer_requests(since):
+    """Yorumlardan toplanan video istekleri (tools/auto_reply.py), son 7 gün; kullanılanlar işaretli."""
+    import requests
+    out = []
+    for repo, f in REQUEST_FILES:
+        try:
+            r = requests.get(f'https://raw.githubusercontent.com/olgunkadirgulhan/{repo}/main/{f}', timeout=20)
+            if r.status_code != 200:
+                continue
+            for x in r.json():
+                if x.get('date', '') >= since.strftime('%Y-%m-%d'):
+                    out.append(f"{repo}: {x['topic']}" + (' ✅ videosu yapıldı' if x.get('used') else ''))
+        except Exception:  # noqa: BLE001
+            continue
+    return out
+
+
 def fmt(n):
     return f'{n / 1_000_000:.1f}M' if n >= 1_000_000 else f'{n / 1000:.1f}K' if n >= 1000 else str(n)
 
@@ -83,6 +106,9 @@ def main():
               '🔴 = izlenme artmadı → format/başlık değişikliği adayı']
     if not prev:
         lines.append('<i>İlk rapor: farklar gelecek haftadan itibaren doğru hesaplanır.</i>')
+    reqs = viewer_requests(week_ago)
+    if reqs:
+        lines += ['', '💡 <b>İzleyici istekleri (bu hafta)</b>'] + [f'• {html.escape(r)}' for r in reqs[:15]]
     HIST.write_text(json.dumps(snap, indent=1, ensure_ascii=False) + '\n', encoding='utf-8')
     if notify.enabled():
         notify._call('sendMessage', text='\n'.join(lines)[:4000], parse_mode='HTML', disable_web_page_preview='true')
