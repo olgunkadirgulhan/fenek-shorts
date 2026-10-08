@@ -1,0 +1,34 @@
+name: weekly-report
+# Her pazartesi 06:00 UTC (TR 09:00): tüm kanalların haftalık raporu → Telegram (sadece okuma)
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q google-api-python-client google-auth requests
+      - env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python tools/weekly_report.py
+      - run: |
+          git config user.name "fenek-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add stats_history.json
+          git diff --cached --quiet && exit 0
+          git commit -m "weekly report: $(date -u +%F)"
+          for i in 1 2 3; do git pull -q --rebase && git push -q && exit 0; sleep 5; done
