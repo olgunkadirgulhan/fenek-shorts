@@ -32,6 +32,21 @@ def main():
         for k in range(0, len(ids), 50):
             vids += yt.videos().list(part='snippet,statistics,status,contentDetails', id=','.join(ids[k:k + 50])).execute()['items']
         pub = [v for v in vids if v['status']['privacyStatus'] == 'public']
+        # kısıtlama işaretleri: reddedilen/başarısız yükleme, gizli kalan, yaş kısıtı, bölge engeli
+        flags = []
+        for v in vids:
+            stt, cd = v['status'], v.get('contentDetails', {})
+            if stt.get('uploadStatus') in ('rejected', 'failed', 'deleted'):
+                flags.append(f"{v['id']} {stt.get('uploadStatus')}:{stt.get('rejectionReason') or stt.get('failureReason')}")
+            if stt['privacyStatus'] != 'public':
+                flags.append(f"{v['id']} {stt['privacyStatus']}")
+            if cd.get('contentRating', {}).get('ytRating') == 'ytAgeRestricted':
+                flags.append(f"{v['id']} yaş kısıtlı")
+            if cd.get('regionRestriction', {}).get('blocked'):
+                flags.append(f"{v['id']} bölge engeli")
+        chs = ch.get('status', {})
+        print(f"  durum: longUploads={chs.get('longUploadsStatus')} privacy={chs.get('privacyStatus')} "
+              f"kısıt/uyarı: {flags[:8] if flags else 'yok'}")
         views = [int(v['statistics'].get('viewCount', 0)) for v in pub]
         likes = sum(int(v['statistics'].get('likeCount', 0)) for v in pub)
         comments = sum(int(v['statistics'].get('commentCount', 0)) for v in pub)
