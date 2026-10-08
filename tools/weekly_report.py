@@ -26,6 +26,10 @@ CHANNELS = {
     'Dex & Friends': 'UCFpwuSiMBupYIOiiSx6lzsg',
     'Bloop Bonkers': 'UCdbAUr-IDGWaKXhXGnX55MQ',
     'German with Fenek': 'UCE76DGxmi3AWuKlp-bGYOCg',
+    'Fenektr': 'UC0E2yFyEoA_G8bBRYbW6cbg',
+    'Maya Builds Cozy': 'UCe5trBb_n-p9FA-qFlOvocQ',
+    'Konuşan Fruits': 'UCbuPTAaiLEbSvTDSZnRe6IQ',
+    'Fruit Drama Club': 'UCRn8Uvt1czDE5hJQBrJRalg',
 }
 # kimliği bilinmeyenler: her kanaldan bir video id → kanal id API'den bulunur
 SEED_VIDEOS = ['tU35nbqGKME', 'SO3ZcE-QgKc', 'IjjH06w1I_w', 'D5uyEHgAfUQ', 'pmUNKe3bNZg', '7AyJ4fS-8B4', 'Wa3KXCSGjIo',
@@ -82,17 +86,28 @@ def main():
         vids = []
         vid_ids = [i['contentDetails']['videoId'] for i in items]
         if vid_ids:
-            vids = yt.videos().list(part='snippet,statistics,status', id=','.join(vid_ids)).execute().get('items', [])
+            vids = yt.videos().list(part='snippet,statistics,status,contentDetails', id=','.join(vid_ids)).execute().get('items', [])
         week = [v for v in vids if v['status'].get('privacyStatus') == 'public'
                 and datetime.fromisoformat(v['snippet']['publishedAt'].replace('Z', '+00:00')) >= week_ago]
         wv = [int(v['statistics'].get('viewCount', 0)) for v in week]
         best = max(week, key=lambda v: int(v['statistics'].get('viewCount', 0)), default=None)
+        flags = []  # ihtar/kısıtlama işaretleri (bağlantılı kanallar riski: erken fark et)
+        for v in vids:
+            stt, cd = v['status'], v.get('contentDetails', {})
+            if stt.get('uploadStatus') in ('rejected', 'failed'):
+                flags.append(f"reddedildi ({stt.get('rejectionReason') or stt.get('failureReason')})")
+            elif stt['privacyStatus'] != 'public' and not stt.get('publishAt'):
+                flags.append('gizli kaldı')
+            if cd.get('contentRating', {}).get('ytRating') == 'ytAgeRestricted':
+                flags.append('yaş kısıtlı')
+            if cd.get('regionRestriction', {}).get('blocked'):
+                flags.append('bölge engeli')
         p = prev.get(cid, {})
         snap[cid] = {'name': name, 'subs': subs, 'views': views, 'date': now.strftime('%Y-%m-%d')}
         rows.append(dict(name=html.escape(ch['snippet']['title'].strip()), subs=subs, dsubs=subs - p.get('subs', subs),
                          views=views, dviews=views - p.get('views', views), n=len(week),
                          med=int(statistics.median(wv)) if wv else 0,
-                         best=(html.escape(best['snippet']['title'][:45]), int(best['statistics'].get('viewCount', 0))) if best else None))
+                         flags=sorted(set(flags)), best=(html.escape(best['snippet']['title'][:45]), int(best['statistics'].get('viewCount', 0))) if best else None))
     rows.sort(key=lambda r: -r['dviews'])
     lines = [f"📊 <b>Haftalık kanal raporu</b> · {now:%d.%m.%Y}", '']
     for r in rows:
@@ -101,7 +116,11 @@ def main():
                      f"({r['dsubs']:+d}) · bu hafta {r['n']} video, medyan {fmt(r['med'])}")
         if r['best']:
             lines.append(f"   ⭐ {r['best'][0]} — {fmt(r['best'][1])}")
+        if r['flags']:
+            lines.append(f"   ⚠️ <b>Kısıtlama:</b> {', '.join(r['flags'])} → Studio'da kontrol et")
     total = sum(r['dviews'] for r in rows)
+    flagged = [r['name'] for r in rows if r['flags']]
+    lines.insert(1, '⚠️ <b>Kısıtlama var:</b> ' + ', '.join(flagged) if flagged else '✅ Hiçbir kanalda ihtar/kısıtlama işareti yok')
     lines += ['', f"Toplam: +{fmt(total)} izlenme, {sum(r['dsubs'] for r in rows):+d} abone",
               '🔴 = izlenme artmadı → format/başlık değişikliği adayı']
     if not prev:
