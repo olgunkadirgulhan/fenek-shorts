@@ -33,13 +33,14 @@ jobs:
           CHANNEL_KIND: general
           CHANNEL_LANG: tr
           STATE_FILE: comment_replies.json
+          REQUESTS_FILE: viewer_requests.json
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FIRST_QUESTIONS: "[\"{topic} konusunda hangi kelime senin için yeniydi? 🤔\", \"Kaç tanesini bildin? ✍️\", \"{topic} ile ilgili Almanca bir cümle kurabilir misin? 🇩🇪\", \"Der, die, das: hangisi seni şaşırttı? 😅\", \"{topic} konusundan sonra ne öğrenelim? 💡\", \"Almanya'da ilk hangi kelimeyi kullanırdın? 🇩🇪\", \"Altyazısız her şeyi anladın mı? 👀\", \"{topic} konusunda bildiğin bir kelimeyi yaz 👇\", \"Telaffuzu en zor kelime hangisiydi? 🗣️\", \"Şu an Almancan hangi seviyede: A1, A2, B1? 📚\", \"Ne kadar süredir Almanca öğreniyorsun? ⏳\", \"Hangi kelime sana en komik geldi? 😂\", \"Almanya'ya gitmeyi düşünüyor musun? ✈️\", \"Bir kelimeyi yorumda çevir, bakalım bilebilecek misin ✍️\", \"En çok hangi konuda zorlanıyorsun? 🤔\"]"
         run: python tools/auto_reply.py
       - run: |
           git config user.name "comment-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add comment_replies*.json 2>/dev/null || true
+          git add comment_replies*.json viewer_requests*.json 2>/dev/null || true
           git diff --cached --quiet && exit 0
           git commit -m "comments: $(date -u +%F-%H%M)"
           for i in 1 2 3; do git pull -q --rebase && git push -q && exit 0; sleep 5; done
