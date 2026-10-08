@@ -167,12 +167,18 @@
    "format": "kelime",
    "topic": "a1people",
    "title": "İnsanlar ve aile: günlük hayatta en çok lazım olan 5 Almanca kelime 👪"
+  },
+  {
+   "id": "20261008-1221-sahne",
+   "format": "sahne",
+   "topic": "doctor",
+   "title": "Almanyada doktorda böyle konuşulur 🩺 | A2"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 28,
+ "count": 29,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -201,6 +207,7 @@
   "sahne|shopping|Das ist nicht teuer. Ich nehme es./Es kostet dreißig Euro. Heute ist es im Angebot./Größe M. Was kostet dieses hier?/Hallo, kann ich Ihnen helfen?/Ja, ich suche ein Hemd./Mit Karte, bitte./Welche Größe brauchen Sie?/Zahlen Sie bar oder mit Karte?/die Größe",
   "kelime|b1verbs|abhängen/bevorzugen/lösen/verbessern/vergleichen",
   "quiz|b1service|der Katalog/der Kundendienst/der Onlineshop",
-  "kelime|a1people|das Enkelkind/das Mädchen/der Gast/der Mann/der Sohn"
+  "kelime|a1people|das Enkelkind/das Mädchen/der Gast/der Mann/der Sohn",
+  "sahne|doctor|Guten Tag, was fehlt Ihnen?/Haben Sie auch Bauchschmerzen?/Ich gebe Ihnen ein Rezept für ein Medikament./Ich habe Kopfschmerzen und Fieber./Nein, nur der Kopf tut weh./Seit gestern Abend./Seit wann?/Vielen Dank, Frau Doktor./der Arzt"
  ]
 }
