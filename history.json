@@ -191,12 +191,18 @@
    "format": "kelime",
    "topic": "a2weather",
    "title": "Hava durumu Almancada nasıl söylenir? 🌦️ | A2"
+  },
+  {
+   "id": "20261009-1949-quiz",
+   "format": "quiz",
+   "topic": "a1cal",
+   "title": "Günler ve aylar konusunda Almancan ne kadar iyi? 🤔 A1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 32,
+ "count": 33,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -229,6 +235,7 @@
   "sahne|doctor|Guten Tag, was fehlt Ihnen?/Haben Sie auch Bauchschmerzen?/Ich gebe Ihnen ein Rezept für ein Medikament./Ich habe Kopfschmerzen und Fieber./Nein, nur der Kopf tut weh./Seit gestern Abend./Seit wann?/Vielen Dank, Frau Doktor./der Arzt",
   "av|a1fruit|der Pfirsich/die Ananas/die Bohne/die Traube/die Zwiebel",
   "sahne|weather|Die Temperatur liegt nur bei fünf Grad./Hast du den Wetterbericht gesehen? Morgen gibt es Regen./Ich auch. Heute ist es auch sehr bewölkt./Ich vermisse den Frühling. Ich liebe sonnige Tage./Keine Sorge, ich habe ihn immer in der Tasche./Schon wieder? Dieser Herbst ist sehr kalt und windig./Vergiss deinen Regenschirm nicht!/Vielleicht gibt es in den Bergen auch Schnee./der Frühling",
-  "kelime|a2weather|das Wetter/der Regenschauer/kühl/neblig/verschneit"
+  "kelime|a2weather|das Wetter/der Regenschauer/kühl/neblig/verschneit",
+  "quiz|a1cal|der Juni/der Samstag/der September"
  ]
 }
