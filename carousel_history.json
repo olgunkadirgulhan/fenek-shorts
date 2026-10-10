@@ -71,6 +71,15 @@
     "die Größe",
     "der Preis"
    ]
+  },
+  {
+   "date": "2026-10-10",
+   "unit": "work",
+   "words": [
+    "die Stelle",
+    "das Büro",
+    "der Kollege"
+   ]
   }
  ],
  "sentences": [
@@ -97,6 +106,9 @@
   "Dann solltest du früh buchen.",
   "Welche Größe brauchen Sie?",
   "Das ist nicht teuer. Ich nehme es.",
-  "Mit Karte, bitte."
+  "Mit Karte, bitte.",
+  "Warum interessieren Sie sich für diese Stelle?",
+  "Weil ich in einem internationalen Team arbeiten möchte.",
+  "Ich arbeite seit fünf Jahren in einem Büro."
  ]
 }
