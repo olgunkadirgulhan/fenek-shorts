@@ -1,0 +1,24 @@
+name: episode-reminder
+# Tek seferlik: 13 Ekim 09:00 UTC (TR 12:00) — Bloop 2. bölümden (14 Ekim Çar) bir gün önce, 1. bölümün sonucu
+on:
+  schedule:
+    - cron: "0 9 13 10 *"
+  workflow_dispatch:
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q google-api-python-client google-auth requests
+      - env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python tools/episode_reminder.py y4wq4Gu63rg "Yarın (14 Ekim Çarşamba, TR 20:00) 2. bölüm otomatik üretilecek. Şu an GİZLİ yükleniyor; iyi gidiyorsa herkese açık yapacağız."
