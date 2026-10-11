@@ -21,4 +21,4 @@ jobs:
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python tools/episode_reminder.py y4wq4Gu63rg "Yarın (14 Ekim Çarşamba, TR 20:00) 2. bölüm otomatik üretilecek. Şu an GİZLİ yükleniyor; iyi gidiyorsa herkese açık yapacağız."
+        run: python tools/episode_reminder.py y4wq4Gu63rg "Takvim: haftada 3 bölüm (Pzt, Çar, Cum TR 20:00). 2. bölüm dün çıktı, 3. bölüm yarın."

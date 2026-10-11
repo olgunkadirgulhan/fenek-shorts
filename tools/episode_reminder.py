@@ -26,7 +26,7 @@ def main():
     text = (f"⏰ <b>Hatırlatma: Bloop uzun bölüm</b>\n\n"
             f"1. bölüm ({hours / 24:.1f} gün): <b>{views:,}</b> izlenme, {int(st.get('likeCount', 0)):,} beğeni, "
             f"{int(st.get('commentCount', 0))} yorum → {verdict}\n"
-            f"https://youtu.be/{vid}\n\n{nxt}\n\nDevam mı? Claude'a yaz: <b>devam</b> ya da <b>dur</b>.")
+            f"https://youtu.be/{vid}\n\n{nxt}\n\nİzlenme oranı için Claude'a yaz: <b>bölüm raporu</b>.")
     print(text)
     notify._call('sendMessage', text=text, parse_mode='HTML', disable_web_page_preview='true')
 
