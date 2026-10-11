@@ -221,12 +221,18 @@
    "format": "sahne",
    "topic": "cooking",
    "title": "Mutfakta: Almanca diyalog 🍳 | A2 #almanca"
+  },
+  {
+   "id": "20261011-1249-kelime",
+   "format": "kelime",
+   "topic": "a2work",
+   "title": "Almanca İş yerinde kelimeleri 🏢 A2 seviyesi"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 37,
+ "count": 38,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -264,6 +270,7 @@
   "kelime|a1body|das Auge/das Gesicht/das Haar/der Fuß/der Rücken",
   "sahne|town|Danke! Haben Sie einen Stadtplan?/Dann rechts oder links?/Entschuldigung, wo ist der Bahnhof?/Ganz nah. Gehen Sie am Park vorbei./Gibt es hier eine Apotheke in der Nähe?/Ja, neben dem Hotel./Leider nicht, aber auf Ihrem Handy gibt es einen!/Links. Er ist gegenüber der Bank./das Hotel",
   "av|a2adv|allein/dann/endlich/obwohl/während",
-  "sahne|cooking|Dann braten wir sie im Topf an./Es riecht schon wunderbar!/Gern! Was brauchen wir?/Ich schneide die Zwiebel und den Knoblauch./Nur eine Prise. Und am Ende zwanzig Minuten in den Ofen./Tomaten, eine Zwiebel, Knoblauch und etwas Olivenöl./Wie viele Löffel Salz nehmen wir?/Wollen wir heute Abend das Rezept meiner Oma ausprobieren?/das Olivenöl"
+  "sahne|cooking|Dann braten wir sie im Topf an./Es riecht schon wunderbar!/Gern! Was brauchen wir?/Ich schneide die Zwiebel und den Knoblauch./Nur eine Prise. Und am Ende zwanzig Minuten in den Ofen./Tomaten, eine Zwiebel, Knoblauch und etwas Olivenöl./Wie viele Löffel Salz nehmen wir?/Wollen wir heute Abend das Rezept meiner Oma ausprobieren?/das Olivenöl",
+  "kelime|a2work|arbeitslos/der Angestellte/der Buchhalter/der Geschäftspartner/die Rente"
  ]
 }
