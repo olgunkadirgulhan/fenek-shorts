@@ -1,0 +1,32 @@
+name: related-video-reminder
+# Tek seferlik: 12 Ekim 07:00 UTC (TR 10:00) — Bloop Shorts'larına "İlgili video" ekleme hatırlatması
+on:
+  schedule:
+    - cron: "0 7 12 10 *"
+  workflow_dispatch:
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests
+      - env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          from fenek import notify
+          links = ["LyNvOQy5YRI", "-Vclb5xIG2Y", "T5QQaCTZV14", "4supLq-3Eec"]
+          text = ("⏰ <b>Hatırlatma: Bloop 'İlgili video'</b>\n\n"
+                  "Videolu doğrulama onaylandıysa bu 4 Short'ta sağdaki <b>İlgili video ✏️</b> → "
+                  "<b>Full Episode 1</b> → <b>Kaydet</b>:\n\n"
+                  + "\n".join(f"{i}. https://studio.youtube.com/video/{v}/edit" for i, v in enumerate(links, 1))
+                  + "\n\nHâlâ 'inceleniyor' diyorsa yarın tekrar dene. Bitince Claude'a yaz: <b>tamam</b>.")
+          notify._call('sendMessage', text=text, parse_mode='HTML', disable_web_page_preview='true')
+          print(text)
+          PY
