@@ -215,12 +215,18 @@
    "format": "av",
    "topic": "a2adv",
    "title": "Bu tabloda 5 Almanca kelime saklı 🔍 Bulabilir misin? | Bağlaçlar ve zarflar"
+  },
+  {
+   "id": "20261011-0550-sahne",
+   "format": "sahne",
+   "topic": "cooking",
+   "title": "Mutfakta: Almanca diyalog 🍳 | A2 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 36,
+ "count": 37,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -257,6 +263,7 @@
   "quiz|a1cal|der Juni/der Samstag/der September",
   "kelime|a1body|das Auge/das Gesicht/das Haar/der Fuß/der Rücken",
   "sahne|town|Danke! Haben Sie einen Stadtplan?/Dann rechts oder links?/Entschuldigung, wo ist der Bahnhof?/Ganz nah. Gehen Sie am Park vorbei./Gibt es hier eine Apotheke in der Nähe?/Ja, neben dem Hotel./Leider nicht, aber auf Ihrem Handy gibt es einen!/Links. Er ist gegenüber der Bank./das Hotel",
-  "av|a2adv|allein/dann/endlich/obwohl/während"
+  "av|a2adv|allein/dann/endlich/obwohl/während",
+  "sahne|cooking|Dann braten wir sie im Topf an./Es riecht schon wunderbar!/Gern! Was brauchen wir?/Ich schneide die Zwiebel und den Knoblauch./Nur eine Prise. Und am Ende zwanzig Minuten in den Ofen./Tomaten, eine Zwiebel, Knoblauch und etwas Olivenöl./Wie viele Löffel Salz nehmen wir?/Wollen wir heute Abend das Rezept meiner Oma ausprobieren?/das Olivenöl"
  ]
 }
