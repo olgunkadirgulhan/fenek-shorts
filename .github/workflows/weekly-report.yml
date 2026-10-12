@@ -3,6 +3,7 @@ name: weekly-report
 on:
   schedule:
     - cron: "0 6 * * 1"
+    - cron: "30 9 * * 1"   # yedek: GitHub bazen atlıyor (2026-10-12'de atladı); bugün rapor çıktıysa adım atlanır
   workflow_dispatch:
 
 permissions:
@@ -14,11 +15,18 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 100   # yedek tetikteki 'bugün gönderildi mi' kontrolü için
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - run: pip install -q google-api-python-client google-auth requests
-      - env:
+      - id: guard
+        run: |
+          if git log --since="20 hours ago" --oneline | grep -q "weekly report: $(date -u +%F)"; then echo skip=1 >> "$GITHUB_OUTPUT"; echo "bugünkü rapor zaten gönderildi"; fi
+      - if: steps.guard.outputs.skip != '1'
+        run: pip install -q google-api-python-client google-auth requests
+      - if: steps.guard.outputs.skip != '1'
+        env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
