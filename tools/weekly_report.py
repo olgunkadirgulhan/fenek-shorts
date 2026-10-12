@@ -61,7 +61,8 @@ def viewer_requests(since):
 
 SEARCH_SEEDS = {'Bloop': ['normal vs psychopath', 'funny animation'], 'Dex': ['types of people'],
                 'Fruit Drama Club': ['talking fruit'], 'Fenek': ['almanca'], 'German with Fenek': ['learn german', 'german a1'],
-                'Maya': ['diy pallet'], 'DebtLab': ['pay off debt']}
+                'Maya': ['diy pallet'], 'DebtLab': ['pay off debt'], 'Paw Rivals': ['cat vs dog'], 'Fox Run': ['reaction test'],
+                'Why Stocks': ['stocks to buy'], 'Moon/Whale': ['crypto news'], 'Konuşan Fruits': ['türk aileleri']}
 
 
 def search_trends():
