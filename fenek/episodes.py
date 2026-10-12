@@ -247,6 +247,37 @@ def lite(ep):
     return ep
 
 
+# 2026-10-12 trendler: kanalın YouTube arama önerilerinde adı geçen ünite/paket (ör. "almanca renkler") %40 öncelikli
+TREND_SEEDS = {'tr': ['almanca', 'almanca kelimeler', 'almanca a1'], 'en': ['learn german', 'german words', 'german a1']}
+_TREND = None
+
+
+def trend_text():
+    global _TREND
+    if _TREND is None:
+        _TREND = ''
+        try:
+            import requests
+            for q in TREND_SEEDS.get(SRC, []):
+                r = requests.get('https://suggestqueries.google.com/complete/search',
+                                 params={'client': 'firefox', 'ds': 'yt', 'hl': SRC, 'q': q}, timeout=6)
+                _TREND += ' ' + ' '.join(r.json()[1]).lower()
+        except Exception:
+            pass
+    return _TREND
+
+
+def trend_pick(items, key, used, rng, weight):
+    """Arama önerilerinde adı geçen öğeler arasından (varsa, %40) en az kullanılanı; yoksa normal seçim."""
+    tt = trend_text()
+    name = lambda x: (x['title'].get(SRC, '') + ' ' + x['title'].get('en', '')).lower() if isinstance(x.get('title'), dict) else ''
+    hits = [x for x in items if tt and any(w in tt for w in name(x).split() if len(w) > 3)]
+    if hits and rng.random() < 0.4:
+        print('trend konusu:', [key(x) for x in hits][:6], flush=True)
+        return pick_least_used(hits, key, used, rng, weight)
+    return pick_least_used(items, key, used, rng, weight)
+
+
 # ------------------------------------------------------------------ seçim
 
 # 2026-10-12 YouTube arama önerileri: "almanca 9. sınıf 1. dönem 1. yazılı" yazılı dönemlerinde çok aranıyor.
@@ -283,11 +314,11 @@ def make_episode(slot, hist, seed):
             return ep
     lw = lambda x: LEVEL_WEIGHT.get(x['cefr'], 1)
     if fmt == 'sahne':
-        unit = pick_least_used([u for u in COURSE['units'] if u['cefr'] in LEVELS], lambda u: u['id'], used, rng, lw)
+        unit = trend_pick([u for u in COURSE['units'] if u['cefr'] in LEVELS], lambda u: u['id'], used, rng, lw)
         ep = ep_sahne(unit, rng)
     else:
         packs = [p for p in COURSE['packs'] if len(p['words']) >= 8 and p['cefr'] in LEVELS]
-        pack = pick_least_used(packs, lambda p: p['id'], used, rng, lw)
+        pack = trend_pick(packs, lambda p: p['id'], used, rng, lw)
         ep = {'kelime': ep_kelime, 'quiz': ep_quiz, 'av': ep_av}[fmt](pack, rng)
     ep['format'] = fmt
     exam_title(ep, unit if fmt == 'sahne' else pack, rng)
