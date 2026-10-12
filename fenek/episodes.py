@@ -249,6 +249,26 @@ def lite(ep):
 
 # ------------------------------------------------------------------ seçim
 
+# 2026-10-12 YouTube arama önerileri: "almanca 9. sınıf 1. dönem 1. yazılı" yazılı dönemlerinde çok aranıyor.
+# MEB 9. sınıf Almanca A1.1 konularıyla örtüşen A1 içeriklerde başlığın yarısı bu aramaya göre yazılır (içerik aynı, dürüst).
+SCHOOL9 = {'greet', 'family', 'a1num', 'a1col', 'a1cal', 'a1time', 'a1people', 'a1school', 'a1small', 'a1food', 'a1home', 'a1verbs'}
+
+
+def exam_title(ep, item, rng):
+    from datetime import date
+    d = date.today()
+    season = (d.month == 10 or (d.month == 11 and d.day <= 20) or d.month == 3 or (d.month == 4 and d.day <= 20)
+              or d.month == 12 or (d.month == 5 and d.day <= 25))
+    if SRC != 'tr' or not season or item.get('cefr') != 'A1' or item.get('id') not in SCHOOL9 or rng.random() > 0.5:
+        return
+    t = item['title']['tr'] if isinstance(item.get('title'), dict) else str(item.get('title', ''))
+    term = '1. dönem' if d.month >= 9 or d.month <= 1 else '2. dönem'
+    n = '1.' if d.month in (10, 11, 3, 4) else '2.'
+    ep['title'] = rng.choice([f"9. Sınıf Almanca {term} {n} yazılıya hazırlık ✍️ {t} | A1",
+                              f"Almanca 9. sınıf {term}: {t} {item.get('emoji', '')} #almanca",
+                              f"Almanca yazılıdan önce izle ✍️ {t} (9. sınıf, A1)"])
+
+
 def make_episode(slot, hist, seed):
     rng = random.Random(seed)
     used = [h['topic'] for h in hist.get('recent', []) if h.get('topic')]
@@ -270,6 +290,7 @@ def make_episode(slot, hist, seed):
         pack = pick_least_used(packs, lambda p: p['id'], used, rng, lw)
         ep = {'kelime': ep_kelime, 'quiz': ep_quiz, 'av': ep_av}[fmt](pack, rng)
     ep['format'] = fmt
+    exam_title(ep, unit if fmt == 'sahne' else pack, rng)
     # sadece kelime kartlarında: quiz/sahne/av'da soru-cevap sessiz kalınca uzun ölü hava oluşuyordu (2026-10-06 testi)
     if NARRATION == 'lite' and fmt == 'kelime':
         lite(ep)
