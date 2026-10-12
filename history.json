@@ -239,12 +239,18 @@
    "format": "kelime",
    "topic": "b1law",
    "title": "Almanca Kurallar ve hukuk kelimeleri ⚖️ B1 seviyesi"
+  },
+  {
+   "id": "20261012-1249-sahne",
+   "format": "sahne",
+   "topic": "hobby",
+   "title": "Bu Almanca konuşmayı anlıyor musun? Spor ve hobiler ⚽ #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 40,
+ "count": 41,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -285,6 +291,7 @@
   "sahne|cooking|Dann braten wir sie im Topf an./Es riecht schon wunderbar!/Gern! Was brauchen wir?/Ich schneide die Zwiebel und den Knoblauch./Nur eine Prise. Und am Ende zwanzig Minuten in den Ofen./Tomaten, eine Zwiebel, Knoblauch und etwas Olivenöl./Wie viele Löffel Salz nehmen wir?/Wollen wir heute Abend das Rezept meiner Oma ausprobieren?/das Olivenöl",
   "kelime|a2work|arbeitslos/der Angestellte/der Buchhalter/der Geschäftspartner/die Rente",
   "quiz|b1phr|es sei denn/ob/sobald",
-  "kelime|b1law|das Gefängnis/das Opfer/der Diebstahl/der Zeuge/die Sicherheit"
+  "kelime|b1law|das Gefängnis/das Opfer/der Diebstahl/der Zeuge/die Sicherheit",
+  "sahne|hobby|Hast du noch andere Hobbys?/Ich gehe dreimal pro Woche ins Fitnessstudio./Ich schwimme lieber und mache Yoga./Ja, ich liebe Fotografie und male gern./Kommst du am Samstag zum Fußballmatch? Meine Mannschaft spielt./Toll! Irgendwann kannst du Fotos von meiner Mannschaft machen./Tut mir leid, am Samstag habe ich Gitarrenunterricht./Was machst du in deiner Freizeit?/die Gitarre"
  ]
 }
