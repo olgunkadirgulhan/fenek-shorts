@@ -59,6 +59,29 @@ def viewer_requests(since):
     return out
 
 
+SEARCH_SEEDS = {'Bloop': ['normal vs psychopath', 'funny animation'], 'Dex': ['types of people'],
+                'Fruit Drama Club': ['talking fruit'], 'Fenek': ['almanca'], 'German with Fenek': ['learn german', 'german a1'],
+                'Maya': ['diy pallet'], 'DebtLab': ['pay off debt']}
+
+
+def search_trends():
+    """YouTube arama kutusu önerileri (herkese açık): başlıkları aranan kelimelere göre güncel tutmak için."""
+    import requests
+    out = []
+    for ch, seeds in SEARCH_SEEDS.items():
+        sug = []
+        for q in seeds:
+            try:
+                r = requests.get('https://suggestqueries.google.com/complete/search',
+                                 params={'client': 'firefox', 'ds': 'yt', 'hl': 'tr' if ch == 'Fenek' else 'en', 'q': q}, timeout=10)
+                sug += [x for x in r.json()[1][1:6] if x not in sug]
+            except Exception:
+                pass
+        if sug:
+            out.append(f"• <b>{ch}</b>: " + html.escape(' | '.join(sug[:6])))
+    return out
+
+
 def fmt(n):
     return f'{n / 1_000_000:.1f}M' if n >= 1_000_000 else f'{n / 1000:.1f}K' if n >= 1000 else str(n)
 
@@ -128,6 +151,9 @@ def main():
     reqs = viewer_requests(week_ago)
     if reqs:
         lines += ['', '💡 <b>İzleyici istekleri (bu hafta)</b>'] + [f'• {html.escape(r)}' for r in reqs[:15]]
+    trends = search_trends()
+    if trends:
+        lines += ['', '🔎 <b>Bu hafta en çok aranan (YouTube önerileri)</b>'] + trends
     HIST.write_text(json.dumps(snap, indent=1, ensure_ascii=False) + '\n', encoding='utf-8')
     if notify.enabled():
         notify._call('sendMessage', text='\n'.join(lines)[:4000], parse_mode='HTML', disable_web_page_preview='true')
