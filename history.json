@@ -251,12 +251,18 @@
    "format": "av",
    "topic": "b1finance",
    "title": "Bu tabloda 5 Almanca kelime saklı 🔍 Bulabilir misin? | Para yönetimi"
+  },
+  {
+   "id": "20261013-0549-sahne",
+   "format": "sahne",
+   "topic": "travel",
+   "title": "Almanyada seyahat böyle konuşulur ✈️ | B1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 42,
+ "count": 43,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -299,6 +305,7 @@
   "quiz|b1phr|es sei denn/ob/sobald",
   "kelime|b1law|das Gefängnis/das Opfer/der Diebstahl/der Zeuge/die Sicherheit",
   "sahne|hobby|Hast du noch andere Hobbys?/Ich gehe dreimal pro Woche ins Fitnessstudio./Ich schwimme lieber und mache Yoga./Ja, ich liebe Fotografie und male gern./Kommst du am Samstag zum Fußballmatch? Meine Mannschaft spielt./Toll! Irgendwann kannst du Fotos von meiner Mannschaft machen./Tut mir leid, am Samstag habe ich Gitarrenunterricht./Was machst du in deiner Freizeit?/die Gitarre",
-  "av|b1finance|das Budget/der Wert/die Aktie/die Hypothek/die PIN"
+  "av|b1finance|das Budget/der Wert/die Aktie/die Hypothek/die PIN",
+  "sahne|travel|Dann solltest du früh buchen./Das klingt toll! War das Hotel gut?/Du hast recht, ich mache heute eine Reservierung./Ich bin nach Portugal geflogen und am Meer geblieben./Ja, aber mein Flug hatte drei Stunden Verspätung./Oh nein! Hast du auch deinen Koffer verloren?/Wo hast du deinen letzten Urlaub verbracht?/Zum Glück nicht. Nächstes Jahr möchte ich in die Berge fahren./der Reisepass"
  ]
 }
