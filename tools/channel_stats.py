@@ -15,10 +15,23 @@ def main():
     creds = Credentials(None, refresh_token=os.environ['YT_REFRESH_TOKEN'], client_id=os.environ['YT_CLIENT_ID'],
                         client_secret=os.environ['YT_CLIENT_SECRET'], token_uri='https://oauth2.googleapis.com/token')
     yt = build('youtube', 'v3', credentials=creds, cache_discovery=False)
-    seeds = yt.videos().list(part='snippet', id=','.join(sys.argv[1:])).execute()['items']
+    # argümanlar: video ID'si, kanal ID'si (UC...) ya da 'q:Kanal Adı' (arama; ilk kanal sonucu)
+    args = ' '.join(sys.argv[1:]).replace('|', ' | ')
+    toks, chans = [], []
+    for part in [a.strip() for a in args.split('|')]:
+        if part.startswith('q:'):
+            r = yt.search().list(part='snippet', q=part[2:], type='channel', maxResults=1).execute()['items']
+            if r:
+                chans.append(r[0]['snippet']['channelId'])
+        else:
+            toks += part.split()
+    chans += [t for t in toks if t.startswith('UC') and len(t) == 24]
+    vids_ = [t for t in toks if len(t) == 11]
+    if vids_:
+        chans += [s['snippet']['channelId'] for s in yt.videos().list(part='snippet', id=','.join(vids_)).execute()['items']]
     now = datetime.now(timezone.utc)
     dump = {}
-    for ch_id in dict.fromkeys(s['snippet']['channelId'] for s in seeds):
+    for ch_id in dict.fromkeys(chans):
         ch = yt.channels().list(part='snippet,statistics,contentDetails,status', id=ch_id).execute()['items'][0]
         st = ch['statistics']
         uploads, ids, tok = ch['contentDetails']['relatedPlaylists']['uploads'], [], None
