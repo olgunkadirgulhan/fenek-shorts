@@ -95,7 +95,7 @@ def ep_sahne(unit, rng):
                   beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key='q', sfx='ding', fenek=True, mood={'emre': 'happy'})]
     beats.append(beat('fenek', SRC, rng.choice([c for c in CTAS if 'Kaç tanesini' not in c]), overlay={'type': 'cta', 'unit': t, 'emoji': unit['emoji'], 'cefr': unit['cefr']}, key='cta', fenek=True, sfx_before='pop'))
     title = rng.choice([f"{t}: Almanca diyalog {unit['emoji']} | {unit['cefr']} #almanca",
-                        f"Almanyada {t.lower()} böyle konuşulur {unit['emoji']} | {unit['cefr']}",
+                        f"{t}: Almanya'da Almanca böyle konuşulur {unit['emoji']} | {unit['cefr']}",
                         f"{t} sahnesi: Emre ve Lena Almanca konuşuyor {unit['emoji']}",
                         f"Bu Almanca konuşmayı anlıyor musun? {t} {unit['emoji']} #almanca",
                         f"Gerçek hayattan Almanca: {t} {unit['emoji']} {unit['cefr']}"])
