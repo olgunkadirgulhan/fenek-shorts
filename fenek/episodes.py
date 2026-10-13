@@ -334,7 +334,7 @@ def gen_unit(rng, used):
     cefr, emoji, t = rng.choice([x for x in cands if cnt[x[2]] == low])
     prompt = (f'Write a NEW, natural German dialogue for Turkish learners. Situation: "{t}" (Turkish name). Level {cefr}.\n'
               'Exactly 6 lines alternating speakers A and B (A is Lena, B is Emre). Each German line max 9 words, everyday '
-              'spoken German, correct grammar; the last line is a small funny or warm twist. Give an accurate natural '
+              'spoken German, correct grammar; the last line is a small funny or warm twist. Audience is Turkish: no pork (ham, Schinken, bacon), no alcohol, no politics or religion. Give an accurate natural '
               'Turkish translation for each line. Also give ONE useful singular noun from the dialogue with its article.\n'
               'Return ONLY JSON: {"lines":[{"who":"A","de":"...","tr":"..."},...],"noun":{"de":"der/die/das Wort","tr":"...","emoji":"..."},'
               '"title_de":"short German name of the situation (max 3 words)"}\n'
