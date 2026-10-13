@@ -93,6 +93,7 @@ jobs:
           LEVELS: ${{ vars.LEVELS }}
           SITE_URL: ${{ vars.SITE_URL }}
           TTS_ENGINE: ${{ vars.TTS_ENGINE }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}   # her videoya yeni diyalog (sahne)
           # Ses zinciri: Azure (anahtar varsa) → edge-tts → Piper/Chatterbox
           AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
           AZURE_SPEECH_REGION: ${{ vars.AZURE_SPEECH_REGION }}

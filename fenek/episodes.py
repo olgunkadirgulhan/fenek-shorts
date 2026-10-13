@@ -94,11 +94,11 @@ def ep_sahne(unit, rng):
                   pause(3.0, overlay=q, key='q', countdown=3, fenek=True),
                   beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key='q', sfx='ding', fenek=True, mood={'emre': 'happy'})]
     beats.append(beat('fenek', SRC, rng.choice([c for c in CTAS if 'Kaç tanesini' not in c]), overlay={'type': 'cta', 'unit': t, 'emoji': unit['emoji'], 'cefr': unit['cefr']}, key='cta', fenek=True, sfx_before='pop'))
-    title = rng.choice([f"{t}: Almanca diyalog {unit['emoji']} | {unit['cefr']} #almanca",
+    title = rng.choice([f"{t}: Almanca diyalog {unit['emoji']} | {unit['cefr']} #almanca"] * 3 + [
                         f"{t}: Almanya'da Almanca böyle konuşulur {unit['emoji']} | {unit['cefr']}",
                         f"{t} sahnesi: Emre ve Lena Almanca konuşuyor {unit['emoji']}",
                         f"Bu Almanca konuşmayı anlıyor musun? {t} {unit['emoji']} #almanca",
-                        f"Gerçek hayattan Almanca: {t} {unit['emoji']} {unit['cefr']}"])
+                        f"Gerçek hayattan Almanca: {t} {unit['emoji']} {unit['cefr']}"])  # klasik başlık en iyi gidiyordu (30.09-06.10)
     return dict(caption=[f"{up(t)}", "ALMANCA DİYALOG " + unit['emoji']], tag=f"{unit['cefr']} · ÜNİTE", title=title,
                 topic=unit['id'], theme=unit['id'], poster={'emoji': unit['emoji'], 'label': unit['title'][TGT].upper()[:18]}, beats=beats,
                 desc=f"{t} ({unit['cefr']}) ünitesinden Almanca diyalog. Türkçe altyazılı, sesli.")
@@ -159,7 +159,7 @@ def ep_quiz(pack, rng):
             beats.append(beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key=f'q{i}', sfx='ding', fenek=True, mood={'emre': 'happy'}))
     beats.append(beat('fenek', SRC, rng.choice(CTAS), overlay={'type': 'cta', 'unit': t, 'emoji': pack['emoji'], 'cefr': pack['cefr']}, key='cta', fenek=True, sfx_before='pop'))
     return dict(caption=['ALMANCA QUIZ 🤔', f"{up(t)}"], tag=f"{pack['cefr']} · QUIZ", topic=pack['id'], theme='study', poster={'emoji': pack['emoji'], 'label': pack['title'][TGT].upper()[:18]},
-                title=rng.choice([f"Almanca quiz: {t} 🤔 3 soruda kendini dene! | {pack['cefr']}", f"{t} konusunda Almancan ne kadar iyi? 🤔 {pack['cefr']}", f"3 soru, 1 konu: {t} 🧠 #almanca", f"Hepsini bilirsen {pack['cefr']} seviyedesin: {t} 🤔", f"Almanca test: {t} ✍️ Kaç doğru yapacaksın?"]), beats=beats,
+                title=rng.choice([f"Almanca quiz: {t} 🤔 3 soruda kendini dene! | {pack['cefr']}"] * 4 + [f"{t} konusunda Almancan ne kadar iyi? 🤔 {pack['cefr']}", f"3 soru, 1 konu: {t} 🧠 #almanca", f"Hepsini bilirsen {pack['cefr']} seviyedesin: {t} 🤔", f"Almanca test: {t} ✍️ Kaç doğru yapacaksın?"]), beats=beats,
                 desc=f"{t} ({pack['cefr']}) üzerine 3 soruluk Almanca quiz. Kaç doğru yaptın? Yorumlara yaz!")
 
 
@@ -278,6 +278,90 @@ def trend_pick(items, key, used, rng, weight):
     return pick_least_used(items, key, used, rng, weight)
 
 
+
+# ------------------------------------------------------------------ yeni diyalog (2026-10-13)
+# Kurs ünitelerinin diyalogları sabit (A1-B1'de 18 ünite) → tekrar riski. En iyi giden diyaloglar A1 günlük
+# konular ve 30-40 sn'ydi; her sahne videosu için Gemini ile YENİ, kısa (6 satır) A1/A2 diyalog yazılır.
+SCENES = [('A1', '☕', 'Kafede sipariş'), ('A1', '🥖', 'Fırında'), ('A1', '🚌', 'Otobüste'), ('A1', '🛒', 'Markette'),
+          ('A1', '👋', 'Yeni komşu'), ('A1', '🏫', 'Okulun ilk günü'), ('A1', '📱', 'Telefonda'), ('A1', '🍕', 'Pizza siparişi'),
+          ('A1', '🎂', 'Doğum günü'), ('A1', '🧭', 'Yol sorma'), ('A1', '🏨', 'Otelde giriş'), ('A1', '🍎', 'Pazarda meyve'),
+          ('A1', '🚆', 'Tren istasyonunda'), ('A1', '👕', 'Mağazada beden'), ('A1', '⏰', 'Saat kaç?'), ('A1', '🐶', 'Parkta köpek'),
+          ('A1', '🍽️', 'Akşam yemeği'), ('A1', '📚', 'Kütüphanede'), ('A1', '🌧️', 'Yağmurlu gün'), ('A1', '🎒', 'Sınıfta'),
+          ('A1', '🏠', 'Ev arkadaşı'), ('A1', '🚲', 'Bisiklet kiralama'), ('A1', '🍦', 'Dondurmacıda'), ('A1', '🎬', 'Sinema bileti'),
+          ('A2', '🩺', 'Doktorda'), ('A2', '💊', 'Eczanede'), ('A2', '🏦', 'Bankada'), ('A2', '📦', 'Postanede'),
+          ('A2', '✈️', 'Havalimanında'), ('A2', '🔑', 'Ev kiralama'), ('A2', '💼', 'İş görüşmesi'), ('A2', '🍳', 'Mutfakta yardım'),
+          ('A2', '⚽', 'Maç planı'), ('A2', '🎁', 'Hediye seçmek'), ('A2', '🚕', 'Taksiyle'), ('A2', '🧳', 'Kayıp bavul')]
+
+
+def _gem(prompt, key, temperature):
+    import requests
+    for model in ('gemini-flash-latest', 'gemini-flash-lite-latest'):
+        try:
+            r = requests.post(f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
+                              json={'contents': [{'parts': [{'text': prompt}]}],
+                                    'generationConfig': {'temperature': temperature, 'responseMimeType': 'application/json',
+                                                         **({} if 'lite' in model else {'thinkingConfig': {'thinkingBudget': 0}})}},
+                              headers={'x-goog-api-key': key}, timeout=90)
+            if r.status_code != 200:
+                print(f'{model}: {r.status_code}', flush=True); continue
+            txt = ''.join(p.get('text', '') for p in r.json()['candidates'][0]['content']['parts'] if not p.get('thought'))
+            return json.loads(txt[txt.index('{'):txt.rindex('}') + 1]), model
+        except Exception as e:  # noqa: BLE001
+            print(f'{model}: {str(e)[:120]}', flush=True)
+    return None, None
+
+
+def _lines_ok(d):
+    try:
+        lines = [dict(who=l['who'], de=l['de'].strip(), tr=l['tr'].strip()) for l in d['lines']]
+    except Exception:  # noqa: BLE001
+        return None
+    ok = (len(lines) == 6 and all(l['who'] in 'AB' and l['de'] and l['tr'] and len(l['de'].split()) <= 11 for l in lines)
+          and [l['who'] for l in lines] == ['A', 'B'] * 3
+          and not any(re.search(r'[ğışçĞİŞÇ]', l['de']) or l['de'] == l['tr'] for l in lines))   # Almanca satır gerçekten Almanca
+    return lines if ok else None
+
+
+def gen_unit(rng, used):
+    """Gemini ile yeni kısa diyalog (+ dil kontrol turu) → ep_sahne'nin beklediği ünite biçimi. Olmazsa None."""
+    key = os.environ.get('GEMINI_API_KEY')
+    if not key or SRC != 'tr' or TGT != 'de':
+        return None
+    lvl = 'A1' if rng.random() < 0.7 else 'A2'
+    cands = [x for x in SCENES if x[0] == lvl]
+    cnt = {x[2]: sum(1 for u in used if u == 'g_' + slug(x[2])) for x in cands}
+    low = min(cnt.values())
+    cefr, emoji, t = rng.choice([x for x in cands if cnt[x[2]] == low])
+    prompt = (f'Write a NEW, natural German dialogue for Turkish learners. Situation: "{t}" (Turkish name). Level {cefr}.\n'
+              'Exactly 6 lines alternating speakers A and B (A is Lena, B is Emre). Each German line max 9 words, everyday '
+              'spoken German, correct grammar; the last line is a small funny or warm twist. Give an accurate natural '
+              'Turkish translation for each line. Also give ONE useful singular noun from the dialogue with its article.\n'
+              'Return ONLY JSON: {"lines":[{"who":"A","de":"...","tr":"..."},...],"noun":{"de":"der/die/das Wort","tr":"...","emoji":"..."},'
+              '"title_de":"short German name of the situation (max 3 words)"}\n'
+              f'Variation seed: {rng.randrange(10**6)} (make it different from a textbook dialogue).')
+    for _ in range(2):
+        d, model = _gem(prompt, key, 1.0)
+        if not d or not _lines_ok(d):
+            continue
+        rev, _m = _gem('You are a strict German teacher and Turkish proofreader. Fix any German grammar/word-choice errors '
+                       'and any Turkish translation or spelling errors in this JSON. Keep the same structure, speakers, '
+                       'meaning and 6 lines; keep German lines short. Return ONLY the corrected JSON.\n' + json.dumps(d, ensure_ascii=False),
+                       key, 0.2)
+        if rev and _lines_ok(rev):
+            d = {**d, **rev}
+        lines = _lines_ok(d)
+        n = d.get('noun') or {}
+        words = [dict(de=n['de'], tr=n['tr'], emoji=n.get('emoji', emoji))] if n.get('de') and ART.match(n['de']) and n.get('tr') else []
+        print(f'yeni diyalog ({model}, kontrol {"ok" if rev else "yok"}): {t} {cefr}', flush=True)
+        return {'id': 'g_' + slug(t), 'cefr': cefr, 'emoji': emoji,
+                'title': {SRC: t, 'en': t, TGT: (d.get('title_de') or t).strip()[:30]}, 'lines': lines, 'words': words}
+    return None
+
+
+def slug(s):
+    return re.sub(r'[^a-z0-9]+', '_', s.lower().translate(str.maketrans('çğıöşüâ', 'cgiosua'))).strip('_')
+
+
 # ------------------------------------------------------------------ seçim
 
 # 2026-10-12 YouTube arama önerileri: "almanca 9. sınıf 1. dönem 1. yazılı" yazılı dönemlerinde çok aranıyor.
@@ -314,7 +398,8 @@ def make_episode(slot, hist, seed):
             return ep
     lw = lambda x: LEVEL_WEIGHT.get(x['cefr'], 1)
     if fmt == 'sahne':
-        unit = trend_pick([u for u in COURSE['units'] if u['cefr'] in LEVELS], lambda u: u['id'], used, rng, lw)
+        unit = gen_unit(rng, used) if rng.random() < 0.8 else None
+        unit = unit or trend_pick([u for u in COURSE['units'] if u['cefr'] in LEVELS], lambda u: u['id'], used, rng, lw)
         ep = ep_sahne(unit, rng)
     else:
         packs = [p for p in COURSE['packs'] if len(p['words']) >= 8 and p['cefr'] in LEVELS]
