@@ -5,3 +5,4 @@ secrets*.env
 .env
 *.raw.wav
 graphify-out/
+social/

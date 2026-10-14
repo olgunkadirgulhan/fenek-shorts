@@ -158,6 +158,18 @@ FORMAT_TAGS = {
 }
 
 
+def social(mp4, title, vid, ep):
+    """Her Short → social/ (artifact 'social-<run>'): fenek-shorts sosyal yayıncısı Instagram/TikTok'a koyar."""
+    import shutil
+    soc = HERE / 'social'
+    soc.mkdir(exist_ok=True)
+    shutil.copy(mp4, soc / 'video.mp4')
+    tiktok, insta = social_captions(ep, title)
+    (soc / 'post.json').write_text(json.dumps({'channel': 'Fenek TR', 'title': title, 'url': f'https://youtube.com/shorts/{vid}',
+                                               'tiktok': tiktok, 'instagram': insta}, ensure_ascii=False, indent=1),
+                                   encoding='utf-8')
+
+
 def social_captions(ep, title):
     """TikTok ve Instagram için hazır açıklama + hashtag (Türkiye'de Almanca öğrenenlere yönelik)."""
     import re
@@ -279,6 +291,7 @@ def main():
     if qpath:
         qpath.unlink(missing_ok=True)
     log(f'uploaded https://youtube.com/shorts/{vid} ({mode})')
+    social(mp4, title, vid, ep)
     n = today_count()
     # Telegram günde tek gönderi (notify.CYCLE): video günlerinde yalnız günün ilk videosu
     if notify.todays_post() != 'video' or n != 1:
