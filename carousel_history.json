@@ -80,6 +80,15 @@
     "das Büro",
     "der Kollege"
    ]
+  },
+  {
+   "date": "2026-10-14",
+   "unit": "restaurant",
+   "words": [
+    "der Koch",
+    "das Trinkgeld",
+    "die Speisekarte"
+   ]
   }
  ],
  "sentences": [
@@ -109,6 +118,9 @@
   "Mit Karte, bitte.",
   "Warum interessieren Sie sich für diese Stelle?",
   "Weil ich in einem internationalen Team arbeiten möchte.",
-  "Ich arbeite seit fünf Jahren in einem Büro."
+  "Ich arbeite seit fünf Jahren in einem Büro.",
+  "Das tut mir sehr leid. Ich spreche sofort mit dem Koch.",
+  "Danke. Eigentlich beschwere ich mich nicht gern.",
+  "Der Nachtisch geht als Entschuldigung auf uns."
  ]
 }
