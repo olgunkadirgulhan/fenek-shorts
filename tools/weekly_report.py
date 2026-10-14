@@ -146,7 +146,10 @@ def main():
         ch = ch[0]; st = ch['statistics']
         subs, views = int(st.get('subscriberCount', 0)), int(st.get('viewCount', 0))
         uploads = ch['contentDetails']['relatedPlaylists']['uploads']
-        items = yt.playlistItems().list(part='contentDetails', playlistId=uploads, maxResults=50).execute().get('items', [])
+        try:
+            items = yt.playlistItems().list(part='contentDetails', playlistId=uploads, maxResults=50).execute().get('items', [])
+        except Exception:
+            items = []                                            # herkese açık video yoksa liste 404 verir
         vids = []
         vid_ids = [i['contentDetails']['videoId'] for i in items]
         if vid_ids:
