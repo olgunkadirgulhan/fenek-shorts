@@ -59,7 +59,7 @@ def iso_dur(d):
 
 
 def long_stats(yt, uploads):
-    """(uzun video izlenme saati tahmini, uzun video izlenme payı). Uzun = 3 dk+; izlenme süresi ≈ izlenme × süre × %35 (tahmin)."""
+    """(uzun video izlenme saati tahmini, uzun video izlenme payı). Uzun = 3 dk+; izlenme süresi ≈ izlenme × süre × %20 (tahmin)."""
     ids, tok = [], None
     for _ in range(6):
         r = yt.playlistItems().list(part='contentDetails', playlistId=uploads, maxResults=50, pageToken=tok).execute()
@@ -70,7 +70,7 @@ def long_stats(yt, uploads):
         for v in yt.videos().list(part='statistics,contentDetails,status', id=','.join(ids[i:i + 50])).execute().get('items', []):
             if v['status'].get('privacyStatus') != 'public': continue
             vc = int(v['statistics'].get('viewCount', 0)); tv += vc; d = iso_dur(v['contentDetails'].get('duration'))
-            if d >= 180: lv += vc; hrs += vc * d * 0.35 / 3600
+            if d >= 180: lv += vc; hrs += vc * d * 0.2 / 3600      # Bloop gerçek verisiyle ayarlandı (2026-10-14)
     return hrs, (lv / tv if tv else 0)
 
 
@@ -212,12 +212,13 @@ def main():
             w = left / per_week
             return f'~{w:.0f} hafta' if w < 52 else '1 yıldan fazla'
         e_subs = eta(1000 - r['subs'], r['dsubs'] * k7); e_hrs = eta(4000 - r['lhrs'], r['dlhrs'] * k7)
-        status = '✅ BAŞVURULABİLİR' if subs_ok and (hrs_ok or shorts_ok) else f"abone {r['subs']}/1000 ({e_subs}) · saat ~{r['lhrs']:.0f}/4000 ({e_hrs})"
+        s90 = r['dviews'] * k7 * 13                                 # bu hızla 90 günlük Short izlenmesi
+        status = '✅ BAŞVURULABİLİR' if subs_ok and (hrs_ok or shorts_ok) else f"abone {r['subs']}/1000 ({e_subs}) · uzun saat ~{r['lhrs']:.0f}/4000 ({e_hrs}) · Short hızı {fmt(int(s90))}/10M (90 gün)"
         lines.append(f"• <b>{r['name']}</b>: {status}")
         lines.append(f"   açılınca bu hızla ≈ ${lo:,.0f}–{hi:,.0f}/ay (uzun RPM ${lr[0]}–{lr[1]})")
         money_rows.append((lo, hi))
     lines.append(f"Toplam potansiyel (hepsi açık olsaydı, bu haftanın hızıyla): ${sum(a for a, _ in money_rows):,.0f}–{sum(b for _, b in money_rows):,.0f}/ay")
-    lines.append('<i>Saat = izlenme × süre × %35 tahmini (gerçeği Studio’da). RPM sektör ortalaması; gerçek RPM para kazanma açılınca görünür.</i>')
+    lines.append('<i>Uzun saat = izlenme × süre × %20 tahmini; Short izlenme saati 4.000 saate SAYILMAZ. Short hızı = bu haftanın hızıyla 90 gün. RPM sektör ortalaması.</i>')
     reqs = viewer_requests(week_ago)
     if reqs:
         lines += ['', '💡 <b>İzleyici istekleri (bu hafta)</b>'] + [f'• {html.escape(r)}' for r in reqs[:15]]
