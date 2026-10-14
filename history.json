@@ -269,12 +269,18 @@
    "format": "quiz",
    "topic": "a1small",
    "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ Soru ve küçük kelimeler | A1"
+  },
+  {
+   "id": "20261014-0549-kelime",
+   "format": "kelime",
+   "topic": "a2land",
+   "title": "Almanca Doğa ve çevre kelimeleri 🏞️ A2 seviyesi"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 45,
+ "count": 46,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -320,6 +326,7 @@
   "av|b1finance|das Budget/der Wert/die Aktie/die Hypothek/die PIN",
   "sahne|travel|Dann solltest du früh buchen./Das klingt toll! War das Hotel gut?/Du hast recht, ich mache heute eine Reservierung./Ich bin nach Portugal geflogen und am Meer geblieben./Ja, aber mein Flug hatte drei Stunden Verspätung./Oh nein! Hast du auch deinen Koffer verloren?/Wo hast du deinen letzten Urlaub verbracht?/Zum Glück nicht. Nächstes Jahr möchte ich in die Berge fahren./der Reisepass",
   "kelime|a1num|acht/eins/neunzehn/sechs/zwei",
-  "quiz|a1small|auch/sehr/wie"
+  "quiz|a1small|auch/sehr/wie",
+  "kelime|a2land|das Blatt/das Feld/der Gipfel/der Hirsch/die Wüste"
  ]
 }
