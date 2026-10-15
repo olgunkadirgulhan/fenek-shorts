@@ -287,12 +287,18 @@
    "format": "av",
    "topic": "a1home",
    "title": "Almanca yazılıdan önce izle ✍️ Ev (9. sınıf, A1)"
+  },
+  {
+   "id": "20261015-0549-sahne",
+   "format": "sahne",
+   "topic": "g_postanede",
+   "title": "Postanede: Almanca diyalog 📦 | A2 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 48,
+ "count": 49,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -341,6 +347,7 @@
   "quiz|a1small|auch/sehr/wie",
   "kelime|a2land|das Blatt/das Feld/der Gipfel/der Hirsch/die Wüste",
   "sahne|g_sinema_bileti|Bringst du bitte auch Cola mit?/Emre, komm schnell ins Kino!/Ich habe die Tickets doch schon./Ja, und drei riesige Popcorn-Tüten dazu!/Reihe fünf, ganz in der Mitte./Super, wo sind unsere Plätze heute?/das Ticket",
-  "av|a1home|das Dach/das Fenster/der Teppich/die Lampe/die Treppe"
+  "av|a1home|das Dach/das Fenster/der Teppich/die Lampe/die Treppe",
+  "sahne|g_postanede|Das ist wirklich sehr günstig./Hallo Emre, schickst du dieses Paket?/Hoffentlich trinkt der Postbote keinen Tee./Ja, das ist Tee für meine Oma./Nur sechs Euro und fünfzig Cent./Oh, wie viel kostet das Porto heute?/das Paket"
  ]
 }
