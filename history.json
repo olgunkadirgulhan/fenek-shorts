@@ -305,12 +305,18 @@
    "format": "quiz",
    "topic": "b1abstract",
    "title": "3 soru, 1 konu: Soyut kavramlar 🧠 #almanca"
+  },
+  {
+   "id": "20261016-0550-kelime",
+   "format": "kelime",
+   "topic": "b1life",
+   "title": "Sağlıklı yaşam Almancada nasıl söylenir? 🥗 | B1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 51,
+ "count": 52,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -362,6 +368,7 @@
   "av|a1home|das Dach/das Fenster/der Teppich/die Lampe/die Treppe",
   "sahne|g_postanede|Das ist wirklich sehr günstig./Hallo Emre, schickst du dieses Paket?/Hoffentlich trinkt der Postbote keinen Tee./Ja, das ist Tee für meine Oma./Nur sechs Euro und fünfzig Cent./Oh, wie viel kostet das Porto heute?/das Paket",
   "kelime|a1adj|arm/interessant/jung/langweilig/traurig",
-  "quiz|b1abstract|der Gedanke/der Prozess/die Veränderung"
+  "quiz|b1abstract|der Gedanke/der Prozess/die Veränderung",
+  "kelime|b1life|das Gewicht/das Gleichgewicht/die Diät/die Kalorie/die Meditation"
  ]
 }
