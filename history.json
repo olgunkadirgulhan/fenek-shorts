@@ -311,12 +311,18 @@
    "format": "kelime",
    "topic": "b1life",
    "title": "Sağlıklı yaşam Almancada nasıl söylenir? 🥗 | B1"
+  },
+  {
+   "id": "20261016-1249-sahne",
+   "format": "sahne",
+   "topic": "digital",
+   "title": "Bu Almanca konuşmayı anlıyor musun? Dijital hayat 📱 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 52,
+ "count": 53,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -369,6 +375,7 @@
   "sahne|g_postanede|Das ist wirklich sehr günstig./Hallo Emre, schickst du dieses Paket?/Hoffentlich trinkt der Postbote keinen Tee./Ja, das ist Tee für meine Oma./Nur sechs Euro und fünfzig Cent./Oh, wie viel kostet das Porto heute?/das Paket",
   "kelime|a1adj|arm/interessant/jung/langweilig/traurig",
   "quiz|b1abstract|der Gedanke/der Prozess/die Veränderung",
-  "kelime|b1life|das Gewicht/das Gleichgewicht/die Diät/die Kalorie/die Meditation"
+  "kelime|b1life|das Gewicht/das Gleichgewicht/die Diät/die Kalorie/die Meditation",
+  "sahne|digital|Gestern habe ich eine seltsame E-Mail bekommen, angeblich von meiner Bank./Hast du die Apps aktualisiert?/Mein Handy ist sehr langsam. Der Bildschirm friert auch ständig ein./Nein, und ich lade zu viele Dateien herunter./Okay. Außerdem bricht meine Internetverbindung ständig ab./Vielleicht musst du dein Handy einfach nur aufladen!/die App/Ändere auch dein Passwort. Sicherheit und Datenschutz sind wichtig./Öffne sie auf keinen Fall! Das ist Betrug."
  ]
 }
