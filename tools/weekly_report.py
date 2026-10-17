@@ -180,6 +180,7 @@ def main():
                          views=views, dviews=views - p.get('views', views), n=len(week),
                          med=int(statistics.median(wv)) if wv else 0,
                          days=max(1.0, (now - datetime.strptime(p['date'], '%Y-%m-%d').replace(tzinfo=timezone.utc)).days) if p.get('date') else 7.0,
+                         age=(now - datetime.fromisoformat(ch['snippet']['publishedAt'].replace('Z', '+00:00'))).days,
                          lhrs=lhrs, dlhrs=lhrs - p.get('long_hours', lhrs), lshare=lshare, title=ch['snippet']['title'].strip(),
                          flags=sorted(set(flags)), best=(html.escape(best['snippet']['title'][:45]), int(best['statistics'].get('viewCount', 0))) if best else None))
     rows.sort(key=lambda r: -r['dviews'])
@@ -212,8 +213,11 @@ def main():
             w = left / per_week
             return f'~{w:.0f} hafta' if w < 52 else '1 yıldan fazla'
         e_subs = eta(1000 - r['subs'], r['dsubs'] * k7); e_hrs = eta(4000 - r['lhrs'], r['dlhrs'] * k7)
-        s90 = r['dviews'] * k7 * 13                                 # bu hızla 90 günlük Short izlenmesi
-        status = '✅ BAŞVURULABİLİR' if subs_ok and (hrs_ok or shorts_ok) else f"abone {r['subs']}/1000 ({e_subs}) · uzun saat ~{r['lhrs']:.0f}/4000 ({e_hrs}) · Short hızı {fmt(int(s90))}/10M (90 gün)"
+        got90 = r['views'] if r['age'] <= 90 else None              # 90 günden genç kanal: toplam izlenme ≈ son 90 gün
+        shorts_ok = bool(got90 and got90 * (1 - r['lshare']) >= 10_000_000)
+        e_sh = eta(10_000_000 - (got90 or 0) * (1 - r['lshare']), r['dviews'] * k7 * (1 - r['lshare'])) if got90 is not None else '?'
+        status = ('✅ ŞARTLAR TAMAM, başvurulabilir' if subs_ok and (hrs_ok or shorts_ok) else
+                  f"abone {r['subs']}/1000 ({e_subs}) · uzun saat ~{r['lhrs']:.0f}/4000 ({e_hrs}) · Short {fmt(int((got90 or 0) * (1 - r['lshare'])))}/10M ({e_sh})")
         lines.append(f"• <b>{r['name']}</b>: {status}")
         lines.append(f"   açılınca bu hızla ≈ ${lo:,.0f}–{hi:,.0f}/ay (uzun RPM ${lr[0]}–{lr[1]})")
         money_rows.append((lo, hi))
