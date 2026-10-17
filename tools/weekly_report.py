@@ -35,7 +35,7 @@ CHANNELS = {
 SEED_VIDEOS = ['tU35nbqGKME', 'SO3ZcE-QgKc', 'IjjH06w1I_w', 'D5uyEHgAfUQ', 'pmUNKe3bNZg', '7AyJ4fS-8B4', 'Wa3KXCSGjIo',
                'THLkUkT0zpc', 'BkOW0HgV36o', 'yzSnhl69zXo', 'bQysUnZx0Io',
                # 2026-10-14: yeni/eksik kanallar (Then vs Now, The Real Cost, Paw Rivals, Countryball, Whale, Orbit, Moon, Bigger)
-               'BT4AIr-ke2w', 'EJDr1QqvAQE', 'QbWjO8_7jKE', 'CCuS0sDMeO0', 'BjdD7ePr8v8', '4DSPgPoQmvE', 'aSdteejXYH8', 'Pdg-lzG7K3k', 'eaXHmXteOUs']  # + Marble Rush Arena
+               'BT4AIr-ke2w', 'EJDr1QqvAQE', 'QbWjO8_7jKE', 'CCuS0sDMeO0', 'BjdD7ePr8v8', '4DSPgPoQmvE', 'aSdteejXYH8', 'Pdg-lzG7K3k', 'eaXHmXteOUs', '98bFgGHbAkg']  # + Wild Matchups  # + Marble Rush Arena
 
 # Para kazanma tahmini: kanal adı parçası → (uzun video RPM aralığı $, Short RPM aralığı $) — sektör ortalaması, kesin değil
 RPM = [('real cost', (8, 15), (0.05, 0.15)), ('debtlab', (8, 15), (0.05, 0.15)), ('then', (5, 10), (0.05, 0.12)),

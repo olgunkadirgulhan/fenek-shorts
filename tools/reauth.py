@@ -15,7 +15,7 @@ import sys
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
-SCOPES = {'full': ['https://www.googleapis.com/auth/youtube'],
+SCOPES = {'full': ['https://www.googleapis.com/auth/youtube', 'https://www.googleapis.com/auth/youtube.force-ssl'],   # force-ssl: yorum botu
           'upload': ['https://www.googleapis.com/auth/youtube.upload', 'https://www.googleapis.com/auth/youtube.readonly']}
 
 
