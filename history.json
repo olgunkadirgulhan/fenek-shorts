@@ -341,12 +341,18 @@
    "format": "quiz",
    "topic": "a2time",
    "title": "Almanca quiz: Zaman ifadeleri 🤔 3 soruda kendini dene! | A2"
+  },
+  {
+   "id": "20261018-0549-kelime",
+   "format": "kelime",
+   "topic": "a2town",
+   "title": "Almanca Şehir hayatı kelimeleri 🏛️ A2 seviyesi"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 57,
+ "count": 58,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -404,6 +410,7 @@
   "av|b1events|das Festival/das Gemälde/der Ramadan/die Feier/prost",
   "sahne|housing|Ist die Wohnung noch frei?/Ja, zwei Monatsmieten./Ja. Sie hat drei Zimmer, eine Küche und einen Balkon./Muss ich eine Kaution zahlen?/Neunhundert Euro, inklusive Heizung./Sehr ruhig. Sie können die Wohnung morgen besichtigen./Sind die Nachbarn ruhig?/Wie hoch ist die Miete?/die Küche",
   "kelime|a1num|acht/dreizehn/hundert/neunzehn/zwei",
-  "quiz|a2time|das Datum/der Feiertag/der Moment"
+  "quiz|a2time|das Datum/der Feiertag/der Moment",
+  "kelime|a2town|das Viertel/der Eingang/die Autobahn/die Fabrik/die Statue"
  ]
 }
