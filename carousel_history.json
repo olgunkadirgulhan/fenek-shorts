@@ -89,6 +89,15 @@
     "das Trinkgeld",
     "die Speisekarte"
    ]
+  },
+  {
+   "date": "2026-10-18",
+   "unit": "doctor",
+   "words": [
+    "der Schmerz",
+    "das Krankenhaus",
+    "der Kopf"
+   ]
   }
  ],
  "sentences": [
@@ -121,6 +130,9 @@
   "Ich arbeite seit fünf Jahren in einem Büro.",
   "Das tut mir sehr leid. Ich spreche sofort mit dem Koch.",
   "Danke. Eigentlich beschwere ich mich nicht gern.",
-  "Der Nachtisch geht als Entschuldigung auf uns."
+  "Der Nachtisch geht als Entschuldigung auf uns.",
+  "Seit wann?",
+  "Seit gestern Abend.",
+  "Ich gebe Ihnen ein Rezept für ein Medikament."
  ]
 }
