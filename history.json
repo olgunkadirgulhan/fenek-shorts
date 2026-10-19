@@ -371,12 +371,18 @@
    "format": "kelime",
    "topic": "a2office",
    "title": "Bu 5 kelimeyi biliyor musun? Resmî işler 🏦 #almanca"
+  },
+  {
+   "id": "20261019-1949-quiz",
+   "format": "quiz",
+   "topic": "a1food",
+   "title": "Hepsini bilirsen A1 seviyedesin: Yiyecekler 🤔"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 62,
+ "count": 63,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -439,6 +445,7 @@
   "sahne|g_telefonda|Bist du schon im Park?/Der Bus hat sicher wieder Verspätung!/Hallo Emre, hörst du mich gut?/Hallo Lena! Ja, aber der Wind ist laut./Nein, ich habe die falsche Linie genommen!/Nein, ich stehe noch an der Haltestelle./die Haltestelle",
   "av|a1small|mit/okay/warum/wer/wie",
   "sahne|g_tren_istasyonunda|Danke, du bist mein Held des Tages!/Entschuldigung, fährt dieser Zug nach Hamburg?/Gerne, aber Hamburg ist die andere Richtung!/Keine Panik, wir rennen einfach zusammen!/Nein, das ist Gleis vier. Hamburg ist Gleis sieben./Oh je, mein Zug fährt in drei Minuten!/das Gleis",
-  "kelime|a2office|ausfüllen/das Wartezimmer/der Personalausweis/die Staatsangehörigkeit/die Versicherung"
+  "kelime|a2office|ausfüllen/das Wartezimmer/der Personalausweis/die Staatsangehörigkeit/die Versicherung",
+  "quiz|a1food|das Abendessen/das Mehl/die Marmelade"
  ]
 }
