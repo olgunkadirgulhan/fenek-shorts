@@ -4,7 +4,7 @@ on:
 
 jobs:
   probe:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 40
     env:
       PYTHONUTF8: "1"
