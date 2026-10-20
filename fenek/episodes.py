@@ -23,7 +23,9 @@ ART = re.compile(r'^(der|die|das) (.+)$')
 ART_COLOR = {'der': '#2F6FEB', 'die': '#E5484D', 'das': '#16A37E'}
 # 6'lık döngü: ilk hafta medyan izlenme kelime 743, sahne 651, quiz 200, av 76 (format başına 4-5 video);
 # güçlü formatlar ikişer kez, zayıflar bir kez. Format listesi (--format) ilk geçişten okunur.
-SLOT_FORMATS = ['sahne', 'kelime', 'quiz', 'kelime', 'sahne', 'av']
+# 2026-10-20: kelime/sayılar/"nasıl söylenir" 950-1.260 izlenme, quiz ve av 0-1 → quiz/av çıkarıldı (kullanıcı onayı);
+# 60 paket × 25 kelime, 5'li seçim + paket döngüsü → tekrar yok.
+SLOT_FORMATS = ['kelime', 'sahne', 'kelime', 'sahne', 'kelime', 'sahne']
 LEVELS = [l.strip() for l in (os.environ.get('LEVELS') or 'A1,A2,B1').split(',')]  # kanalın hedef seviyeleri
 
 # Açılış cümleleri: konu adı söylenmez (zaten ekranın üstünde yazıyor), kısa ve doğrudan
