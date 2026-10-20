@@ -389,12 +389,18 @@
    "format": "kelime",
    "topic": "a2free",
    "title": "5 Almanca kelime: Boş zaman 🎸 | A2 #almanca"
+  },
+  {
+   "id": "20261020-1917-sahne",
+   "format": "sahne",
+   "topic": "g_yeni_komsu",
+   "title": "Gerçek hayattan Almanca: Yeni komşu 👋 A1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 65,
+ "count": 66,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -460,6 +466,7 @@
   "kelime|a2office|ausfüllen/das Wartezimmer/der Personalausweis/die Staatsangehörigkeit/die Versicherung",
   "quiz|a1food|das Abendessen/das Mehl/die Marmelade",
   "kelime|a2fashion|anprobieren/das Leder/der Ohrring/der Stil/die Mode",
-  "kelime|a2free|das Hobby/die Einladung/die Gartenarbeit/die Musik/stricken"
+  "kelime|a2free|das Hobby/die Einladung/die Gartenarbeit/die Musik/stricken",
+  "sahne|g_yeni_komsu|Danke! Ich mag die Wohnung sehr./Hallo! Bist du der neue Nachbar?/Hier ist warmer Tee für dich./Ich bin Lena. Herzlich willkommen!/Ja, ich heiße Emre. Hallo!/Super, ich trinke jeden Tag Tee!/der Nachbar"
  ]
 }
