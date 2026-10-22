@@ -419,12 +419,18 @@
    "format": "sahne",
    "topic": "g_ev_arkadasi",
    "title": "Ev arkadaşı: Almanca diyalog 🏠 | A1 #almanca"
+  },
+  {
+   "id": "20261022-1249-kelime",
+   "format": "kelime",
+   "topic": "b1career",
+   "title": "5 Almanca kelime: Kariyer 📈 | B1 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 70,
+ "count": 71,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -495,6 +501,7 @@
   "kelime|a1school|das Papier/das Telefon/der Bleistift/der Satz/die Seite",
   "sahne|g_kayip_bavul|Emre, das Gepäckband ist jetzt komplett leer!/Guten Tag, mein roter Koffer ist nicht da./Komm, wir gehen sofort zum Schalter da drüben./Oh nein, mein großer Koffer fehlt wirklich./Ups! Ich habe nur Handgepäck mitgenommen!/Warte mal, Emre... was hast du an?/der Koffer",
   "kelime|a1num|sechs/sechzehn/vierzig/zwanzig/zwei",
-  "sahne|g_ev_arkadasi|Dein Handy ist im Kühlschrank!/Emre, wo ist der Kaffee?/Gern. Wo ist mein Handy?/Hier in der Küche, Lena./Super, danke dir vielmals./Ups, falsche Dose Cola./die Küche"
+  "sahne|g_ev_arkadasi|Dein Handy ist im Kühlschrank!/Emre, wo ist der Kaffee?/Gern. Wo ist mein Handy?/Hier in der Küche, Lena./Super, danke dir vielmals./Ups, falsche Dose Cola./die Küche",
+  "kelime|b1career|das Jobcenter/der Beruf/die Beförderung/die Kündigung/die Probezeit"
  ]
 }
