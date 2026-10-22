@@ -98,6 +98,15 @@
     "das Krankenhaus",
     "der Kopf"
    ]
+  },
+  {
+   "date": "2026-10-22",
+   "unit": "hobby",
+   "words": [
+    "das Match",
+    "der Fußball",
+    "die Freizeit"
+   ]
   }
  ],
  "sentences": [
@@ -133,6 +142,9 @@
   "Der Nachtisch geht als Entschuldigung auf uns.",
   "Seit wann?",
   "Seit gestern Abend.",
-  "Ich gebe Ihnen ein Rezept für ein Medikament."
+  "Ich gebe Ihnen ein Rezept für ein Medikament.",
+  "Ich schwimme lieber und mache Yoga.",
+  "Ja, ich liebe Fotografie und male gern.",
+  "Toll! Irgendwann kannst du Fotos von meiner Mannschaft machen."
  ]
 }
