@@ -413,12 +413,18 @@
    "format": "kelime",
    "topic": "a1num",
    "title": "Bu 5 kelimeyi biliyor musun? Sayılar 🔢 #almanca"
+  },
+  {
+   "id": "20261022-0549-sahne",
+   "format": "sahne",
+   "topic": "g_ev_arkadasi",
+   "title": "Ev arkadaşı: Almanca diyalog 🏠 | A1 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 69,
+ "count": 70,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -488,6 +494,7 @@
   "sahne|g_yeni_komsu|Danke! Ich mag die Wohnung sehr./Hallo! Bist du der neue Nachbar?/Hier ist warmer Tee für dich./Ich bin Lena. Herzlich willkommen!/Ja, ich heiße Emre. Hallo!/Super, ich trinke jeden Tag Tee!/der Nachbar",
   "kelime|a1school|das Papier/das Telefon/der Bleistift/der Satz/die Seite",
   "sahne|g_kayip_bavul|Emre, das Gepäckband ist jetzt komplett leer!/Guten Tag, mein roter Koffer ist nicht da./Komm, wir gehen sofort zum Schalter da drüben./Oh nein, mein großer Koffer fehlt wirklich./Ups! Ich habe nur Handgepäck mitgenommen!/Warte mal, Emre... was hast du an?/der Koffer",
-  "kelime|a1num|sechs/sechzehn/vierzig/zwanzig/zwei"
+  "kelime|a1num|sechs/sechzehn/vierzig/zwanzig/zwei",
+  "sahne|g_ev_arkadasi|Dein Handy ist im Kühlschrank!/Emre, wo ist der Kaffee?/Gern. Wo ist mein Handy?/Hier in der Küche, Lena./Super, danke dir vielmals./Ups, falsche Dose Cola./die Küche"
  ]
 }
