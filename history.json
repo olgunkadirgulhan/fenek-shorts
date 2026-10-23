@@ -437,12 +437,18 @@
    "format": "kelime",
    "topic": "a1small",
    "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ Soru ve küçük kelimeler | A1"
+  },
+  {
+   "id": "20261023-1249-sahne",
+   "format": "sahne",
+   "topic": "relations",
+   "title": "İlişkiler: Almanca diyalog 💞 | B1 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 73,
+ "count": 74,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -516,6 +522,7 @@
   "sahne|g_ev_arkadasi|Dein Handy ist im Kühlschrank!/Emre, wo ist der Kaffee?/Gern. Wo ist mein Handy?/Hier in der Küche, Lena./Super, danke dir vielmals./Ups, falsche Dose Cola./die Küche",
   "kelime|b1career|das Jobcenter/der Beruf/die Beförderung/die Kündigung/die Probezeit",
   "sahne|work|Gut. Wann könnten Sie anfangen?/Ich arbeite seit fünf Jahren in einem Büro./Ich würde gern etwa dreitausend Euro verdienen./Sobald ich den Vertrag unterschrieben habe./Warum interessieren Sie sich für diese Stelle?/Was sind Ihre Gehaltsvorstellungen?/Weil ich in einem internationalen Team arbeiten möchte./Wie viel Erfahrung haben Sie?/die Stelle",
-  "kelime|a1small|mehr/natürlich/oder/und/welcher"
+  "kelime|a1small|mehr/natürlich/oder/und/welcher",
+  "sahne|relations|Dann ruf ihn an und versöhnt euch./Du hast recht. Wir verloben uns ja nächsten Monat!/Du siehst bedrückt aus. Gibt es ein Problem mit deinem Partner?/Ich weiß. Ohne Vertrauen funktioniert nichts./In jeder Beziehung ist Kommunikation sehr wichtig./Nein! Er ist etwas eifersüchtig, und ich habe ihm nicht zugehört./Warum? Wollt ihr euch trennen?/Wir hatten gestern einen großen Streit./die Kommunikation"
  ]
 }
