@@ -449,12 +449,18 @@
    "format": "kelime",
    "topic": "b1media",
    "title": "5 Almanca kelime: Medya ve eğlence 📺 | B1 #almanca"
+  },
+  {
+   "id": "20261024-0552-sahne",
+   "format": "sahne",
+   "topic": "cafe",
+   "title": "Kafede sahnesi: Emre ve Lena Almanca konuşuyor ☕"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 75,
+ "count": 76,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -530,6 +536,7 @@
   "sahne|work|Gut. Wann könnten Sie anfangen?/Ich arbeite seit fünf Jahren in einem Büro./Ich würde gern etwa dreitausend Euro verdienen./Sobald ich den Vertrag unterschrieben habe./Warum interessieren Sie sich für diese Stelle?/Was sind Ihre Gehaltsvorstellungen?/Weil ich in einem internationalen Team arbeiten möchte./Wie viel Erfahrung haben Sie?/die Stelle",
   "kelime|a1small|mehr/natürlich/oder/und/welcher",
   "sahne|relations|Dann ruf ihn an und versöhnt euch./Du hast recht. Wir verloben uns ja nächsten Monat!/Du siehst bedrückt aus. Gibt es ein Problem mit deinem Partner?/Ich weiß. Ohne Vertrauen funktioniert nichts./In jeder Beziehung ist Kommunikation sehr wichtig./Nein! Er ist etwas eifersüchtig, und ich habe ihm nicht zugehört./Warum? Wollt ihr euch trennen?/Wir hatten gestern einen großen Streit./die Kommunikation",
-  "kelime|b1media|der Podcast/die Komödie/die Schlagzeile/die Sendung/die Zeitung"
+  "kelime|b1media|der Podcast/die Komödie/die Schlagzeile/die Sendung/die Zeitung",
+  "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kuchen"
  ]
 }
