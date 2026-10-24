@@ -461,12 +461,18 @@
    "format": "kelime",
    "topic": "a1num",
    "title": "Almanca 9. sınıf 1. dönem: Sayılar 🔢 #almanca"
+  },
+  {
+   "id": "20261024-1949-sahne",
+   "format": "sahne",
+   "topic": "family",
+   "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ Aile | A1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 77,
+ "count": 78,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -544,6 +550,7 @@
   "sahne|relations|Dann ruf ihn an und versöhnt euch./Du hast recht. Wir verloben uns ja nächsten Monat!/Du siehst bedrückt aus. Gibt es ein Problem mit deinem Partner?/Ich weiß. Ohne Vertrauen funktioniert nichts./In jeder Beziehung ist Kommunikation sehr wichtig./Nein! Er ist etwas eifersüchtig, und ich habe ihm nicht zugehört./Warum? Wollt ihr euch trennen?/Wir hatten gestern einen großen Streit./die Kommunikation",
   "kelime|b1media|der Podcast/die Komödie/die Schlagzeile/die Sendung/die Zeitung",
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kuchen",
-  "kelime|a1num|achtzehn/eins/sechs/vierzig/zwei"
+  "kelime|a1num|achtzehn/eins/sechs/vierzig/zwei",
+  "sahne|family|Hast du Geschwister?/Hast du einen Hund?/Ich liebe Katzen!/Ja, ich habe einen Bruder und eine Schwester./Meine Familie ist groß./Meine Mutter und mein Vater wohnen in Berlin./Nein, aber wir haben eine Katze./Wo wohnen deine Eltern?/das Kind"
  ]
 }
