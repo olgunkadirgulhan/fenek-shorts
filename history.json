@@ -479,12 +479,18 @@
    "format": "sahne",
    "topic": "g_mac_plani",
    "title": "Maç planı: Almanca diyalog ⚽ | A2 #almanca"
+  },
+  {
+   "id": "20261025-1949-kelime",
+   "format": "kelime",
+   "topic": "a1animals",
+   "title": "Almanca Hayvanlar kelimeleri 🐾 A1 seviyesi"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 80,
+ "count": 81,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -565,6 +571,7 @@
   "kelime|a1num|achtzehn/eins/sechs/vierzig/zwei",
   "sahne|family|Hast du Geschwister?/Hast du einen Hund?/Ich liebe Katzen!/Ja, ich habe einen Bruder und eine Schwester./Meine Familie ist groß./Meine Mutter und mein Vater wohnen in Berlin./Nein, aber wir haben eine Katze./Wo wohnen deine Eltern?/das Kind",
   "kelime|b1look|attraktiv/das Tattoo/die Frisur/hochgewachsen/klein gewachsen",
-  "sahne|g_mac_plani|Emre, schaust du heute das Fußballspiel?/Ja, natürlich! Um wie viel Uhr?/Keine Sorge, der Eistee ist schon kalt./Super, ich bringe leckere Pizza mit./Um zwanzig Uhr im Wohnzimmer./Vergiss den kalten Eistee nicht!/der Eistee"
+  "sahne|g_mac_plani|Emre, schaust du heute das Fußballspiel?/Ja, natürlich! Um wie viel Uhr?/Keine Sorge, der Eistee ist schon kalt./Super, ich bringe leckere Pizza mit./Um zwanzig Uhr im Wohnzimmer./Vergiss den kalten Eistee nicht!/der Eistee",
+  "kelime|a1animals|das Pferd/das Schwein/der Frosch/die Giraffe/die Maus"
  ]
 }
