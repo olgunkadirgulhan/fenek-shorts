@@ -18,6 +18,7 @@ import argparse
 import csv
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -238,9 +239,15 @@ def main():
         seen = set(hist.get('sigs', []))
         seed0 = int(datetime.now().timestamp())
         # Her video farklı olsun: daha önce üretilmiş bir bölüm çıkarsa başka tohumla, gerekirse başka formatla dene
+        # 2026-10-25: aynı başlık iki kez yüklenmez (tekrar eden başlıkları YouTube dağıtmıyor)
+        tk = lambda t: ' '.join(re.sub(r'[^\w ]', ' ', re.sub(r'#\w+', ' ', str(t).lower())).split())
+        seen_t = {tk(h.get('title', '')) for h in hist.get('recent', [])}
+        if PUBLISHED.exists():
+            with PUBLISHED.open(encoding='utf-8') as f:
+                seen_t |= {tk(r.get('title', '')) for r in csv.DictReader(f)}
         for k in range(40):
             ep = episodes.make_episode(slot + (k // 10), hist, seed=seed0 + k)
-            if signature(ep) not in seen:
+            if signature(ep) not in seen and tk(ep['title']) not in seen_t:
                 break
             log(f'tekrar eden bölüm atlandı ({ep["format"]} / {ep.get("topic")})')
         ep['id'] = datetime.now(timezone.utc).strftime('%Y%m%d-%H%M') + '-' + ep['format']
