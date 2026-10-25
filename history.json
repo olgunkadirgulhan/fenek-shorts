@@ -467,12 +467,18 @@
    "format": "sahne",
    "topic": "family",
    "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ Aile | A1"
+  },
+  {
+   "id": "20261025-0549-kelime",
+   "format": "kelime",
+   "topic": "b1look",
+   "title": "5 Almanca kelime: Dış görünüş 🪞 | B1 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 78,
+ "count": 79,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -551,6 +557,7 @@
   "kelime|b1media|der Podcast/die Komödie/die Schlagzeile/die Sendung/die Zeitung",
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kuchen",
   "kelime|a1num|achtzehn/eins/sechs/vierzig/zwei",
-  "sahne|family|Hast du Geschwister?/Hast du einen Hund?/Ich liebe Katzen!/Ja, ich habe einen Bruder und eine Schwester./Meine Familie ist groß./Meine Mutter und mein Vater wohnen in Berlin./Nein, aber wir haben eine Katze./Wo wohnen deine Eltern?/das Kind"
+  "sahne|family|Hast du Geschwister?/Hast du einen Hund?/Ich liebe Katzen!/Ja, ich habe einen Bruder und eine Schwester./Meine Familie ist groß./Meine Mutter und mein Vater wohnen in Berlin./Nein, aber wir haben eine Katze./Wo wohnen deine Eltern?/das Kind",
+  "kelime|b1look|attraktiv/das Tattoo/die Frisur/hochgewachsen/klein gewachsen"
  ]
 }
