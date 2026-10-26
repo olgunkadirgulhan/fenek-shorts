@@ -107,6 +107,15 @@
     "der Fußball",
     "die Freizeit"
    ]
+  },
+  {
+   "date": "2026-10-26",
+   "unit": "relations",
+   "words": [
+    "der Partner",
+    "das Vertrauen",
+    "die Kommunikation"
+   ]
   }
  ],
  "sentences": [
@@ -145,6 +154,9 @@
   "Ich gebe Ihnen ein Rezept für ein Medikament.",
   "Ich schwimme lieber und mache Yoga.",
   "Ja, ich liebe Fotografie und male gern.",
-  "Toll! Irgendwann kannst du Fotos von meiner Mannschaft machen."
+  "Toll! Irgendwann kannst du Fotos von meiner Mannschaft machen.",
+  "Nein! Er ist etwas eifersüchtig, und ich habe ihm nicht zugehört.",
+  "In jeder Beziehung ist Kommunikation sehr wichtig.",
+  "Du hast recht. Wir verloben uns ja nächsten Monat!"
  ]
 }
