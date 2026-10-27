@@ -515,12 +515,18 @@
    "format": "sahne",
    "topic": "greet",
    "title": "Almanca 9. sınıf 1. dönem: Tanışma 👋 #almanca"
+  },
+  {
+   "id": "20261027-1949-kelime",
+   "format": "kelime",
+   "topic": "a1num",
+   "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ Sayılar | A1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 86,
+ "count": 87,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -607,6 +613,7 @@
   "kelime|a1small|aber/alle/dort/mit/was",
   "sahne|g_doktorda|Das ist keine gute Idee für dich./Emre, warum bist du heute so müde?/Ich habe diese Woche starke Kopfschmerzen./Nein, nur Kaffee und kalte Cola./Stimmt, mein Kopf kocht jetzt schon./Trinkst du denn genug Wasser am Tag?/der Kopfschmerz",
   "kelime|a2health|das Pflaster/der Patient/die Allergie/die Impfung/die Tablette",
-  "sahne|greet|Danke, tschüss!/Freut mich!/Hallo! Wie heißt du?/Ich bin Tom. Woher kommst du?/Ich heiße Anna. Und du?/Ich komme aus Spanien./Ja, ein bisschen./Sprichst du Englisch?/das Land"
+  "sahne|greet|Danke, tschüss!/Freut mich!/Hallo! Wie heißt du?/Ich bin Tom. Woher kommst du?/Ich heiße Anna. Und du?/Ich komme aus Spanien./Ja, ein bisschen./Sprichst du Englisch?/das Land",
+  "kelime|a1num|dreizehn/elf/vierzehn/vierzig/zwanzig"
  ]
 }
