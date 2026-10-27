@@ -509,12 +509,18 @@
    "format": "kelime",
    "topic": "a2health",
    "title": "Bu 5 kelimeyi biliyor musun? Sağlık 🩹 #almanca"
+  },
+  {
+   "id": "20261027-1249-sahne",
+   "format": "sahne",
+   "topic": "greet",
+   "title": "Almanca 9. sınıf 1. dönem: Tanışma 👋 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 85,
+ "count": 86,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -600,6 +606,7 @@
   "sahne|g_parkta_kopek|Darf ich den Hund jetzt streicheln?/Er gibt mir plötzlich die Pfote!/Ja, er ist wirklich sehr freundlich./Ja, er liebt neue Freunde sehr./Jetzt bist du sein bester Mensch./Schau mal, ein süßer Hund dort!/der Hund",
   "kelime|a1small|aber/alle/dort/mit/was",
   "sahne|g_doktorda|Das ist keine gute Idee für dich./Emre, warum bist du heute so müde?/Ich habe diese Woche starke Kopfschmerzen./Nein, nur Kaffee und kalte Cola./Stimmt, mein Kopf kocht jetzt schon./Trinkst du denn genug Wasser am Tag?/der Kopfschmerz",
-  "kelime|a2health|das Pflaster/der Patient/die Allergie/die Impfung/die Tablette"
+  "kelime|a2health|das Pflaster/der Patient/die Allergie/die Impfung/die Tablette",
+  "sahne|greet|Danke, tschüss!/Freut mich!/Hallo! Wie heißt du?/Ich bin Tom. Woher kommst du?/Ich heiße Anna. Und du?/Ich komme aus Spanien./Ja, ein bisschen./Sprichst du Englisch?/das Land"
  ]
 }
