@@ -539,12 +539,18 @@
    "format": "sahne",
    "topic": "g_ev_kiralama",
    "title": "Ev kiralama: Almanca diyalog 🔑 | A2 #almanca"
+  },
+  {
+   "id": "20261029-0549-kelime",
+   "format": "kelime",
+   "topic": "a1nature",
+   "title": "5 Almanca kelime: Doğa ve mevsimler 🌳 | A1 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 90,
+ "count": 91,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -635,6 +641,7 @@
   "kelime|a1num|dreizehn/elf/vierzehn/vierzig/zwanzig",
   "sahne|g_bankada|Alles klar. Wir schicken die Karte per Post./Guten Tag! Kann ich Ihnen helfen?/Hallo, ich brauche bitte eine neue Bankkarte./Ja, hier bitte. Meine alte Karte ist weg./Kein Problem. Haben Sie Ihren Ausweis dabei?/Super, hoffentlich verliere ich sie nicht wieder!/die Bankkarte",
   "kelime|a1small|aber/alle/mit/ohne/willkommen",
-  "sahne|g_ev_kiralama|Achtzig Euro inklusive Strom und schnellem Internet./Das Angebot klingt perfekt für uns./Die Wohnung ist wirklich sehr schön./Ja, und der Balkon ist riesig./Super, ich bringe morgen den Vertrag mit./Wie hoch ist die Miete bitte?/die Miete"
+  "sahne|g_ev_kiralama|Achtzig Euro inklusive Strom und schnellem Internet./Das Angebot klingt perfekt für uns./Die Wohnung ist wirklich sehr schön./Ja, und der Balkon ist riesig./Super, ich bringe morgen den Vertrag mit./Wie hoch ist die Miete bitte?/die Miete",
+  "kelime|a1nature|der Stern/der Wald/die Blume/die Insel/kalt"
  ]
 }
