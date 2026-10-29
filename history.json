@@ -551,12 +551,18 @@
    "format": "sahne",
    "topic": "g_pizza_siparisi",
    "title": "Bu Almanca konuşmayı anlıyor musun? Pizza siparişi 🍕 #almanca"
+  },
+  {
+   "id": "20261029-1949-kelime",
+   "format": "kelime",
+   "topic": "a2cook",
+   "title": "5 Almanca kelime: Mutfakta 🧑‍🍳 | A2 #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 92,
+ "count": 93,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -649,6 +655,7 @@
   "kelime|a1small|aber/alle/mit/ohne/willkommen",
   "sahne|g_ev_kiralama|Achtzig Euro inklusive Strom und schnellem Internet./Das Angebot klingt perfekt für uns./Die Wohnung ist wirklich sehr schön./Ja, und der Balkon ist riesig./Super, ich bringe morgen den Vertrag mit./Wie hoch ist die Miete bitte?/die Miete",
   "kelime|a1nature|der Stern/der Wald/die Blume/die Insel/kalt",
-  "sahne|g_pizza_siparisi|Abgemacht, ich bestelle jetzt sofort online./Emre, hast du Hunger auf Pizza?/Ja, ich habe riesigen Hunger!/Nehmen wir eine große Pizza Salami?/Perfekt, aber bitte ohne scharfe Peperoni./Super, ich hole schon mal die Teller./die Pizza"
+  "sahne|g_pizza_siparisi|Abgemacht, ich bestelle jetzt sofort online./Emre, hast du Hunger auf Pizza?/Ja, ich habe riesigen Hunger!/Nehmen wir eine große Pizza Salami?/Perfekt, aber bitte ohne scharfe Peperoni./Super, ich hole schon mal die Teller./die Pizza",
+  "kelime|a2cook|backen/das Gewürz/die Sahne/probieren/sauer"
  ]
 }
