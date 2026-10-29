@@ -35,7 +35,7 @@ HOOKS = {
     'quiz': ['Üç soru, üç saniye. Hazır mısın?', 'Kendini dene! Üç soru.'],
     'av': ['Bu tabloda beş Almanca kelime saklı. On saniyen var!', 'Beş kelime saklı. Kaç tanesini bulabilirsin?'],
 }
-SITE_CTAS = ['Tüm ünite sitede ücretsiz. Link profilde!', 'Bunun devamı sitede, ücretsiz. Link profilde!']
+SITE_CTAS = ['Tüm ünite sitede ücretsiz. Link açıklamada!', 'Bunun devamı sitede, ücretsiz. Link açıklamada!']   # link gerçekten açıklamada (yanıltıcı olmasın)
 FOLLOW_CTAS = ['Her gün yeni Almanca video için takip et!', 'Kaç tanesini bildin? Yorumlara yaz!',
                'Bunu kaydet, yarın tekrar et!', 'Yarın yeni kelimeler var. Takip et!']
 # Site açılana kadar (SITE_URL boş) siteye/markaya yönlendiren cümle kurulmaz

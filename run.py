@@ -193,6 +193,7 @@ def metadata(ep):
             'german', 'learn german', ep['format']] + (['fenek'] if site else [])
     desc = (f"{ep.get('desc', '')}\n\n"
             + (f'Tüm üniteler ücretsiz: {site}\n' if site else '')
+            + (f"Almanya'da iş arıyorsan Almanca CV (Lebenslauf) ve ön yazı: {cv}\n" if (cv := os.environ.get('CV_URL', '').strip()) else '')
             + 'Her gün 4 yeni Almanca video. Takip et, Almancan her gün biraz daha gelişsin! 🔔\n\n'
             '#almanca #almancaöğren #deutsch #shorts')
     return ep['title'][:100], desc, tags

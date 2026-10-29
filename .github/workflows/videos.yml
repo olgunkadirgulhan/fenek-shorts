@@ -92,6 +92,7 @@ jobs:
           MAX_PER_DAY: ${{ vars.MAX_PER_DAY }}
           LEVELS: ${{ vars.LEVELS }}
           SITE_URL: ${{ vars.SITE_URL }}
+          CV_URL: ${{ vars.CV_URL }}
           TTS_ENGINE: ${{ vars.TTS_ENGINE }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}   # her videoya yeni diyalog (sahne)
           # Ses zinciri: Azure (anahtar varsa) → edge-tts → Piper/Chatterbox
