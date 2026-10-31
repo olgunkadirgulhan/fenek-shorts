@@ -575,12 +575,18 @@
    "format": "sahne",
    "topic": "routine",
    "title": "Günlük rutin sahnesi: Emre ve Lena Almanca konuşuyor ⏰"
+  },
+  {
+   "id": "20261031-0549-kelime",
+   "format": "kelime",
+   "topic": "a1num",
+   "title": "Sayılar: günlük hayatta en çok lazım olan 5 Almanca kelime 🔢"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 96,
+ "count": 97,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -677,6 +683,7 @@
   "kelime|a2cook|backen/das Gewürz/die Sahne/probieren/sauer",
   "sahne|g_firinda|Gerne! Das Brot ist noch ganz warm./Guten Morgen! Was darf es sein?/Hallo! Drei Brezeln und ein Roggenbrot, bitte./Ja, bitte. Schneiden Sie es dünn?/Möchten Sie das Brot geschnitten haben?/Super, dann esse ich den Rand sofort!/das Roggenbrot",
   "kelime|a1transport|das Boot/das Flugzeug/das Schiff/das Taxi/die U-Bahn",
-  "sahne|routine|Frühstückst du?/Ich koche Abendessen und sehe fern./Ich putze mir die Zähne und schlafe früh./Ich wache um sieben auf und dusche./Ja, dann fahre ich mit dem Bus zur Arbeit./Um wie viel Uhr wachst du morgens auf?/Was für ein langweiliger Tag! Lass uns am Wochenende ins Kino gehen./Was machst du am Abend?/das Abendessen"
+  "sahne|routine|Frühstückst du?/Ich koche Abendessen und sehe fern./Ich putze mir die Zähne und schlafe früh./Ich wache um sieben auf und dusche./Ja, dann fahre ich mit dem Bus zur Arbeit./Um wie viel Uhr wachst du morgens auf?/Was für ein langweiliger Tag! Lass uns am Wochenende ins Kino gehen./Was machst du am Abend?/das Abendessen",
+  "kelime|a1num|acht/achtzehn/dreizehn/fünfzehn/neun"
  ]
 }
