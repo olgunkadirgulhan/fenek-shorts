@@ -581,12 +581,18 @@
    "format": "kelime",
    "topic": "a1num",
    "title": "Sayılar: günlük hayatta en çok lazım olan 5 Almanca kelime 🔢"
+  },
+  {
+   "id": "20261031-1251-sahne",
+   "format": "sahne",
+   "topic": "g_aksam_yemegi",
+   "title": "Akşam yemeği sahnesi: Emre ve Lena Almanca konuşuyor 🍽️"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 97,
+ "count": 98,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -684,6 +690,7 @@
   "sahne|g_firinda|Gerne! Das Brot ist noch ganz warm./Guten Morgen! Was darf es sein?/Hallo! Drei Brezeln und ein Roggenbrot, bitte./Ja, bitte. Schneiden Sie es dünn?/Möchten Sie das Brot geschnitten haben?/Super, dann esse ich den Rand sofort!/das Roggenbrot",
   "kelime|a1transport|das Boot/das Flugzeug/das Schiff/das Taxi/die U-Bahn",
   "sahne|routine|Frühstückst du?/Ich koche Abendessen und sehe fern./Ich putze mir die Zähne und schlafe früh./Ich wache um sieben auf und dusche./Ja, dann fahre ich mit dem Bus zur Arbeit./Um wie viel Uhr wachst du morgens auf?/Was für ein langweiliger Tag! Lass uns am Wochenende ins Kino gehen./Was machst du am Abend?/das Abendessen",
-  "kelime|a1num|acht/achtzehn/dreizehn/fünfzehn/neun"
+  "kelime|a1num|acht/achtzehn/dreizehn/fünfzehn/neun",
+  "sahne|g_aksam_yemegi|Aber bitte erst die Hände waschen, Emre./Emre, der Tisch ist endlich fertig!/Es gibt heute Reis, Suppe und Hähnchen./Mein absoluter Liebling! Ich habe großen Hunger./Mmh, das riecht wirklich super lecker, Lena!/Ups! Der Teller wartet schon auf mich./der Teller"
  ]
 }
