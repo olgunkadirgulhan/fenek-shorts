@@ -617,12 +617,18 @@
    "format": "kelime",
    "topic": "a1jobs",
    "title": "Meslekler: günlük hayatta en çok lazım olan 5 Almanca kelime 🧑‍🔧"
+  },
+  {
+   "id": "20261102-1251-sahne",
+   "format": "sahne",
+   "topic": "g_markette",
+   "title": "Markette: Almanya'da Almanca böyle konuşulur 🛒 | A1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 103,
+ "count": 104,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -726,6 +732,7 @@
   "sahne|clothes|Es ist sehr billig, nur zwanzig Euro./Gern. Und dieses T-Shirt ist ein Geschenk!/Hallo, was kostet diese Jacke?/Ja, aber die blaue ist teurer./Mittel, bitte. Haben Sie sie in Blau?/Super! Ich nehme das Kleid und einen Hut./Und was ist der Preis für dieses rote Kleid?/Vierzig Euro. Welche Größe?/die Jacke",
   "kelime|a1verbs|finden/haben/nehmen/spielen/tanzen",
   "sahne|g_sinifta|Aber kaue leise, sonst kommt Herr Müller!/Danke! Ist das Apfel oder Minze?/Emre, hast du einen Kaugummi für mich?/Es ist Minze. Sehr frisch./Ja, klar. Hier, bitte schön./Super, perfekt für Mathe jetzt./der Kaugummi",
-  "kelime|a1jobs|der Arbeiter/der Feuerwehrmann/der Friseur/der Musiker/der Verkäufer"
+  "kelime|a1jobs|der Arbeiter/der Feuerwehrmann/der Friseur/der Musiker/der Verkäufer",
+  "sahne|g_markette|Brauchen wir noch süße Erdbeeren?/Emre, wo bleiben die Tomaten?/Hier, ganz frisch aus der Türkei!/Immer, die retten den Tag!/Schon im Wagen, und frisches Brot./Super, nimm noch Joghurt mit./die Tomate"
  ]
 }
