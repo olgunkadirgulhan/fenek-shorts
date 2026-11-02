@@ -25,7 +25,7 @@ ART_COLOR = {'der': '#2F6FEB', 'die': '#E5484D', 'das': '#16A37E'}
 # güçlü formatlar ikişer kez, zayıflar bir kez. Format listesi (--format) ilk geçişten okunur.
 # 2026-10-20: kelime/sayılar/"nasıl söylenir" 950-1.260 izlenme, quiz ve av 0-1 → quiz/av çıkarıldı (kullanıcı onayı);
 # 60 paket × 25 kelime, 5'li seçim + paket döngüsü → tekrar yok.
-SLOT_FORMATS = ['kelime', 'sahne', 'kelime', 'sahne', 'kelime', 'sahne']
+SLOT_FORMATS = ['kelime', 'kelime', 'sahne']   # 2026-11-02: diyalog (sahne) 1-25 izlenme, kelime/sınav başlığı 130-2.263 → kelime 2/3
 LEVELS = [l.strip() for l in (os.environ.get('LEVELS') or 'A1,A2,B1').split(',')]  # kanalın hedef seviyeleri
 
 # Açılış cümleleri: konu adı söylenmez (zaten ekranın üstünde yazıyor), kısa ve doğrudan
@@ -371,13 +371,20 @@ def slug(s):
 SCHOOL9 = {'greet', 'family', 'a1num', 'a1col', 'a1cal', 'a1time', 'a1people', 'a1school', 'a1small', 'a1food', 'a1home', 'a1verbs'}
 
 
+def in_exam_season():
+    from datetime import date
+    d = date.today()
+    return (d.month == 10 or (d.month == 11 and d.day <= 20) or d.month == 3 or (d.month == 4 and d.day <= 20)
+            or d.month == 12 or (d.month == 5 and d.day <= 25))
+
+
 def exam_title(ep, item, rng):
     from datetime import date
     d = date.today()
     season = (d.month == 10 or (d.month == 11 and d.day <= 20) or d.month == 3 or (d.month == 4 and d.day <= 20)
               or d.month == 12 or (d.month == 5 and d.day <= 25))
-    if SRC != 'tr' or not season or item.get('cefr') != 'A1' or item.get('id') not in SCHOOL9 or rng.random() > 0.5:
-        return
+    if SRC != 'tr' or not season or item.get('cefr') != 'A1' or item.get('id') not in SCHOOL9:
+        return   # 2026-11-02: sınav başlıkları kanalın tek büyüyen içeriği → uygun konuda her zaman
     t = item['title']['tr'] if isinstance(item.get('title'), dict) else str(item.get('title', ''))
     term = '1. dönem' if d.month >= 9 or d.month <= 1 else '2. dönem'
     n = '1.' if d.month in (10, 11, 3, 4) else '2.'
@@ -405,6 +412,9 @@ def make_episode(slot, hist, seed):
         ep = ep_sahne(unit, rng)
     else:
         packs = [p for p in COURSE['packs'] if len(p['words']) >= 8 and p['cefr'] in LEVELS]
+        school = [p for p in packs if p['id'] in SCHOOL9 and p['cefr'] == 'A1']
+        if school and in_exam_season() and rng.random() < 0.7:   # 2026-11-02: yazılı döneminde okul konuları öne
+            packs = school
         pack = trend_pick(packs, lambda p: p['id'], used, rng, lw)
         ep = {'kelime': ep_kelime, 'quiz': ep_quiz, 'av': ep_av}[fmt](pack, rng)
     ep['format'] = fmt
