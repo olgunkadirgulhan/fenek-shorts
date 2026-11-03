@@ -125,6 +125,15 @@
     "die Temperatur",
     "der Regenschirm"
    ]
+  },
+  {
+   "date": "2026-11-03",
+   "unit": "cafe",
+   "words": [
+    "das Brot",
+    "der Tee",
+    "die Milch"
+   ]
   }
  ],
  "sentences": [
@@ -169,6 +178,9 @@
   "Du hast recht. Wir verloben uns ja nächsten Monat!",
   "Schon wieder? Dieser Herbst ist sehr kalt und windig.",
   "Vergiss deinen Regenschirm nicht!",
-  "Keine Sorge, ich habe ihn immer in der Tasche."
+  "Keine Sorge, ich habe ihn immer in der Tasche.",
+  "Guten Morgen! Was möchten Sie?",
+  "Mit Zucker?",
+  "Das macht sieben Euro."
  ]
 }
