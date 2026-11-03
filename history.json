@@ -635,12 +635,18 @@
    "format": "kelime",
    "topic": "a1time",
    "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ Zaman | A1"
+  },
+  {
+   "id": "20261103-1247-kelime",
+   "format": "kelime",
+   "topic": "b1society",
+   "title": "Toplum: günlük hayatta en çok lazım olan 5 Almanca kelime 🏘️"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 106,
+ "count": 107,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -747,6 +753,7 @@
   "kelime|a1jobs|der Arbeiter/der Feuerwehrmann/der Friseur/der Musiker/der Verkäufer",
   "sahne|g_markette|Brauchen wir noch süße Erdbeeren?/Emre, wo bleiben die Tomaten?/Hier, ganz frisch aus der Türkei!/Immer, die retten den Tag!/Schon im Wagen, und frisches Brot./Super, nimm noch Joghurt mit./die Tomate",
   "sahne|g_eczanede|Aber nimm bitte keinen Bananensirup./Guten Tag, ich hätte gern ein Schmerzmittel./Hallo Emre, brauchst du eine Tablette?/Hier ist die Apotheke, komm schnell rein./Ja Lena, ich habe Kopfschmerzen./Zu spät, ich liebe Banane zum Frühstück!/die Apotheke",
-  "kelime|a1time|das Wochenende/der Mittag/die Zeit/immer/jetzt"
+  "kelime|a1time|das Wochenende/der Mittag/die Zeit/immer/jetzt",
+  "kelime|b1society|die Gemeinschaft/die Generation/die Minderheit/die Religion/die Spende"
  ]
 }
