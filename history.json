@@ -659,12 +659,18 @@
    "format": "kelime",
    "topic": "a1people",
    "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ İnsanlar ve aile | A1"
+  },
+  {
+   "id": "20261104-1949-sahne",
+   "format": "sahne",
+   "topic": "restaurant",
+   "title": "Restoranda şikâyet: Almanya'da Almanca böyle konuşulur 🍽️ | B1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 110,
+ "count": 111,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -775,6 +781,7 @@
   "kelime|b1society|die Gemeinschaft/die Generation/die Minderheit/die Religion/die Spende",
   "sahne|g_i_s_gorusmesi|Danke schön, Frau Lena. Ich freue mich./Guten Tag, Emre. Setzen Sie sich./Hier ist Ihr Tee. Und nun zur Arbeit./Hoffentlich trinken wir nach dem Vertrag darauf./Lieber Tee, bitte mit viel Zucker./Trinken Sie gern Kaffee oder Tee?/der Vertrag",
   "kelime|a1col|blau/grau/hell/orange/türkis",
-  "kelime|a1people|der Erwachsene/der Onkel/die Eltern/die Leute/die Tante"
+  "kelime|a1people|der Erwachsene/der Onkel/die Eltern/die Leute/die Tante",
+  "sahne|restaurant|Außerdem wollte ich das Steak blutig, aber es ist durchgebraten./Danke. Eigentlich beschwere ich mich nicht gern./Das tut mir sehr leid. Ich spreche sofort mit dem Koch./Der Nachtisch geht als Entschuldigung auf uns./Entschuldigung, es gibt ein Problem. Mein Hauptgericht ist kalt./Natürlich. Und probieren Sie unbedingt den neuen Nachtisch auf der Speisekarte!/Sehr nett. Kann ich die Rechnung haben? Rechnen Sie bitte auch das Trinkgeld dazu./Sie haben recht. Ich bringe Ihnen ein neues. War die Soße übrigens zu scharf?/der Nachtisch"
  ]
 }
