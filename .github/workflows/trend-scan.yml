@@ -1,0 +1,28 @@
+name: trend-scan
+# Sadece okuma: viral format araştırması (tools/trend_scan.py), elle çalıştırılır
+on:
+  workflow_dispatch:
+    inputs:
+      queries:
+        description: "Aramalar, | ile ayrılmış"
+        type: string
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q google-api-python-client google-auth
+      - env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python tools/trend_scan.py "${{ inputs.queries }}"
+      - uses: actions/upload-artifact@v5
+        with:
+          name: trend-scan
+          path: trend_scan.json
+          retention-days: 30
