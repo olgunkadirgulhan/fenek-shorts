@@ -44,7 +44,7 @@ jobs:
       - id: g
         env:
           LOG_FILE: published.csv
-          SLOTS: "05:00,12:00,19:00"
+          SLOTS: "16:00"   # 2026-11-05: zayıf kanal → günde 1, TR akşamı (19:00 TR)
           # published.csv'de format sütunu bölüm türünü tutar ('short' değil): hepsi Shorts sayılır
           SHORT_KINDS: "sahne,kelime,quiz,av,hata"
           HAS_YT: ${{ secrets.YT_REFRESH_TOKEN != '' }}
