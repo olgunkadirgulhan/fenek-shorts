@@ -671,12 +671,18 @@
    "format": "kelime",
    "topic": "a2feel",
    "title": "Duygular Almancada nasıl söylenir? 😊 | A2"
+  },
+  {
+   "id": "20261105-1249-kelime",
+   "format": "kelime",
+   "topic": "a1cal",
+   "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ Günler ve aylar | A1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 112,
+ "count": 113,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -789,6 +795,7 @@
   "kelime|a1col|blau/grau/hell/orange/türkis",
   "kelime|a1people|der Erwachsene/der Onkel/die Eltern/die Leute/die Tante",
   "sahne|restaurant|Außerdem wollte ich das Steak blutig, aber es ist durchgebraten./Danke. Eigentlich beschwere ich mich nicht gern./Das tut mir sehr leid. Ich spreche sofort mit dem Koch./Der Nachtisch geht als Entschuldigung auf uns./Entschuldigung, es gibt ein Problem. Mein Hauptgericht ist kalt./Natürlich. Und probieren Sie unbedingt den neuen Nachtisch auf der Speisekarte!/Sehr nett. Kann ich die Rechnung haben? Rechnen Sie bitte auch das Trinkgeld dazu./Sie haben recht. Ich bringe Ihnen ein neues. War die Soße übrigens zu scharf?/der Nachtisch",
-  "kelime|a2feel|die Wut/entspannt/fühlen/wütend/überrascht"
+  "kelime|a2feel|die Wut/entspannt/fühlen/wütend/überrascht",
+  "kelime|a1cal|der August/der Mai/der März/der Samstag/morgen"
  ]
 }
