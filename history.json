@@ -683,12 +683,18 @@
    "format": "sahne",
    "topic": "g_mutfakta_yardim",
    "title": "Mutfakta yardım: Almanca diyalog 🍳 | A2 #almanca"
+  },
+  {
+   "id": "20261107-1649-kelime",
+   "format": "kelime",
+   "topic": "a1home",
+   "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ Ev | A1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 114,
+ "count": 115,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -803,6 +809,7 @@
   "sahne|restaurant|Außerdem wollte ich das Steak blutig, aber es ist durchgebraten./Danke. Eigentlich beschwere ich mich nicht gern./Das tut mir sehr leid. Ich spreche sofort mit dem Koch./Der Nachtisch geht als Entschuldigung auf uns./Entschuldigung, es gibt ein Problem. Mein Hauptgericht ist kalt./Natürlich. Und probieren Sie unbedingt den neuen Nachtisch auf der Speisekarte!/Sehr nett. Kann ich die Rechnung haben? Rechnen Sie bitte auch das Trinkgeld dazu./Sie haben recht. Ich bringe Ihnen ein neues. War die Soße übrigens zu scharf?/der Nachtisch",
   "kelime|a2feel|die Wut/entspannt/fühlen/wütend/überrascht",
   "kelime|a1cal|der August/der Mai/der März/der Samstag/morgen",
-  "sahne|g_mutfakta_yardim|Bitte schneide die Tomaten in Scheiben./Emre, kannst du mir mal helfen?/Es liegt direkt neben der großen Schüssel./Gut, mache ich. Wo ist das Messer?/Ja, natürlich. Was soll ich tun?/Perfekt! Aber ich esse die Tomaten heimlich./das Messer"
+  "sahne|g_mutfakta_yardim|Bitte schneide die Tomaten in Scheiben./Emre, kannst du mir mal helfen?/Es liegt direkt neben der großen Schüssel./Gut, mache ich. Wo ist das Messer?/Ja, natürlich. Was soll ich tun?/Perfekt! Aber ich esse die Tomaten heimlich./das Messer",
+  "kelime|a1home|das Fenster/der Kleiderschrank/der Vorhang/die Dusche/die Tür"
  ]
 }
