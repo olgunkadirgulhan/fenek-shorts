@@ -134,6 +134,15 @@
     "der Tee",
     "die Milch"
    ]
+  },
+  {
+   "date": "2026-11-07",
+   "unit": "greet",
+   "words": [
+    "der Freund",
+    "die Sprache",
+    "das Land"
+   ]
   }
  ],
  "sentences": [
@@ -181,6 +190,9 @@
   "Keine Sorge, ich habe ihn immer in der Tasche.",
   "Guten Morgen! Was möchten Sie?",
   "Mit Zucker?",
-  "Das macht sieben Euro."
+  "Das macht sieben Euro.",
+  "Sprichst du Englisch?",
+  "Ja, ein bisschen.",
+  "Danke, tschüss!"
  ]
 }
