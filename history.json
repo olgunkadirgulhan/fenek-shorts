@@ -701,12 +701,18 @@
    "format": "sahne",
    "topic": "g_hediye_secmek",
    "title": "Bu Almanca konuşmayı anlıyor musun? Hediye seçmek 🎁 #almanca"
+  },
+  {
+   "id": "20261110-1649-kelime",
+   "format": "kelime",
+   "topic": "a1school",
+   "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ Okul | A1"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 117,
+ "count": 118,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -824,6 +830,7 @@
   "sahne|g_mutfakta_yardim|Bitte schneide die Tomaten in Scheiben./Emre, kannst du mir mal helfen?/Es liegt direkt neben der großen Schüssel./Gut, mache ich. Wo ist das Messer?/Ja, natürlich. Was soll ich tun?/Perfekt! Aber ich esse die Tomaten heimlich./das Messer",
   "kelime|a1home|das Fenster/der Kleiderschrank/der Vorhang/die Dusche/die Tür",
   "kelime|a1food|das Eis/das Mehl/der Keks/der Nachtisch/die Wurst",
-  "sahne|g_hediye_secmek|Perfekt, hoffentlich macht sie keinen Kopfstand./Schmuck hat sie schon sehr viel./Super Idee, sie liebt doch Yoga!/Vielleicht eine schöne Kette oder Ohrringe?/Was schenken wir Aylin zum Geburtstag?/Wie wäre es mit einem Yogakurs?/das Geschenk"
+  "sahne|g_hediye_secmek|Perfekt, hoffentlich macht sie keinen Kopfstand./Schmuck hat sie schon sehr viel./Super Idee, sie liebt doch Yoga!/Vielleicht eine schöne Kette oder Ohrringe?/Was schenken wir Aylin zum Geburtstag?/Wie wäre es mit einem Yogakurs?/das Geschenk",
+  "kelime|a1school|das Buch/das Heft/das Papier/das Wort/die Lektion"
  ]
 }
