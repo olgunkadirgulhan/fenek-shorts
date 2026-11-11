@@ -143,6 +143,15 @@
     "die Sprache",
     "das Land"
    ]
+  },
+  {
+   "date": "2026-11-11",
+   "unit": "digital",
+   "words": [
+    "die App",
+    "das Passwort",
+    "der Bildschirm"
+   ]
   }
  ],
  "sentences": [
@@ -193,6 +202,9 @@
   "Das macht sieben Euro.",
   "Sprichst du Englisch?",
   "Ja, ein bisschen.",
-  "Danke, tschüss!"
+  "Danke, tschüss!",
+  "Mein Handy ist sehr langsam. Der Bildschirm friert auch ständig ein.",
+  "Hast du die Apps aktualisiert?",
+  "Okay. Außerdem bricht meine Internetverbindung ständig ab."
  ]
 }
