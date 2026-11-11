@@ -707,12 +707,18 @@
    "format": "kelime",
    "topic": "a1school",
    "title": "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık ✍️ Okul | A1"
+  },
+  {
+   "id": "20261111-1657-kelime",
+   "format": "kelime",
+   "topic": "a1verbs",
+   "title": "Almanca yazılıdan önce izle ✍️ Temel fiiller (9. sınıf, A1)"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 118,
+ "count": 119,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -831,6 +837,7 @@
   "kelime|a1home|das Fenster/der Kleiderschrank/der Vorhang/die Dusche/die Tür",
   "kelime|a1food|das Eis/das Mehl/der Keks/der Nachtisch/die Wurst",
   "sahne|g_hediye_secmek|Perfekt, hoffentlich macht sie keinen Kopfstand./Schmuck hat sie schon sehr viel./Super Idee, sie liebt doch Yoga!/Vielleicht eine schöne Kette oder Ohrringe?/Was schenken wir Aylin zum Geburtstag?/Wie wäre es mit einem Yogakurs?/das Geschenk",
-  "kelime|a1school|das Buch/das Heft/das Papier/das Wort/die Lektion"
+  "kelime|a1school|das Buch/das Heft/das Papier/das Wort/die Lektion",
+  "kelime|a1verbs|denken/lernen/nehmen/rennen/öffnen"
  ]
 }
