@@ -33,19 +33,12 @@ def artifacts(repo, since):
 
 
 def send(files, post):
-    if post.get('videos'):                                   # deneme: birden çok video, sırayla
-        for v in post['videos']:
-            with io.BytesIO(files[v['file']]) as f:
-                notify._call('sendVideo', files={'video': (v['file'], f, 'video/mp4')},
-                             caption=v.get('caption', '')[:1000], supports_streaming='true')
+    """2026-11-11: dosya yok, sadece "paylaşıldı" yazısı."""
+    if post.get('videos'):
         if post.get('note'):
             notify.message(post['note'])
         return
-    with io.BytesIO(files['video.mp4']) as f:
-        notify._call('sendDocument', files={'document': ('video.mp4', f, 'video/mp4')},
-                     caption=f"🎬 {post['channel']} — günün videosu (TikTok/Instagram için)\n{post['title']}\n{post['url']}"[:1000])
-    notify.copyable('🎵 TikTok açıklaması (kutuya dokun → kopyalanır):', post['tiktok'])
-    notify.copyable('📸 Instagram açıklaması (kutuya dokun → kopyalanır):', post['instagram'])
+    notify.message(f"✅ {post['channel']} YouTube'da paylaşıldı\n{post['title']}\n{post['url']}")
 
 
 def main():
