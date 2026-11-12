@@ -6,6 +6,12 @@ import os
 from datetime import date, datetime, timezone
 
 API = 'https://api.telegram.org/bot{token}/{method}'
+
+
+def _quiet():   # kullanıcı isteği (2026-11-12): TR 21:00–09:00 arası Telegram bildirimi sessiz gelsin
+    from datetime import datetime, timedelta, timezone
+    h = (datetime.now(timezone.utc) + timedelta(hours=3)).hour
+    return {'disable_notification': 'true'} if (h >= 21 or h < 9) else {}
 # Telegram'a günde tek gönderi, 4 günlük döngü: 3 gün video, 1 gün kaydırmalı gönderi (UTC gün)
 CYCLE_START = date(2026, 10, 7)
 CYCLE = ['video', 'video', 'video', 'carousel']
@@ -24,7 +30,7 @@ def enabled():
 def _call(method, files=None, **data):
     import requests
     r = requests.post(API.format(token=os.environ['TELEGRAM_BOT_TOKEN'], method=method),
-                      data={'chat_id': os.environ['TELEGRAM_CHAT_ID'], **data}, files=files, timeout=120)
+                      data={'chat_id': os.environ['TELEGRAM_CHAT_ID'], **_quiet(), **data}, files=files, timeout=120)
     if not r.ok:
         raise RuntimeError(f'telegram {r.status_code}: {r.text[:200]}')
 
