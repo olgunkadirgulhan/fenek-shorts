@@ -719,12 +719,18 @@
    "format": "sahne",
    "topic": "g_yagmurlu_gun",
    "title": "Yağmurlu gün: Almanca diyalog 🌧️ | A1 #almanca"
+  },
+  {
+   "id": "20261113-1649-kelime",
+   "format": "kelime",
+   "topic": "a1time",
+   "title": "Almanca 9. sınıf 1. dönem: Zaman ⏰ #almanca"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 120,
+ "count": 121,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -845,6 +851,7 @@
   "sahne|g_hediye_secmek|Perfekt, hoffentlich macht sie keinen Kopfstand./Schmuck hat sie schon sehr viel./Super Idee, sie liebt doch Yoga!/Vielleicht eine schöne Kette oder Ohrringe?/Was schenken wir Aylin zum Geburtstag?/Wie wäre es mit einem Yogakurs?/das Geschenk",
   "kelime|a1school|das Buch/das Heft/das Papier/das Wort/die Lektion",
   "kelime|a1verbs|denken/lernen/nehmen/rennen/öffnen",
-  "sahne|g_yagmurlu_gun|Dann bleiben wir heute für immer hier./Der Regen trommelt gegen das Fenster./Ja, das ist echt gemütliches Wetter./Oh ja, und dazu warme Simit!/Perfekt, ich hole schnell den Honig./Wollen wir uns einen Tee kochen?/das Fenster"
+  "sahne|g_yagmurlu_gun|Dann bleiben wir heute für immer hier./Der Regen trommelt gegen das Fenster./Ja, das ist echt gemütliches Wetter./Oh ja, und dazu warme Simit!/Perfekt, ich hole schnell den Honig./Wollen wir uns einen Tee kochen?/das Fenster",
+  "kelime|a1time|die Minute/die Mitternacht/die Nacht/gestern/immer"
  ]
 }
