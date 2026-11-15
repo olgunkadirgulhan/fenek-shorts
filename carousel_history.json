@@ -152,6 +152,15 @@
     "das Passwort",
     "der Bildschirm"
    ]
+  },
+  {
+   "date": "2026-11-15",
+   "unit": "cooking",
+   "words": [
+    "der Topf",
+    "die Tomate",
+    "das Salz"
+   ]
   }
  ],
  "sentences": [
@@ -205,6 +214,9 @@
   "Danke, tschüss!",
   "Mein Handy ist sehr langsam. Der Bildschirm friert auch ständig ein.",
   "Hast du die Apps aktualisiert?",
-  "Okay. Außerdem bricht meine Internetverbindung ständig ab."
+  "Okay. Außerdem bricht meine Internetverbindung ständig ab.",
+  "Gern! Was brauchen wir?",
+  "Ich schneide die Zwiebel und den Knoblauch.",
+  "Dann braten wir sie im Topf an."
  ]
 }
