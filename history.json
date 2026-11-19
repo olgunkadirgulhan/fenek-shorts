@@ -755,12 +755,18 @@
    "format": "sahne",
    "topic": "g_okulun_ilk_gunu",
    "title": "Bu Almanca konuşmayı anlıyor musun? Okulun ilk günü 🏫 #almanca"
+  },
+  {
+   "id": "20261119-1649-kelime",
+   "format": "kelime",
+   "topic": "a1cal",
+   "title": "Almanca yazılıdan önce izle ✍️ Günler ve aylar (9. sınıf, A1)"
   }
  ],
  "bank_used": [
   "001_kafe_will_moechte"
  ],
- "count": 126,
+ "count": 127,
  "sigs": [
   "hata|cafe|Guten Morgen! Was möchten Sie?/Ich möchte/Ich möchte einen Kaffee mit Milch, bitte./Ich möchte einen Kaffee./Ich will/Ich will ein Kaffee!/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./der Kuchen",
   "kelime|a1col|beige/dunkel/golden/rot/schwarz",
@@ -887,6 +893,7 @@
   "sahne|g_havalimaninda|Bestimmt, da liegen nur blaue Taschen./Emre, hast du den großen Koffer?/Hoffentlich ist er überhaupt noch da./Na super, den klaut bestimmt niemand./Nein, der kommt erst ganz am Ende./Unser Koffer ist aber knallrot und aus Samt./der Koffer",
   "kelime|a1people|der Gast/der Mann/der Verwandte/die Ehefrau/die Hochzeit",
   "kelime|b1trip|das Reiseziel/der Bahnsteig/der Wechselkurs/die Führung/die Unterkunft",
-  "sahne|g_okulun_ilk_gunu|Hallo, ich bin Lena. Und du?/Hast du einen Kaffee dabei?/Ich heiße Emre. Guten Morgen!/Ja, besonders ohne Matheprüfung heute!/Nein, aber ich habe süßen Tee./Tee am Morgen ist sehr gut./der Tee"
+  "sahne|g_okulun_ilk_gunu|Hallo, ich bin Lena. Und du?/Hast du einen Kaffee dabei?/Ich heiße Emre. Guten Morgen!/Ja, besonders ohne Matheprüfung heute!/Nein, aber ich habe süßen Tee./Tee am Morgen ist sehr gut./der Tee",
+  "kelime|a1cal|das Jahr/der August/der Dienstag/der Mai/der Monat"
  ]
 }
