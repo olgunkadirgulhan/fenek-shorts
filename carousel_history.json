@@ -161,6 +161,15 @@
     "die Tomate",
     "das Salz"
    ]
+  },
+  {
+   "date": "2026-11-19",
+   "unit": "routine",
+   "words": [
+    "das Frühstück",
+    "die Arbeit",
+    "der Bus"
+   ]
   }
  ],
  "sentences": [
@@ -217,6 +226,9 @@
   "Okay. Außerdem bricht meine Internetverbindung ständig ab.",
   "Gern! Was brauchen wir?",
   "Ich schneide die Zwiebel und den Knoblauch.",
-  "Dann braten wir sie im Topf an."
+  "Dann braten wir sie im Topf an.",
+  "Ich wache um sieben auf und dusche.",
+  "Frühstückst du?",
+  "Ich koche Abendessen und sehe fern."
  ]
 }
