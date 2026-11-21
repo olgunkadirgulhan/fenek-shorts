@@ -371,26 +371,33 @@ def slug(s):
 SCHOOL9 = {'greet', 'family', 'a1num', 'a1col', 'a1cal', 'a1time', 'a1people', 'a1school', 'a1small', 'a1food', 'a1home', 'a1verbs'}
 
 
-def in_exam_season():
+def exam_season():
+    """(term, n) while students search for an upcoming MEB yazılı, else None.
+    2026-11-21: the 1st term's 2nd yazılı is late Dec / early Jan, so titles must keep running after 20 Nov
+    (they used to stop exactly when the search for it starts)."""
     from datetime import date
-    d = date.today()
-    return (d.month == 10 or (d.month == 11 and d.day <= 20) or d.month == 3 or (d.month == 4 and d.day <= 20)
-            or d.month == 12 or (d.month == 5 and d.day <= 25))
+    d = date.today(); md = (d.month, d.day)
+    if (10, 1) <= md <= (11, 20): return '1. dönem', '1.'
+    if md >= (11, 21) or md <= (1, 16): return '1. dönem', '2.'
+    if (3, 1) <= md <= (4, 20): return '2. dönem', '1.'
+    if (4, 21) <= md <= (6, 10): return '2. dönem', '2.'
+    return None
+
+
+def in_exam_season():
+    return exam_season() is not None
 
 
 def exam_title(ep, item, rng):
-    from datetime import date
-    d = date.today()
-    season = (d.month == 10 or (d.month == 11 and d.day <= 20) or d.month == 3 or (d.month == 4 and d.day <= 20)
-              or d.month == 12 or (d.month == 5 and d.day <= 25))
+    season = exam_season()
     if SRC != 'tr' or not season or item.get('cefr') != 'A1' or item.get('id') not in SCHOOL9:
         return   # 2026-11-02: sınav başlıkları kanalın tek büyüyen içeriği → uygun konuda her zaman
     t = item['title']['tr'] if isinstance(item.get('title'), dict) else str(item.get('title', ''))
-    term = '1. dönem' if d.month >= 9 or d.month <= 1 else '2. dönem'
-    n = '1.' if d.month in (10, 11, 3, 4) else '2.'
-    ep['title'] = rng.choice([f"9. Sınıf Almanca {term} {n} yazılıya hazırlık ✍️ {t} | A1",
-                              f"Almanca 9. sınıf {term}: {t} {item.get('emoji', '')} #almanca",
-                              f"Almanca yazılıdan önce izle ✍️ {t} (9. sınıf, A1)"])
+    term, n = season
+    # 2026-11-21: both 5K-view videos used the exact search phrase "9. Sınıf Almanca 1. dönem 1. yazılıya hazırlık"
+    ep['title'] = rng.choices([f"9. Sınıf Almanca {term} {n} yazılıya hazırlık ✍️ {t} | A1",
+                               f"Almanca 9. sınıf {term} {n} yazılı: {t} {item.get('emoji', '')} #almanca",
+                               f"Almanca yazılıdan önce izle ✍️ {t} (9. sınıf, A1)"], weights=[6, 2, 2])[0]
 
 
 def make_episode(slot, hist, seed):
